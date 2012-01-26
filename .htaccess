@@ -8,7 +8,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 #not a symbolic link
 RewriteCond %{REQUEST_FILENAME} !-l
 
-RewriteBase /framework
+RewriteBase /rocketfuseFW
 
 #rewrite TO then the second part is FROM
 RewriteRule ^(.*)$ index.php/$1

@@ -33,6 +33,8 @@ class Router {
 			//separate the controller from the method
 			$parts = explode('/', $_SERVER['PATH_INFO']);
 			
+			echo $parts;
+			
 			//controller is not empty
 			if (!empty($parts[1])) {
 				
@@ -48,7 +50,8 @@ class Router {
 					}
 					
 					//set the parameters if there are any
-					$params = array_slice($parts, 2);
+					$params = array_slice($parts, 3);
+					
 					if(!empty($params)) {
 						$this->parameters = $params;
 					}
