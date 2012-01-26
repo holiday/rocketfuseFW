@@ -1,0 +1,14 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+#if filename is NOT directory (!-d)
+RewriteCond %{REQUEST_FILENAME} !-d
+#not a file
+RewriteCond %{REQUEST_FILENAME} !-f
+#not a symbolic link
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteBase /framework
+
+#rewrite TO then the second part is FROM
+RewriteRule ^(.*)$ index.php/$1

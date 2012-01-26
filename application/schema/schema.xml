@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="ready4car" defaultIdMethod="native">
+	<table name="Users" phpName="User">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="email" type="varchar" size="255" required="true" />
+	</table>
+	
+	<table name="Posts" phpName="Post">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="title" type="varchar" size="70" required="true" />
+		<column name="userId" type="integer" required="true" />
+		<column name="priceFrom" type="integer" size="6" required="true" />
+		<column name="priceTo" type="integer" size="6" required="true" />
+		<column name="yearFrom" type="integer" size="4" required="false" />
+		<column name="yearTo" type="integer" size="4" required="false" />
+		<column name="carMakeId" type="integer" required="true" />
+		<column name="carModelId" type="integer" required="true" />
+		<column name="transmission" type="varchar" required="true" />
+		<column name="tradein" type="integer" size="1" required="true" />
+		<column name="comment" type="varchar" size="1000" required="true" />
+		<column name="submitted" type="integer" size="11" required="true" />
+	</table>
+</database>
