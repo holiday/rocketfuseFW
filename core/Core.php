@@ -7,11 +7,11 @@
 abstract class Core {
 	
 	//Store a copy of the master Registry
-	protected $registry;
+	protected $Registry;
 	
 	//Initialize a new core file with the Registry instance
 	public function __construct($registry){
-		$this->registry = $registry;
+		$this->Registry = $registry;
 	}
 	
 }

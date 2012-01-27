@@ -25,11 +25,11 @@ class Template extends Core {
 		
 		//if a controller was not specified then it is assumed the controller is the current one
 		if(!isset($controller)) {
-			$controller = $this->registry->Router->controller;
+			$controller = $this->Registry->Router->controller;
 		}
 		
 		//Look in the application/views/controller for the view
-		$path = __VIEWS . $this->registry->Router->controller . DS . $view . '.php';
+		$path = __VIEWS . $this->Registry->Router->controller . DS . $view . '.php';
 
 		//keys will become variables
 		extract($this->vars);
@@ -37,7 +37,7 @@ class Template extends Core {
 		//check both the view directory and also check within the admin directory for the admin file
 		if(is_readable($path)) {
 			//include the view file
-			include $path;
+			print_r(include $path);
 			return true;
 		}else {
 			throw new Exception ('Could not find view ' . $view, E_USER_ERROR);

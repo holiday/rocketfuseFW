@@ -20,11 +20,14 @@ class Router extends Core {
 	
 	public function loadController() {
 		
+		echo "<pre>";
+		print_r($_SERVER);
+		
 		//check that controller is set in the url
-		if (isset($_SERVER['PATH_INFO'])) {
+		if (isset($_SERVER['REQUEST_URI'])) {
 			
 			//separate the controller from the method
-			$parts = explode('/', $_SERVER['PATH_INFO']);
+			$parts = explode('/', $_SERVER['REQUEST_URI']);
 			
 			//controller is not empty
 			if (!empty($parts[1])) {
@@ -66,7 +69,7 @@ class Router extends Core {
 		require_once($loc1);
 		
 		$className = ucfirst($this->controller) . 'Controller';
-		$controller = new $className($this->registry);
+		$controller = new $className($this->Registry);
 		
 		//call the action and pass it any parameters
 		call_user_func_array(array($controller,  $this->method), $this->parameters);
