@@ -9,7 +9,7 @@
 	
 */
 
-class Controller {
+class Controller extends Core{
 	
 	//Main component provider
 	public $App;

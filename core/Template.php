@@ -5,15 +5,9 @@
 	for loading in page attributes into views.
 */
 
-class Template {
-
-	private $registry;
+class Template extends Core {
 	
 	public $vars = array();
-	
-	public function __construct($registry) {
-		$this->registry = $registry;	
-	}
 	
 	/*
 	*	Magic Setter for dynamic variables

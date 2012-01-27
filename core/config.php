@@ -2,7 +2,7 @@
 
 //error reporting set to all
 error_reporting(E_ALL);
-//ini_set('display_errors', 'On');
+ini_set('display_errors', 'On');
 
 //set the default timezone
 date_default_timezone_set('America/New_York');
@@ -34,9 +34,6 @@ $registry = new Registry();
 
 //load in the router to the registry
 $registry->Router = new Router($registry);
-
-//load in the database in the registry
-$registry->Database = new Database($registry);
 
 //template class
 $registry->Template = new Template($registry);

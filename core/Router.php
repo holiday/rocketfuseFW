@@ -7,9 +7,7 @@
 	WARNING: Core file, altering this file may render the application unusable
 */
 
-class Router {
-	
-	private $registry;
+class Router extends Core {
 	
 	//default controller
 	public $controller = 'index';
@@ -19,9 +17,6 @@ class Router {
 	//parameters
 	public $parameters = array();
 	
-	function __construct($registry) {
-		$this->registry = $registry;
-	}
 	
 	public function loadController() {
 		
