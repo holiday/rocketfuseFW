@@ -1,14 +1,6 @@
-Options +FollowSymLinks
-RewriteEngine on
-
-#if filename is NOT directory (!-d)
-RewriteCond %{REQUEST_FILENAME} !-d
-#not a file
-RewriteCond %{REQUEST_FILENAME} !-f
-#not a symbolic link
-RewriteCond %{REQUEST_FILENAME} !-l
-
-RewriteBase /rocketfuseFW
-
-#rewrite TO then the second part is FROM
-RewriteRule ^(.*)$ index.php/$1
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+</IfModule>

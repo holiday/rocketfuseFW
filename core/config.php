@@ -2,7 +2,7 @@
 
 //error reporting set to all
 error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+//ini_set('display_errors', 'On');
 
 //set the default timezone
 date_default_timezone_set('America/New_York');
@@ -22,20 +22,24 @@ define('__CONTROLLERS', __ROOT . DS . 'application' . DS . 'controllers' . DS);
 //views
 define('__VIEWS', __ROOT . DS . 'application' . DS . 'views' . DS);
 
+//Modules dir
+define('__MODULES', __ROOT . DS . 'lib' . DS);
+
 //get the init.php core file
 require_once(__ROOT . DS . 'core' . DS . 'init.php');
 
+
 //core bootstrapper
-$registry = new \core\Registry();
+$registry = new Registry();
 
 //load in the router to the registry
-$registry->Router = new \core\Router($registry);
+$registry->Router = new Router($registry);
 
 //load in the database in the registry
-$registry->Database = new \core\Database($registry);
+$registry->Database = new Database($registry);
 
 //template class
-$registry->Template = new \core\Template($registry);
+$registry->Template = new Template($registry);
 
 //load the controller
 $registry->Router->loadController();

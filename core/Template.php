@@ -1,5 +1,4 @@
 <?php
-namespace core;
 
 /*
 	Template handles loading specific views associated with the current Controller. It is also responsible

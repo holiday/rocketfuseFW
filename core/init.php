@@ -4,29 +4,34 @@
 *	BootStrapper File, loads all core files, models and controllers on request including Propel ORM
 */
 
-//Propel.php
-require_once(__ROOT . DS . 'vendors' . DS . 'propel' . DS . 'runtime' . DS . 'lib' . DS . 'Propel.php');
-// Initialize Propel with the runtime configuration
-Propel::init(__ROOT . DS . 'application' . DS . 'schema' . DS . 'build' . DS . 'conf' . DS . 'models-conf.php');
-// Add the generated 'classes' directory to the include path
-set_include_path(__ROOT . DS . 'application' . DS . 'schema' . DS . 'build' . DS . 'classes' . PATH_SEPARATOR . get_include_path());
-
-//set the vendors path
-set_include_path(__ROOT . DS . 'vendors' . PATH_SEPARATOR . get_include_path());
-
 /* Framework Core File Loading*/
 require_once(__ROOT . DS . 'core' . DS . 'Loader.php');
 
-$loader = new \core\Loader("core", __ROOT);
+//Application Directory Include path
+set_include_path(__ROOT . PATH_SEPARATOR . get_include_path());
+
+/* PROPEL BOOTSTRAP*/
+require_once(Loader::convertPath('vendors/propel/runtime/lib/Propel.php'));
+Propel::init(Loader::convertPath('application/schema/build/conf/models-conf.php'));
+set_include_path(Loader::convertPath('application/schema/build/classes') . PATH_SEPARATOR . get_include_path());
+/* END PROPEL BOOTSTRAP*/
+
+//set the vendors path
+set_include_path(Loader::convertPath('vendors') . PATH_SEPARATOR . get_include_path());
+
+//include the core files
+set_include_path(Loader::convertPath('core') . PATH_SEPARATOR . get_include_path());
+
+$loader = new Loader(null, __ROOT . DS . 'core');
 $loader->register();
 
-$loader = new \core\Loader(null, __ROOT . DS . 'application' . DS . 'schema' . DS . 'build' . DS . 'classes' . DS . 'models' . DS . 'map');
+$loader = new Loader(null, 'application/schema/build/classes/models/map');
 $loader->register();
 
-$loader = new \core\Loader(null, __ROOT . DS . 'application' . DS . 'schema' . DS . 'build' . DS . 'classes' . DS . 'models' . DS . 'om');
+$loader = new Loader(null, 'application/schema/build/classes/models/om');
 $loader->register();
 
-$loader = new \core\Loader(null, __ROOT . DS . 'application' . DS . 'schema' . DS . 'build' . DS . 'classes' . DS . 'models');
+$loader = new Loader(null, 'application/schema/build/classes/models');
 $loader->register();
 
 

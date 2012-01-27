@@ -1,7 +1,5 @@
 <?php
 
-namespace core;
-
 class Registry {
 		
 	private static $vars = array();

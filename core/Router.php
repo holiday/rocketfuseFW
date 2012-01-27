@@ -7,8 +7,6 @@
 	WARNING: Core file, altering this file may render the application unusable
 */
 
-namespace core;
-
 class Router {
 	
 	private $registry;
@@ -32,8 +30,6 @@ class Router {
 			
 			//separate the controller from the method
 			$parts = explode('/', $_SERVER['PATH_INFO']);
-			
-			echo $parts;
 			
 			//controller is not empty
 			if (!empty($parts[1])) {

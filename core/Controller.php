@@ -9,8 +9,6 @@
 	
 */
 
-namespace core;
-
 class Controller {
 	
 	//Main component provider
