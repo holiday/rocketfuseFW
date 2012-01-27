@@ -1,7 +1,11 @@
 <?php
 
-require 'Validator.php';
+//contains validation expressions
+require 'Valid.php';
 
+/**
+*	Form Validator that is used to validate data, log error messages and perform additional form related tasks.
+*/
 class FormValidator{
 	
 	private $data;
@@ -12,12 +16,22 @@ class FormValidator{
 	
 	private $errors = array();
 	
+	/**
+	*	Initialize a new FormValidator with rules and data to validate
+	*	@param $rules Array
+	*	@param $data Array structured like form POST data
+	*/
 	public function __construct($rules, $data){
 		$this->rules = $rules;
+		
+		//remove the submit field
 		$this->data = array_slice($data, 0, -1);
-		$this->validate();
 	}
 	
+	/**
+	*	Run through each field's rule, get the POST data and call the 
+	*	validation method based on the rule
+	*/
 	public function validate(){
 		foreach($this->data as $fieldName => $val) {
 			
@@ -29,15 +43,11 @@ class FormValidator{
 				
 				$fn = array_shift($rule);
 				$rule = array_merge($params, $rule);
-				Validator::__callStatic($fn, $rule);
+				Valid::__callStatic($fn, $rule);
 			}else{
-				Validator::__callStatic($rule, $params);
+				Valid::__callStatic($rule, $params);
 			}
 		}
-	}
-	
-	public function addRule($fieldData, $fieldParams){
-		
 	}
 	
 	public function getRules(){

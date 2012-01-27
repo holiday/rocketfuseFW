@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/**
 *	The Registry class is a singleton that serves as a bootstrapper for 
 *	the core framework files. Specifically Router and Template managers.
 *
@@ -11,11 +11,14 @@
 */
 
 class Registry {
-		
+	
+	//Storage for Core files
 	private static $vars = array();
 	
+	//Singleton instance
 	private $instance;
 	
+	//Prevent instantiation
 	public function __construct() {
 	}
 	
@@ -35,10 +38,19 @@ class Registry {
 		throw new Exception ('Cloning Registry is not permitted');
 	}
 	
+	/**
+	*	Magic setter for storing Core classes
+	*	@param $k Core Class identifier
+	*	@param $v Core Class instance
+	*/
 	public function __set($k, $v) {
 		self::$vars[$k] = $v;
 	}
 	
+	/**
+	*	Magic getter for getting Core classes
+	*	@param $k Core Class identifier
+	*/
 	public function __get($k) {
 		return self::$vars[$k];	
 	}

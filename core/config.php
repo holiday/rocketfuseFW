@@ -26,8 +26,7 @@ define('__VIEWS', __ROOT . DS . 'application' . DS . 'views' . DS);
 define('__MODULES', __ROOT . DS . 'lib' . DS);
 
 //get the init.php core file
-require_once(__ROOT . DS . 'core' . DS . 'init.php');
-
+require __ROOT . DS . 'core' . DS . 'init.php';
 
 //core bootstrapper
 $registry = new Registry();
@@ -40,5 +39,6 @@ $registry->Template = new Template($registry);
 
 //load the controller
 $registry->Router->loadController();
+
 
 ?>

@@ -69,7 +69,7 @@ class Router extends Core {
 		$controller = new $className($this->registry);
 		
 		//call the action and pass it any parameters
-		$controller->__call($this->method, $this->parameters);
+		call_user_func_array(array($controller,  $this->method), $this->parameters);
 	}
 		
 }
