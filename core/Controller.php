@@ -12,6 +12,12 @@ class Controller{
 	//Stores the Registry
 	public $App;
 	
+	//Access Control is Turned off by default
+	public $ACL = false;
+	
+	//stored an array of String method names
+	public $allowed;
+	
 	/**
 	*	Initializes a controller with the Registry object
 	*	@param $registry Registry 
@@ -20,6 +26,11 @@ class Controller{
 		$this->App = $registry;
 	}
 	
+	/**
+	*	Method that is called before any other method
+	*/
+	public function runBefore(){
+	}
 	
 	/**
 	*	Magic method that is used to call methods defined in this Class by its String $fnName with optional 
@@ -41,9 +52,16 @@ class Controller{
 			//call the function
 			call_user_func_array(array(get_class($this), $fnName), $params);
 		}else {
-			//FIXXX THIS, it should show a useful error
-			throw new Exception('Sorry the page you requested does not exist.');
+			//render a 404 error
+			$this->App->Template->errorpage('404');
 		}
+	}
+	
+	/**
+	*	Return an array of Strings of method names that are allowed access
+	*/
+	public function getAllowedMethods(){
+		return $this->allowed;
 	}
 	
 

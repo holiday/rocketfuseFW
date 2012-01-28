@@ -34,6 +34,11 @@ define('__CSS', __ROOT . DS . 'application' . DS . 'public' . DS . 'css' . DS);
 //public dir
 define('__JS', __ROOT . DS . 'application' . DS . 'public' . DS . 'js' . DS);
 
+//images dir
+define('__IMAGES', __ROOT . DS . 'application' . DS . 'public' . DS . 'images' . DS);
+
+define('__ERRORPAGES', __ROOT . DS . 'core' . DS . 'errorpages' . DS);
+
 //get the init.php core file
 require __ROOT . DS . 'core' . DS . 'init.php';
 
@@ -45,6 +50,9 @@ $registry->Router = new Router($registry);
 
 //template class
 $registry->Template = new Template($registry);
+
+//Access Control
+$registry->ACL = new ACL($registry);
 
 //load the controller
 $registry->Router->loadController();

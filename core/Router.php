@@ -13,15 +13,18 @@ class Router extends Core {
 	public $controller = 'index';
 	//default method
 	public $method = 'index';
-	
 	//parameters
 	public $parameters = array();
 	
+	public $requestURI = '';
 	
 	public function loadController() {
 		
 		//check that controller is set in the url
 		if (isset($_SERVER['REQUEST_URI'])) {
+			
+			//store the request
+			$this->request = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			
 			//separate the controller from the method
 			$parts = explode('/', $_SERVER['REQUEST_URI']);
@@ -65,11 +68,8 @@ class Router extends Core {
 		//require the controller file
 		require_once($loc1);
 		
-		$className = ucfirst($this->controller) . 'Controller';
-		$controller = new $className($this->Registry);
-		
-		//call the action and pass it any parameters
-		call_user_func_array(array($controller,  $this->method), $this->parameters);
+		//Pass the request through the Access Control
+		$this->Registry->ACL->handle($this->controller, $this->method, $this->parameters);
 	}
 		
 }

@@ -47,6 +47,19 @@ class Template extends Core {
 			
 	}
 	
+	public function errorpage($page){
+		$path = __ERRORPAGES . $page . '.html';
+		if(is_readable($path)) {
+			//include the view file
+			include $path;
+			return true;
+		}else {
+			throw new Exception ('Could not find the page you were looking for at path: ' . $path, E_USER_ERROR);
+			return false;
+			
+		}
+	}
+	
 	public function js($fileName){
 		echo '<script src="http://' . $_SERVER['HTTP_HOST'] . '/application/public/js/' . $fileName . '.js' . '" type="text/javascript"></script>';
 	}
