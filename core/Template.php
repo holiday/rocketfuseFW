@@ -47,6 +47,18 @@ class Template extends Core {
 			
 	}
 	
+	public function js($fileName){
+		echo '<script src="http://' . $_SERVER['HTTP_HOST'] . '/application/public/js/' . $fileName . '.js' . '" type="text/javascript"></script>';
+	}
+	
+	public function css($fileName){
+		echo '<link href="http://' . $_SERVER['HTTP_HOST'] . '/application/public/css/' . $fileName . '.css' . '" rel="stylesheet" type="text/css">';
+	}
+	
+	public function less($fileName){
+		echo '<link href="http://' . $_SERVER['HTTP_HOST'] . '/application/public/css/' . $fileName . '.less' . '" rel="stylesheet/less" type="text/css">';
+	}
+	
 	
 }
 

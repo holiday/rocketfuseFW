@@ -1,14 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php $this->Registry->Template->render('header'); ?>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title><?php echo $title; ?></title>
-</head>
-<body>
 <h2>Credit Card Validation Demo Tester (using lib/FormValidator)</h2>
 <p>Luhn's Algorithm used for Mod 10 Check Digit</p>
-<form name="creditcardtester" action="\index\test" method="POST">
+<form name="creditcardtester" action="\index\creditcard" method="POST">
 	<input type="text" size="20" name="cc" />
 	<select name="cardtype">
 		<option value="visa">Visa</option>
@@ -21,5 +15,5 @@
 	</select>
 	<input type="submit" name="check" value="Check">
 </form>
-</body>
-</html>
+
+<?php $this->Registry->Template->render('footer'); ?>

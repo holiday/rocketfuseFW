@@ -28,6 +28,12 @@ define('__MODULES', __ROOT . DS . 'lib' . DS);
 //public dir
 define('__PUBLIC', __ROOT . DS . 'application' . DS . 'public' . DS);
 
+//public dir
+define('__CSS', __ROOT . DS . 'application' . DS . 'public' . DS . 'css' . DS);
+
+//public dir
+define('__JS', __ROOT . DS . 'application' . DS . 'public' . DS . 'js' . DS);
+
 //get the init.php core file
 require __ROOT . DS . 'core' . DS . 'init.php';
 

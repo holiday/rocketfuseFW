@@ -28,8 +28,9 @@ class Loader {
 	*	@param $obj String Class/Object name
 	*/
 	public function import($type, $obj){
-		if(strtolower($type) == 'module'){
-			require Loader::convertPath("lib/$obj/$obj.php");
+		$type = strtolower(trim($type));
+		if($type == 'module'){
+			require Loader::convertPath(__MODULES . "/$obj/$obj.php");
 			return true;
 		}
 		return false;
