@@ -25,6 +25,9 @@ define('__VIEWS', __ROOT . DS . 'application' . DS . 'views' . DS);
 //Modules dir
 define('__MODULES', __ROOT . DS . 'lib' . DS);
 
+//public dir
+define('__PUBLIC', __ROOT . DS . 'application' . DS . 'public' . DS);
+
 //get the init.php core file
 require __ROOT . DS . 'core' . DS . 'init.php';
 

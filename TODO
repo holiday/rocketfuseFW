@@ -1,0 +1,7 @@
+TODO:
+
+- Extend the Router or a separate class to handle user defined Routes
+- Extend the Controller to emulate an Access Control System or add a layer between the Router and the Controller for ACL
+- Extend and Refactor the Loader, it should be able to load Modules, Controllers, Views, CSS, JS and Images
+- Complete version 1 of the Validator
+- TEST....EVERYTHING!!! (PHPUnit)
