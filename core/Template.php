@@ -37,7 +37,7 @@ class Template extends Core {
 		//check both the view directory and also check within the admin directory for the admin file
 		if(is_readable($path)) {
 			//include the view file
-			print_r(include $path);
+			include $path;
 			return true;
 		}else {
 			throw new Exception ('Could not find view ' . $view, E_USER_ERROR);

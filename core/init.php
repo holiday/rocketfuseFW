@@ -23,6 +23,9 @@ set_include_path('vendors' . PATH_SEPARATOR . get_include_path());
 //include the core files
 set_include_path('core' . PATH_SEPARATOR . get_include_path());
 
+//include the public directory
+set_include_path('application' . DS . 'public' . PATH_SEPARATOR . get_include_path());
+
 $loader = new Loader(__ROOT . DS . 'core');
 $loader->register();
 

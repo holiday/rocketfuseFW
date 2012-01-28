@@ -43,10 +43,9 @@ class FormValidator{
 				
 				$fn = array_shift($rule);
 				$rule = array_merge($params, $rule);
-				Valid::__callStatic($fn, $rule);
-			}else{
-				Valid::__callStatic($rule, $params);
+				return Valid::__callStatic($fn, $rule);
 			}
+			return Valid::__callStatic($rule, $params);
 		}
 	}
 	

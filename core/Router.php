@@ -20,9 +20,6 @@ class Router extends Core {
 	
 	public function loadController() {
 		
-		echo "<pre>";
-		print_r($_SERVER);
-		
 		//check that controller is set in the url
 		if (isset($_SERVER['REQUEST_URI'])) {
 			
