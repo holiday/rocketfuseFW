@@ -1,7 +1,7 @@
 <?php
 
 //contains validation expressions
-require 'Valid.php';
+require 'Validator.php';
 
 /**
 *	Form Validator that is used to validate data, log error messages and perform additional form related tasks.
@@ -43,9 +43,9 @@ class FormValidator{
 				
 				$fn = array_shift($rule);
 				$rule = array_merge($params, $rule);
-				return Valid::__callStatic($fn, $rule);
+				return Validator::__callStatic($fn, $rule);
 			}
-			return Valid::__callStatic($rule, $params);
+			return Validator::__callStatic($rule, $params);
 		}
 	}
 	
