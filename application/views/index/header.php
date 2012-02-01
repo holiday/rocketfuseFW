@@ -8,3 +8,4 @@
 <?php $this->Registry->Template->js('less-1.2.1.min'); ?>
 </head>
 <body>
+	<div id="container">

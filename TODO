@@ -1,7 +1,17 @@
 TODO:
 
-- Extend the Router or a separate class to handle user defined Routes
-- Extend the Controller to emulate an Access Control System or add a layer between the Router and the Controller for ACL
 - Extend and Refactor the Loader, it should be able to load Modules, Controllers, Views, CSS, JS and Images
 - Complete version 1 of the Validator
 - TEST....EVERYTHING!!! (PHPUnit)
+- ACL should also handle redirect back if the feature is enabled
+- Router should be better adapted to handle controller->view requests and display proper error pages
+
+
+
+
+Validator:
+- Must be able to validate Select fields (if they are set/not)
+- Able to set dependencies between multiple fields eg. 2 fields that have upper/lower bounded values i.e. a price range
+  where one cannot be less than the other or vice versa
+- Able to specify multiple validation rules against one field (possible best implemented recursively)
+- 

@@ -30,6 +30,8 @@ class Template extends Core {
 		
 		//Look in the application/views/controller for the view
 		$path = __VIEWS . $this->Registry->Router->controller . DS . $view . '.php';
+		
+		$path2 = __VIEWS . $view . '.php';
 
 		//keys will become variables
 		extract($this->vars);
@@ -38,6 +40,9 @@ class Template extends Core {
 		if(is_readable($path)) {
 			//include the view file
 			include $path;
+			return true;
+		}elseif(is_readable($path2)){
+			include $path2;
 			return true;
 		}else {
 			throw new Exception ('Could not find view ' . $view, E_USER_ERROR);

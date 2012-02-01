@@ -3,27 +3,32 @@
 /**
 *	Provides base functionality for all controllers. All controllers must extends this class
 *	to be accessible. Adding functionality to this controller will affect each controller 
-*	that extends from this class.
+*	that extends from this class. Controllers are singleton, multiple instantiation is prevented.
 *	
 */
 
 class Controller{
 	
-	//Stores the Registry
 	public $App;
 	
 	//Access Control is Turned off by default
-	public $ACL = false;
+	public $enableACL = false;
 	
 	//stored an array of String method names
-	public $allowed;
+	public $allow;
 	
-	/**
-	*	Initializes a controller with the Registry object
-	*	@param $registry Registry 
-	*/
+	//upon failure to call a method, this is used by the Router + ACL 
+	public $redirect = '404';
+	
+	//whether to make this controller accessible 
+	public $visible = true;
+
 	public function __construct($registry) {
 		$this->App = $registry;
+	}
+	
+	public function index() {
+		//default method called if none is specified
 	}
 	
 	/**
@@ -63,8 +68,6 @@ class Controller{
 	public function getAllowedMethods(){
 		return $this->allowed;
 	}
-	
-
 }
 
 ?>

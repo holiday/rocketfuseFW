@@ -42,6 +42,9 @@ define('__ERRORPAGES', __ROOT . DS . 'core' . DS . 'errorpages' . DS);
 //get the init.php core file
 require __ROOT . DS . 'core' . DS . 'init.php';
 
+//get the routes file
+require __ROOT . DS . 'core' . DS . 'routes.php';
+
 //core bootstrapper
 $registry = new Registry();
 

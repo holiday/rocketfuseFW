@@ -23,7 +23,6 @@ class FormValidator{
 	*/
 	public function __construct($rules, $data){
 		$this->rules = $rules;
-		
 		//remove the submit field
 		$this->data = array_slice($data, 0, -1);
 	}
@@ -33,6 +32,29 @@ class FormValidator{
 	*	validation method based on the rule
 	*/
 	public function validate(){
+		
+		foreach($this->data as $fieldName => $fieldVal){
+			if(isset($this->rules[$fieldName]['rule'])){
+				//proceed to validate the field
+				$fieldVal = array($fieldVal);
+				
+				$rule = $this->rules[$fieldName]['rule'];
+				if(is_array($rule)){
+					$fn = array_shift($rule);
+					$rule = array_merge($fieldVal, $rule);
+					if(!Validator::__callStatic($fn, $rule)){	
+						$this->errors[$fieldName] = $this->rules[$fieldName]['message'];
+					}
+				}else{
+					if(!Validator::__callStatic($rule, $fieldVal)) {
+						$this->errors[$fieldName] = $this->rules[$fieldName]['message'];
+					}
+				}
+			}
+		}
+	}
+	
+	public function validate2(){
 		foreach($this->data as $fieldName => $val) {
 			
 			$params = array($val);
@@ -43,10 +65,22 @@ class FormValidator{
 				
 				$fn = array_shift($rule);
 				$rule = array_merge($params, $rule);
-				return Validator::__callStatic($fn, $rule);
+				if(!Validator::__callStatic($fn, $rule)){
+					$this->errors[$val] = $rule['message'];
+				}
 			}
-			return Validator::__callStatic($rule, $params);
+			if(!Validator::__callStatic($rule, $params)) {
+				$this->errors[$val] = $rule['message'];
+			}
 		}
+	}
+	
+	public function isValid(){
+		return empty($this->errors);
+	}
+	
+	public function getErrors(){
+		return $this->errors;
 	}
 	
 	public function getRules(){
