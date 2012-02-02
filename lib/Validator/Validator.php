@@ -305,10 +305,15 @@ class Validator{
 		
 	}
 	
-	public function range($from, $to){
-		$regex = "/^[$from-$to]$/";
-		if(!preg_match($regex, $this->_val())) {
-			$this->_logError();
+	public function range($from, $to, $inclusive=false){
+		if($inclusive){
+			if(!($this->_val() >= $from && $this->_val() <= $to)) {
+				$this->_logError();
+			}
+		}else{
+			if(!($this->_val() > $from && $this->_val() < $to)) {
+				$this->_logError();
+			}
 		}
 		return $this;
 	}
