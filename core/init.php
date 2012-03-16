@@ -17,10 +17,6 @@ Propel::init(Loader::convertPath('application/schema/build/conf/models-conf.php'
 set_include_path(Loader::convertPath('application/schema/build/classes') . PATH_SEPARATOR . get_include_path());
 /* End Propel Bootstrap*/
 
-/*Html Purifier Bootstrap*/
-require __ROOT . DS . Loader::convertPath('vendors/htmlpurifier-4.4.0-lite/library/HTMLPurifier.auto.php');
-/*End Html Purifier Bootstrap*/
-
 //set the vendors path
 set_include_path('vendors' . PATH_SEPARATOR . get_include_path());
 
