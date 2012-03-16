@@ -12,7 +12,6 @@ class Template extends Core {
 	/*
 	*	Magic Setter for dynamic variables
 	*/
-	
 	public function __set($k, $v) {
 		$this->vars[$k] = $v;	
 	}

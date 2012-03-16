@@ -24,6 +24,11 @@ class Router extends Core {
 	//requested url
 	public $request = '';
 	
+	//request URI
+	public $requestURI = '';
+	
+	public $queryString = '';
+	
 	//server host
 	public $host;
 	
@@ -48,12 +53,19 @@ class Router extends Core {
 			//store the request
 			$this->request = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			
+			//store the request URI
+			$this->requestURI = $_SERVER['REQUEST_URI'];
+			
+			//query string
+			$this->queryString = htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
+			
 			//if there is a stored route for this, use it
-			if($this->_checkRoute($_SERVER['REQUEST_URI'])){
+			if($this->_checkRoute($this->requestURI)){
 				return true;
 			}
 			
-			$route = Route::generateRoute($_SERVER['REQUEST_URI']);
+			$route = Route::generateRoute($this->requestURI);
+			
 			if($route instanceof Route) {
 				$this->controller = $route->getController();
 				$this->method = $route->getMethod();
@@ -97,16 +109,19 @@ class Router extends Core {
 		//Instantiate Controller and Persist it in an array
 		$controller = new $className($this->Registry);
 		
-		if($controller->enableACL) {
+		
+		//if(!$controller->enabled) {
 			//Pass the request through the Access Control
 			$this->Registry->ACL->handle($controller, $this->method, $this->parameters);
 			return true;
-		}
+		//}
+		
+		//Without ACL uncomment this
+		/*
 		$controller->runBefore();
 		call_user_func_array(array($controller,  $this->method), $this->parameters);
-		//$controller->__call($this->method, $this->parameters);
 		return true;
-		
+		*/
 	}
 	
 	public function e404() {
@@ -121,6 +136,14 @@ class Router extends Core {
 		
 		if(is_array($request)){
 			if(isset($request['controller']) && isset($request['method'])) {
+				$params = '/';
+				if(isset($request['parameters'])){
+					foreach($request['parameters'] as $param) {
+						$params .= $param . '/';
+					}
+					header('Location: http://' . $this->host . '/' . $request['controller'] . '/' . $request['method'] . $params);
+					return true;
+				}
 				header('Location: http://' . $this->host . '/' . $request['controller'] . '/' . $request['method']);
 				return true;
 			}
@@ -130,22 +153,7 @@ class Router extends Core {
 		$this->e404();
 		return false;
 	}
-	
-	public function isPost() {
-		return strtolower(trim($this->requestType)) == 'post';
-	}
-	
-	public function isGet() {
-		return strtolower(trim($this->requestType)) == 'get';
-	}
-	
-	public function isPut() {
-		return strtolower(trim($this->requestType)) == 'put';
-	}
-	
-	public function isDelete() {
-		return strtolower(trim($this->requestType)) == 'delete';
-	}
+
 		
 }
 

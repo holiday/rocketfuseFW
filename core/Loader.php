@@ -18,7 +18,11 @@ class Loader {
 	*	Initialize the Loader with an include path. This is the main directory
 	*	in which the Classes/Assets are located.
 	*/
-	public function __construct($includePath) {
+	public function __construct($includePath='') {
+		$this->includePath = $this->convertPath($includePath);
+	}
+	
+	public function setIncludePath() {
 		$this->includePath = $this->convertPath($includePath);
 	}
 	
@@ -27,10 +31,17 @@ class Loader {
 	*	@param $type String type i.e. Module/Controller/Model
 	*	@param $obj String Class/Object name
 	*/
-	public function import($type, $obj){
+	public function import($type, $obj, $name=null){
 		$type = strtolower(trim($type));
 		if($type == 'module'){
+			if($name != null) {
+				require Loader::convertPath(__MODULES . "/$obj/$name.php");
+				return true;
+			}
 			require Loader::convertPath(__MODULES . "/$obj/$obj.php");
+			return true;
+		}elseif($type == 'controller') {
+			require Loader::convertPath(__CONTROLLERS . "$obj.php");
 			return true;
 		}
 		return false;

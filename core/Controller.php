@@ -11,14 +11,11 @@ class Controller{
 	
 	public $App;
 	
-	//Access Control is Turned off by default
-	public $enableACL = false;
+	//enables this controller or disables it, by default it is enabled
+	public $enabled = true;
 	
 	//stored an array of String method names
-	public $allow;
-	
-	//upon failure to call a method, this is used by the Router + ACL 
-	public $redirect = '404';
+	public $allow = array('index');
 	
 	//whether to make this controller accessible 
 	public $visible = true;

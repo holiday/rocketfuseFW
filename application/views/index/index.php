@@ -1,24 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Index Controller</title>
+	<link href="/application/public/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/application/public/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/application/public/bootstrap/css/docs.css" rel="stylesheet">
+    <link href="/application/public/bootstrap/js/google-code-prettify/prettify.css" rel="stylesheet">
+</head>
+<body>
 
-<?php $this->Registry->Template->render('header'); ?>
 
-<h1><?php echo $title; ?></h1>
-<hr />
-<!--
-<form name="loginForm" action="/index/index" method="POST">
-	<label for"username">Username</label>
+<div class="wrapper span24">
 	<br>
-	<input id="username" type="text" name="username" size="100" />
-	<br>
-	<label for"username">Email</label>
-	<br>
-	<input id="email" type="text" name="email" size="100" />
-	<br>
-	<label for"username">Password</label>
-	<br>
-	<input id="password" type="password" name="password" size="100" />
-	<br />
-	<input type="submit" name="Send Request" />
-</form>
---!>
+	<form action="/index/upload" method="POST" enctype="multipart/form-data" class="form-horizontal">
+		<div class="control-group">
+	      <label class="control-label" for="fileInput">File input</label>
+	      <div class="controls">
+	        <input class="input-file" id="fileInput" type="file" name="image1">
+	      </div>
+	    </div>
+		
+		<div class="control-group">
+	      <label class="control-label" for="fileInput">File input</label>
+	      <div class="controls">
+	        <input class="input-file" id="fileInput" type="file" name="image2">
+	      </div>
+	    </div>
+	
+		<div class="form-actions">
+		  <button type="submit" class="btn btn-primary">Upload</button>
+		</div>
+	</form>
+</div>
 
-<?php $this->Registry->Template->render('footer'); ?>
+
+</body>
+</html>

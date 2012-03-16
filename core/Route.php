@@ -2,89 +2,126 @@
 
 class Route {
 	
-	private $controller;
+	//controller name
+	private $controller = null;
 	
-	//default to index view
+	//controller method name
 	private $method = 'index';
 	
+	//optional parameters to be passed to controller method
 	private $parameters = array();
 	
-	private $route;
+	//path requested
+	private $path = '';
 	
-	private $options;
-	
-	public function __construct($route, $options) {
-		$this->route = $route;
-		$this->options = $options;
-		$this->setController($options);
-		$this->setMethod($options);
-		$this->setParameters($options);
+	/**
+	*	Initialize a new Route
+	*/	
+	public function __construct() {
+		
 	}
 	
+	public function create() {
+		return new self();//instantiate a new static Route
+	}
+	
+	/**
+	*	Return the String name of this Route's Controller
+	*/
 	public function getController(){
 		return $this->controller;
 	}
 	
+	/**
+	*	Return the String name of this Route's Method
+	*/
 	public function getMethod(){
 		return $this->method;
 	}
 	
+	/**
+	*	Return the Array of parameters pertaining to this Route
+	*/
 	public function getParameters(){
 		return $this->parameters;
 	}
 	
+	/**
+	*	Return the route/path of the Http Request
+	*/
 	public function getRoute() {
-		return $this->route;
+		return $this->path;
 	}
 	
+	/**
+	*	Return an Array containing only the data needed for an Http Redirect i.e. controller, method and parameters (optional)
+	*/
 	public function getRedirect(){
 		return array('controller' => $this->controller, 'method' => $this->method, 'parameters' => $this->parameters);
 	}
 	
-	public function setController($ops) {
-		if(isset($ops['controller'])) {
-			$this->controller = $ops['controller'];
-			return true;
-		}
-		throw new Exception('Invalid Route, controller is not defined.');
+	/**
+	*	Setter for the path
+	*/
+	public function setPath($path='') {
+		$this->path = $path;
+		return $this;
 	}
 	
-	public function setMethod($ops) {
-		if(isset($ops['method'])){
-			$this->method = $ops['method'];
-			return true;
+	/**
+	*	Setter for the Controller name. Throws 
+	*/
+	public function setController($controller=null) {
+		if(!$controller) {
+			//exception is thrown as Controller is required
+			throw new Exception('Invalid Route, Controller is not defined.');
 		}
-		return false;
+		
+		$this->controller = $controller;
+		return $this;
 	}
 	
-	public function setParameters($ops){
-		if(isset($ops['parameters'])) {
-			$this->parameters = $ops['parameters'];
-			return true;
-		}
-		return false;
+	/**
+	*	Setter for the Controller method
+	*/
+	public function setMethod($method='index') {
+		$this->method = $method;
+		return $this;
 	}
 	
-	public static function generateRoute($request) {
-		$parts = explode('/', $request);
+	public function setParameters($parameters=array()){
+		$this->parameters = $parameters;
+		return $this;
+	}
+	
+	public function generateRoute($requestURI) {
+		$parts = explode('/', $requestURI);
+		
+		//remove the blank created
 		array_shift($parts);
-		if(isset($parts[0])) {
+		
+		//if the controller exists in the request
+		if(isset($parts[0]) && $parts[0] != null && $parts[0] != '') {
+			
 			$controller = $parts[0];
-			if(isset($parts[1])){
+			
+			if(isset($parts[1]) && $parts[1] != '' && $parts[1] != null){
 				$method = $parts[1];
 			}else{
 				$method = 'index';
 			}
 			//set the parameters if there are any
 			$params = array_slice($parts, 2);
-			return new Route($request, array('controller' => $controller, 'method' => $method, 'parameters' => $params));
+			$params = array_merge($params, array_values($_GET));
+			
+			return Route::create()->setController($controller)->setMethod($method)->setParameters($params);
 		}
-		//invalid request
+		//bad request
 		return false;
 	}
 	
 	public function toString() {
-		return "Routing request: '" . $this->route . "' to controller => " . $this->controller . " and method => " . $this->method;
+		return "Routing request: '" . $this->path . "' to controller => " . $this->controller . " and method => " . $this->method;
 	}
 	
 }
