@@ -14,22 +14,56 @@
 <div class="wrapper span24">
 	<br>
 	<form action="/index/upload" method="POST" enctype="multipart/form-data" class="form-horizontal">
+		
 		<div class="control-group">
-	      <label class="control-label" for="fileInput">File input</label>
+	      <label class="control-label" for="emailInput">Email Address:</label>
 	      <div class="controls">
-	        <input class="input-file" id="fileInput" type="file" name="image1">
+	        <input class="input-file" id="emailInput" type="text" name="email">
 	      </div>
 	    </div>
+	
+		<div class="control-group">
+	      <label class="control-label" for="rangeInput">Enter a number between 1 and 10:</label>
+	      <div class="controls">
+	        <input class="input-file" id="rangeInput" type="text" name="range">
+	      </div>
+	    </div>
+	
+		<div class="control-group">
+			<label class="control-label" for="select01">Select list</label>
+			<div class="controls">
+				<select id="select01" name="single">
+					<option value='false'>something</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+				</select>
+			</div>
+		</div>
+	
+		<div class="control-group">
+          <label class="control-label" for="multiSelect">Multicon-select</label>
+          <div class="controls">
+            <select multiple="multiple" id="multiple" name="multiple[]">
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+            </select>
+          </div>
+        </div>
 		
 		<div class="control-group">
 	      <label class="control-label" for="fileInput">File input</label>
 	      <div class="controls">
-	        <input class="input-file" id="fileInput" type="file" name="image2">
+	        <input class="input-file" id="fileInput" type="file" name="avatar[]" multiple="multiple">
 	      </div>
 	    </div>
 	
 		<div class="form-actions">
-		  <button type="submit" class="btn btn-primary">Upload</button>
+		  <button type="submit" name="test-submit" class="btn btn-primary">Upload</button>
 		</div>
 	</form>
 </div>

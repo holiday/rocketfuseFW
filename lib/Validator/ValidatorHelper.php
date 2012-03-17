@@ -1,14 +1,22 @@
 <?php
 
 require_once ('lib/Bootstrapper.php');
-require_once('AbstractValidator.php');
+require_once('ValidationRules/AbstractValidator.php');
+
+/**
+*	Validator helper class to manage various validations to be performed on data.
+*	Multiple Validators can be used and are all executed in one go. Errors are logged 
+*	and method chaining is supported where necessary.
+*/
 
 class ValidatorHelper {
 	
+	//stores the AbstractValidator objects
 	protected $validators;
 	
+	//logs all errors
 	protected $errors;
-	
+
 	/**
 	*	Initialize a new ValidatorHelper
 	*/
@@ -58,6 +66,7 @@ class ValidatorHelper {
 	public function reset() {
 		$this->validators = array();
 		$this->errors = array();
+		return (empty($this->validators) && empty($this->errors));
 	}
 	
 	
