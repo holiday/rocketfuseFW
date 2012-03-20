@@ -25,6 +25,27 @@ abstract class AbstractValidator {
 	abstract public function validate();
 	
 	/**
+	*	Setter for the Validator value
+	*/
+	public function setValue($val) {
+		$this->value = $val;
+	}
+	
+	private function required() {
+		if(isset($this->options['required']) && $this->options['required'] == false) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	*	Getter for values
+	*/	
+	public function getValue() {
+		return $this->value;
+	}
+	
+	/**
 	*	Getter for the error message
 	*/
 	public function getError() {

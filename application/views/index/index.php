@@ -23,6 +23,13 @@
 	    </div>
 	
 		<div class="control-group">
+	      <label class="control-label" for="dateInput">Date (dd/mm/yy):</label>
+	      <div class="controls">
+	        <input class="input-file" id="dateInput" type="text" name="date">
+	      </div>
+	    </div>
+	
+		<div class="control-group">
 	      <label class="control-label" for="rangeInput">Enter a number between 1 and 10:</label>
 	      <div class="controls">
 	        <input class="input-file" id="rangeInput" type="text" name="range">

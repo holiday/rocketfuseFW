@@ -45,8 +45,6 @@ class FormValidator {
 	}
 	
 	private function run($ruleName, $data=null, $options) {
-		//echo 'Executing rule ', $ruleName, ' with data ' , json_encode($data), ' and options ', json_encode($options), '<br>';
-		
 		$validationRule = ucfirst($ruleName) . 'Validator';
 		$this->val->addValidator(new $validationRule($data, $options));
 		

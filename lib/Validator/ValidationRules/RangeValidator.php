@@ -10,6 +10,10 @@ class RangeValidator extends AbstractValidator {
 	public function validate() {
 		
 		if(!is_numeric($this->value)) {
+			if(is_array($this->value)) {
+				//check array length
+				return (count($this->value) >= $this->options['from'] && $this->value <= $this->options['to']) ? true : false;
+			}
 			//check string length
 			return (strlen($this->value) >= $this->options['from'] && $this->value <= $this->options['to']) ? true : false;
 		}	

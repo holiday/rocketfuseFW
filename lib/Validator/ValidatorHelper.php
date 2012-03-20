@@ -52,6 +52,18 @@ class ValidatorHelper {
 		return empty($this->errors) ? true : false; //checks for errors
  	}
 	
+	/**
+	*	This method determines whether a validation should be performed on a non-required field.
+	*	Return true if a validation should be performed, false otherwise.
+	*/	
+	private function doVal($validator) {
+		
+		if(!$validator->required() && $validator->getValue() != null) {
+			return true;
+		}
+		return false;
+		
+	}
 	
 	/**
 	*	Getter for errors
