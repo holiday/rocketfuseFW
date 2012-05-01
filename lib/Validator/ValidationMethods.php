@@ -85,7 +85,7 @@ class ValidationMethods{
 	public static function length($val, $length) {
 		return (strlen($val) == (int)$length);
 	}
-	
+
 	/**
 	*	Return true if the String is atleast $minLength
 	*	@param $val String
