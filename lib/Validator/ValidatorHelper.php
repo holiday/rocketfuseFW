@@ -45,7 +45,10 @@ class ValidatorHelper {
 	public function validate() {
 		foreach($this->validators as $validator) { //perform all validations
 			if(!$validator->validate()) {
-				$this->errors[] = $validator->getError(); //log each error 
+				echo $validator->toString();
+				if(!array_key_exists($validator->getFieldName(), $this->errors) && $validator->nullValue() && $validator->required()) { //if no errors previously set
+					$this->errors[$validator->getFieldName()] = $validator->getError(); //log the error
+				}
 			}
 		}
 		

@@ -13,5 +13,4 @@ Validator:
 - Must be able to validate Select fields (if they are set/not)
 - Able to set dependencies between multiple fields eg. 2 fields that have upper/lower bounded values i.e. a price range
   where one cannot be less than the other or vice versa
-- Able to specify multiple validation rules against one field (possible best implemented recursively)
 - 

@@ -19,9 +19,13 @@ class Controller{
 	
 	//whether to make this controller accessible 
 	public $visible = true;
+	
+	//holds helper class Post
+	public $post;
 
 	public function __construct($registry) {
 		$this->App = $registry;
+		$this->post = $this->App->Post;
 	}
 	
 	public function index() {
@@ -32,6 +36,8 @@ class Controller{
 	*	Method that is called before any other method
 	*/
 	public function runBefore(){
+		//initialize the Post Helper
+		$this->post->init();
 	}
 	
 	/**

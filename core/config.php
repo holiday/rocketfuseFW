@@ -57,9 +57,6 @@ $registry->Template = new Template($registry);
 //Access Control
 $registry->ACL = new ACL($registry);
 
-//Input Sanitizer
-$registry->Input = Input::getInstance($registry);
-
 //load the controller
 $registry->Router->loadController();
 

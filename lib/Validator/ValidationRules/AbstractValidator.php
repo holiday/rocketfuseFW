@@ -9,12 +9,16 @@ abstract class AbstractValidator {
 	//Stores options that the validate() method requires to perform the validation
 	protected $options;
 	
+	//the fieldname that this Validator is acting on
+	protected $fieldName;
+	
 	/**
 	*	Initialize a new AbstractValidator
 	*	@param $value String to be validated
 	*	@param $errorMsg Error message to be logged should validation fail
 	*/
-	public function __construct($value, $options=null) {
+	public function __construct($fieldName, $value, $options=null) {
+		$this->fieldName = $fieldName;
 		$this->value = $value;
 		$this->options = $options;
 	}
@@ -31,11 +35,26 @@ abstract class AbstractValidator {
 		$this->value = $val;
 	}
 	
-	private function required() {
-		if(isset($this->options['required']) && $this->options['required'] == false) {
-			return false;
+	public function required() {
+		if(isset($this->options['required'])) {
+			return $this->options['required'];
 		}
 		return true;
+	}
+	
+	public function nullValue() {
+		if(is_array($this->value) && count($this->value) <= 0) {
+			return true;
+		}elseif(is_string($this->value) && strlen(trim($this->value)) == 0) {
+			return true;
+		}elseif($this->value == null) {
+			return true;
+		}	
+		return false;
+	}
+	
+	public function toString() {
+		return "Field: " . $this->getFieldName() . ', Null Value?: ' . (int)$this->nullValue() . ', Required: ' . (int)$this->required() . '<br>';
 	}
 	
 	/**
@@ -43,6 +62,13 @@ abstract class AbstractValidator {
 	*/	
 	public function getValue() {
 		return $this->value;
+	}
+	
+	/**
+	*	Getter for the fieldName
+	*/	
+	public function getFieldName() {
+		return $this->fieldName;
 	}
 	
 	/**

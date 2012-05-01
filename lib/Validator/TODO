@@ -1,0 +1,4 @@
+Bugs/Upgrades
+- FormValidator should know how to handle non-required fields when they are not set
+- FormValidator should allow for custom validation functions defined by user i.e. methods defined by the caller Class
+- Fix DateValidator index offset

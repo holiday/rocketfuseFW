@@ -40,7 +40,7 @@
 			<label class="control-label" for="select01">Select list</label>
 			<div class="controls">
 				<select id="select01" name="single">
-					<option value='false'>something</option>
+					<option value=''>something</option>
 					<option value='2'>2</option>
 					<option value='3'>3</option>
 					<option value='4'>4</option>
