@@ -5,6 +5,7 @@ TODO:
 - TEST....EVERYTHING!!! (PHPUnit)
 - ACL should also handle redirect back if the feature is enabled
 - Router should be better adapted to handle controller->view requests and display proper error pages
+- Template only detects .php files, it should detect any extension
 
 
 
