@@ -1,20 +1,16 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace FormHelper;
 
 //Notice: Do not modify the order if these required files
 require_once 'Bootstrapper.php';
 require_once 'Observable.php';
 require_once 'Observer.php';
+require_once 'ObservableForm.php';
 require_once 'FieldTypes/AbstractFormField.php';
 use \FieldTypes\AbstractFormField as AbstractFormField;
 
-class Form extends AbstractFormField {
+class Form extends AbstractFormField implements ObservableForm {
     
     protected $name = '';
     
@@ -22,9 +18,9 @@ class Form extends AbstractFormField {
     
     protected $attributes = array();
     
-    protected $indent=1;
+    protected $indent = 1;
     
-    protected $data=null; //houses the data after a form submission
+    protected $data= array(); //houses the data after a form submission
     
     function __construct($name, $attributes=array(), $indent=1) {
         // Initialize the bootstrapper
@@ -39,10 +35,15 @@ class Form extends AbstractFormField {
     
     public function setData($data) {
         if(is_array($data)) {
-            $this->$data = $data;
+            $this->data = $data;
+            $this->setChanged($this->data);
             return $this;
         }
         throw new \Exception('Invalid data supplied to Form->setData(), must be an array.');
+    }
+    
+    public function getData() {
+        return $this->data;
     }
     
     /**
@@ -199,6 +200,7 @@ class Form extends AbstractFormField {
     public static function text($name, $attributes=array()) {
         return new \FieldTypes\Text($name, $attributes);
     }
+    
     /**
      * Factory for FormField single Select
     */
@@ -207,6 +209,7 @@ class Form extends AbstractFormField {
 
         return $select;
     }
+    
     /**
      * Factory for FormField multi Select
     */
@@ -254,13 +257,6 @@ class Form extends AbstractFormField {
     */
     public static function label($name, $attributes, $formField=null){
         return new \FieldTypes\Label($name, $attributes, $formField);
-    }
-    
-    /**
-     * Factory for FormField String
-    */
-    public static function string($text) {
-        return new \FieldTypes\StringField($text);
     }
 
 }

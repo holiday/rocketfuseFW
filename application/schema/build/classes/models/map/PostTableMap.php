@@ -39,18 +39,20 @@ class PostTableMap extends TableMap
 		$this->setUseIdGenerator(true);
 		// columns
 		$this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-		$this->addColumn('TITLE', 'Title', 'VARCHAR', true, 70, null);
-		$this->addColumn('USERID', 'Userid', 'INTEGER', true, null, null);
-		$this->addColumn('PRICEFROM', 'Pricefrom', 'INTEGER', true, 6, null);
-		$this->addColumn('PRICETO', 'Priceto', 'INTEGER', true, 6, null);
+		$this->addForeignKey('USER_ID', 'UserId', 'INTEGER', 'Users', 'ID', true, null, null);
+		$this->addColumn('PRICEFROM', 'Pricefrom', 'INTEGER', true, null, null);
+		$this->addColumn('PRICETO', 'Priceto', 'INTEGER', true, null, null);
 		$this->addColumn('YEARFROM', 'Yearfrom', 'INTEGER', false, 4, null);
 		$this->addColumn('YEARTO', 'Yearto', 'INTEGER', false, 4, null);
-		$this->addColumn('CARMAKEID', 'Carmakeid', 'INTEGER', true, null, null);
-		$this->addColumn('CARMODELID', 'Carmodelid', 'INTEGER', true, null, null);
+		$this->addForeignKey('CAR_MAKE_ID', 'CarMakeId', 'INTEGER', 'CarMakes', 'ID', true, null, null);
+		$this->addForeignKey('CAR_MODEL_ID', 'CarModelId', 'INTEGER', 'CarModels', 'ID', true, null, null);
 		$this->addColumn('TRANSMISSION', 'Transmission', 'VARCHAR', true, 255, null);
 		$this->addColumn('TRADEIN', 'Tradein', 'INTEGER', true, 1, null);
+		$this->addColumn('POSTTYPE', 'Posttype', 'VARCHAR', true, 4, null);
 		$this->addColumn('COMMENT', 'Comment', 'VARCHAR', true, 1000, null);
-		$this->addColumn('SUBMITTED', 'Submitted', 'INTEGER', true, 11, null);
+		$this->addColumn('DATESUBMITTED', 'Datesubmitted', 'INTEGER', true, 10, null);
+		$this->addColumn('ACTIVATION', 'Activation', 'VARCHAR', false, 40, null);
+		$this->addColumn('ACTIVE', 'Active', 'BOOLEAN', true, 1, null);
 		// validators
 	} // initialize()
 
@@ -59,6 +61,9 @@ class PostTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
+		$this->addRelation('CarMake', 'CarMake', RelationMap::MANY_TO_ONE, array('car_make_id' => 'id', ), null, null);
+		$this->addRelation('CarModel', 'CarModel', RelationMap::MANY_TO_ONE, array('car_model_id' => 'id', ), null, null);
 	} // buildRelations()
 
 } // PostTableMap

@@ -11,7 +11,7 @@ class Controller{
 	
 	public $App;
 	
-	//enables this controller or disables it, by default it is enabled
+	//enables this controller or disables it
 	public $enabled = true;
 	
 	//stored an array of String method names
@@ -63,7 +63,7 @@ class Controller{
 	*	Return an array of Strings of method names that are allowed access
 	*/
 	public function getAllowedMethods(){
-		return $this->allowed;
+		return $this->allow;
 	}
 }
 

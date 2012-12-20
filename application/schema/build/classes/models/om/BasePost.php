@@ -37,16 +37,10 @@ abstract class BasePost extends BaseObject  implements Persistent
 	protected $id;
 
 	/**
-	 * The value for the title field.
-	 * @var        string
-	 */
-	protected $title;
-
-	/**
-	 * The value for the userid field.
+	 * The value for the user_id field.
 	 * @var        int
 	 */
-	protected $userid;
+	protected $user_id;
 
 	/**
 	 * The value for the pricefrom field.
@@ -73,16 +67,16 @@ abstract class BasePost extends BaseObject  implements Persistent
 	protected $yearto;
 
 	/**
-	 * The value for the carmakeid field.
+	 * The value for the car_make_id field.
 	 * @var        int
 	 */
-	protected $carmakeid;
+	protected $car_make_id;
 
 	/**
-	 * The value for the carmodelid field.
+	 * The value for the car_model_id field.
 	 * @var        int
 	 */
-	protected $carmodelid;
+	protected $car_model_id;
 
 	/**
 	 * The value for the transmission field.
@@ -97,16 +91,49 @@ abstract class BasePost extends BaseObject  implements Persistent
 	protected $tradein;
 
 	/**
+	 * The value for the posttype field.
+	 * @var        string
+	 */
+	protected $posttype;
+
+	/**
 	 * The value for the comment field.
 	 * @var        string
 	 */
 	protected $comment;
 
 	/**
-	 * The value for the submitted field.
+	 * The value for the datesubmitted field.
 	 * @var        int
 	 */
-	protected $submitted;
+	protected $datesubmitted;
+
+	/**
+	 * The value for the activation field.
+	 * @var        string
+	 */
+	protected $activation;
+
+	/**
+	 * The value for the active field.
+	 * @var        boolean
+	 */
+	protected $active;
+
+	/**
+	 * @var        User
+	 */
+	protected $aUser;
+
+	/**
+	 * @var        CarMake
+	 */
+	protected $aCarMake;
+
+	/**
+	 * @var        CarModel
+	 */
+	protected $aCarModel;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -133,23 +160,13 @@ abstract class BasePost extends BaseObject  implements Persistent
 	}
 
 	/**
-	 * Get the [title] column value.
-	 * 
-	 * @return     string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	/**
-	 * Get the [userid] column value.
+	 * Get the [user_id] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getUserid()
+	public function getUserId()
 	{
-		return $this->userid;
+		return $this->user_id;
 	}
 
 	/**
@@ -193,23 +210,23 @@ abstract class BasePost extends BaseObject  implements Persistent
 	}
 
 	/**
-	 * Get the [carmakeid] column value.
+	 * Get the [car_make_id] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getCarmakeid()
+	public function getCarMakeId()
 	{
-		return $this->carmakeid;
+		return $this->car_make_id;
 	}
 
 	/**
-	 * Get the [carmodelid] column value.
+	 * Get the [car_model_id] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getCarmodelid()
+	public function getCarModelId()
 	{
-		return $this->carmodelid;
+		return $this->car_model_id;
 	}
 
 	/**
@@ -233,6 +250,16 @@ abstract class BasePost extends BaseObject  implements Persistent
 	}
 
 	/**
+	 * Get the [posttype] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getPosttype()
+	{
+		return $this->posttype;
+	}
+
+	/**
 	 * Get the [comment] column value.
 	 * 
 	 * @return     string
@@ -243,13 +270,33 @@ abstract class BasePost extends BaseObject  implements Persistent
 	}
 
 	/**
-	 * Get the [submitted] column value.
+	 * Get the [datesubmitted] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getSubmitted()
+	public function getDatesubmitted()
 	{
-		return $this->submitted;
+		return $this->datesubmitted;
+	}
+
+	/**
+	 * Get the [activation] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getActivation()
+	{
+		return $this->activation;
+	}
+
+	/**
+	 * Get the [active] column value.
+	 * 
+	 * @return     boolean
+	 */
+	public function getActive()
+	{
+		return $this->active;
 	}
 
 	/**
@@ -273,44 +320,28 @@ abstract class BasePost extends BaseObject  implements Persistent
 	} // setId()
 
 	/**
-	 * Set the value of [title] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Post The current object (for fluent API support)
-	 */
-	public function setTitle($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->title !== $v) {
-			$this->title = $v;
-			$this->modifiedColumns[] = PostPeer::TITLE;
-		}
-
-		return $this;
-	} // setTitle()
-
-	/**
-	 * Set the value of [userid] column.
+	 * Set the value of [user_id] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     Post The current object (for fluent API support)
 	 */
-	public function setUserid($v)
+	public function setUserId($v)
 	{
 		if ($v !== null) {
 			$v = (int) $v;
 		}
 
-		if ($this->userid !== $v) {
-			$this->userid = $v;
-			$this->modifiedColumns[] = PostPeer::USERID;
+		if ($this->user_id !== $v) {
+			$this->user_id = $v;
+			$this->modifiedColumns[] = PostPeer::USER_ID;
+		}
+
+		if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+			$this->aUser = null;
 		}
 
 		return $this;
-	} // setUserid()
+	} // setUserId()
 
 	/**
 	 * Set the value of [pricefrom] column.
@@ -393,44 +424,52 @@ abstract class BasePost extends BaseObject  implements Persistent
 	} // setYearto()
 
 	/**
-	 * Set the value of [carmakeid] column.
+	 * Set the value of [car_make_id] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     Post The current object (for fluent API support)
 	 */
-	public function setCarmakeid($v)
+	public function setCarMakeId($v)
 	{
 		if ($v !== null) {
 			$v = (int) $v;
 		}
 
-		if ($this->carmakeid !== $v) {
-			$this->carmakeid = $v;
-			$this->modifiedColumns[] = PostPeer::CARMAKEID;
+		if ($this->car_make_id !== $v) {
+			$this->car_make_id = $v;
+			$this->modifiedColumns[] = PostPeer::CAR_MAKE_ID;
+		}
+
+		if ($this->aCarMake !== null && $this->aCarMake->getId() !== $v) {
+			$this->aCarMake = null;
 		}
 
 		return $this;
-	} // setCarmakeid()
+	} // setCarMakeId()
 
 	/**
-	 * Set the value of [carmodelid] column.
+	 * Set the value of [car_model_id] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     Post The current object (for fluent API support)
 	 */
-	public function setCarmodelid($v)
+	public function setCarModelId($v)
 	{
 		if ($v !== null) {
 			$v = (int) $v;
 		}
 
-		if ($this->carmodelid !== $v) {
-			$this->carmodelid = $v;
-			$this->modifiedColumns[] = PostPeer::CARMODELID;
+		if ($this->car_model_id !== $v) {
+			$this->car_model_id = $v;
+			$this->modifiedColumns[] = PostPeer::CAR_MODEL_ID;
+		}
+
+		if ($this->aCarModel !== null && $this->aCarModel->getId() !== $v) {
+			$this->aCarModel = null;
 		}
 
 		return $this;
-	} // setCarmodelid()
+	} // setCarModelId()
 
 	/**
 	 * Set the value of [transmission] column.
@@ -473,6 +512,26 @@ abstract class BasePost extends BaseObject  implements Persistent
 	} // setTradein()
 
 	/**
+	 * Set the value of [posttype] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Post The current object (for fluent API support)
+	 */
+	public function setPosttype($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->posttype !== $v) {
+			$this->posttype = $v;
+			$this->modifiedColumns[] = PostPeer::POSTTYPE;
+		}
+
+		return $this;
+	} // setPosttype()
+
+	/**
 	 * Set the value of [comment] column.
 	 * 
 	 * @param      string $v new value
@@ -493,24 +552,72 @@ abstract class BasePost extends BaseObject  implements Persistent
 	} // setComment()
 
 	/**
-	 * Set the value of [submitted] column.
+	 * Set the value of [datesubmitted] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     Post The current object (for fluent API support)
 	 */
-	public function setSubmitted($v)
+	public function setDatesubmitted($v)
 	{
 		if ($v !== null) {
 			$v = (int) $v;
 		}
 
-		if ($this->submitted !== $v) {
-			$this->submitted = $v;
-			$this->modifiedColumns[] = PostPeer::SUBMITTED;
+		if ($this->datesubmitted !== $v) {
+			$this->datesubmitted = $v;
+			$this->modifiedColumns[] = PostPeer::DATESUBMITTED;
 		}
 
 		return $this;
-	} // setSubmitted()
+	} // setDatesubmitted()
+
+	/**
+	 * Set the value of [activation] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Post The current object (for fluent API support)
+	 */
+	public function setActivation($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->activation !== $v) {
+			$this->activation = $v;
+			$this->modifiedColumns[] = PostPeer::ACTIVATION;
+		}
+
+		return $this;
+	} // setActivation()
+
+	/**
+	 * Sets the value of the [active] column.
+	 * Non-boolean arguments are converted using the following rules:
+	 *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+	 *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+	 * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+	 * 
+	 * @param      boolean|integer|string $v The new value
+	 * @return     Post The current object (for fluent API support)
+	 */
+	public function setActive($v)
+	{
+		if ($v !== null) {
+			if (is_string($v)) {
+				$v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+			} else {
+				$v = (boolean) $v;
+			}
+		}
+
+		if ($this->active !== $v) {
+			$this->active = $v;
+			$this->modifiedColumns[] = PostPeer::ACTIVE;
+		}
+
+		return $this;
+	} // setActive()
 
 	/**
 	 * Indicates whether the columns in this object are only set to default values.
@@ -545,18 +652,20 @@ abstract class BasePost extends BaseObject  implements Persistent
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->userid = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
-			$this->pricefrom = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-			$this->priceto = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
-			$this->yearfrom = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
-			$this->yearto = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
-			$this->carmakeid = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-			$this->carmodelid = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
-			$this->transmission = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-			$this->tradein = ($row[$startcol + 10] !== null) ? (int) $row[$startcol + 10] : null;
+			$this->user_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+			$this->pricefrom = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+			$this->priceto = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
+			$this->yearfrom = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+			$this->yearto = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+			$this->car_make_id = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
+			$this->car_model_id = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+			$this->transmission = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+			$this->tradein = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
+			$this->posttype = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
 			$this->comment = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
-			$this->submitted = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
+			$this->datesubmitted = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
+			$this->activation = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+			$this->active = ($row[$startcol + 14] !== null) ? (boolean) $row[$startcol + 14] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -565,7 +674,7 @@ abstract class BasePost extends BaseObject  implements Persistent
 				$this->ensureConsistency();
 			}
 
-			return $startcol + 13; // 13 = PostPeer::NUM_HYDRATE_COLUMNS.
+			return $startcol + 15; // 15 = PostPeer::NUM_HYDRATE_COLUMNS.
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Post object", $e);
@@ -588,6 +697,15 @@ abstract class BasePost extends BaseObject  implements Persistent
 	public function ensureConsistency()
 	{
 
+		if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+			$this->aUser = null;
+		}
+		if ($this->aCarMake !== null && $this->car_make_id !== $this->aCarMake->getId()) {
+			$this->aCarMake = null;
+		}
+		if ($this->aCarModel !== null && $this->car_model_id !== $this->aCarModel->getId()) {
+			$this->aCarModel = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -627,6 +745,9 @@ abstract class BasePost extends BaseObject  implements Persistent
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aUser = null;
+			$this->aCarMake = null;
+			$this->aCarModel = null;
 		} // if (deep)
 	}
 
@@ -737,6 +858,32 @@ abstract class BasePost extends BaseObject  implements Persistent
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aUser !== null) {
+				if ($this->aUser->isModified() || $this->aUser->isNew()) {
+					$affectedRows += $this->aUser->save($con);
+				}
+				$this->setUser($this->aUser);
+			}
+
+			if ($this->aCarMake !== null) {
+				if ($this->aCarMake->isModified() || $this->aCarMake->isNew()) {
+					$affectedRows += $this->aCarMake->save($con);
+				}
+				$this->setCarMake($this->aCarMake);
+			}
+
+			if ($this->aCarModel !== null) {
+				if ($this->aCarModel->isModified() || $this->aCarModel->isNew()) {
+					$affectedRows += $this->aCarModel->save($con);
+				}
+				$this->setCarModel($this->aCarModel);
+			}
+
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
 				if ($this->isNew()) {
@@ -776,11 +923,8 @@ abstract class BasePost extends BaseObject  implements Persistent
 		if ($this->isColumnModified(PostPeer::ID)) {
 			$modifiedColumns[':p' . $index++]  = '`ID`';
 		}
-		if ($this->isColumnModified(PostPeer::TITLE)) {
-			$modifiedColumns[':p' . $index++]  = '`TITLE`';
-		}
-		if ($this->isColumnModified(PostPeer::USERID)) {
-			$modifiedColumns[':p' . $index++]  = '`USERID`';
+		if ($this->isColumnModified(PostPeer::USER_ID)) {
+			$modifiedColumns[':p' . $index++]  = '`USER_ID`';
 		}
 		if ($this->isColumnModified(PostPeer::PRICEFROM)) {
 			$modifiedColumns[':p' . $index++]  = '`PRICEFROM`';
@@ -794,11 +938,11 @@ abstract class BasePost extends BaseObject  implements Persistent
 		if ($this->isColumnModified(PostPeer::YEARTO)) {
 			$modifiedColumns[':p' . $index++]  = '`YEARTO`';
 		}
-		if ($this->isColumnModified(PostPeer::CARMAKEID)) {
-			$modifiedColumns[':p' . $index++]  = '`CARMAKEID`';
+		if ($this->isColumnModified(PostPeer::CAR_MAKE_ID)) {
+			$modifiedColumns[':p' . $index++]  = '`CAR_MAKE_ID`';
 		}
-		if ($this->isColumnModified(PostPeer::CARMODELID)) {
-			$modifiedColumns[':p' . $index++]  = '`CARMODELID`';
+		if ($this->isColumnModified(PostPeer::CAR_MODEL_ID)) {
+			$modifiedColumns[':p' . $index++]  = '`CAR_MODEL_ID`';
 		}
 		if ($this->isColumnModified(PostPeer::TRANSMISSION)) {
 			$modifiedColumns[':p' . $index++]  = '`TRANSMISSION`';
@@ -806,11 +950,20 @@ abstract class BasePost extends BaseObject  implements Persistent
 		if ($this->isColumnModified(PostPeer::TRADEIN)) {
 			$modifiedColumns[':p' . $index++]  = '`TRADEIN`';
 		}
+		if ($this->isColumnModified(PostPeer::POSTTYPE)) {
+			$modifiedColumns[':p' . $index++]  = '`POSTTYPE`';
+		}
 		if ($this->isColumnModified(PostPeer::COMMENT)) {
 			$modifiedColumns[':p' . $index++]  = '`COMMENT`';
 		}
-		if ($this->isColumnModified(PostPeer::SUBMITTED)) {
-			$modifiedColumns[':p' . $index++]  = '`SUBMITTED`';
+		if ($this->isColumnModified(PostPeer::DATESUBMITTED)) {
+			$modifiedColumns[':p' . $index++]  = '`DATESUBMITTED`';
+		}
+		if ($this->isColumnModified(PostPeer::ACTIVATION)) {
+			$modifiedColumns[':p' . $index++]  = '`ACTIVATION`';
+		}
+		if ($this->isColumnModified(PostPeer::ACTIVE)) {
+			$modifiedColumns[':p' . $index++]  = '`ACTIVE`';
 		}
 
 		$sql = sprintf(
@@ -826,11 +979,8 @@ abstract class BasePost extends BaseObject  implements Persistent
 					case '`ID`':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
 						break;
-					case '`TITLE`':
-						$stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
-						break;
-					case '`USERID`':
-						$stmt->bindValue($identifier, $this->userid, PDO::PARAM_INT);
+					case '`USER_ID`':
+						$stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
 						break;
 					case '`PRICEFROM`':
 						$stmt->bindValue($identifier, $this->pricefrom, PDO::PARAM_INT);
@@ -844,11 +994,11 @@ abstract class BasePost extends BaseObject  implements Persistent
 					case '`YEARTO`':
 						$stmt->bindValue($identifier, $this->yearto, PDO::PARAM_INT);
 						break;
-					case '`CARMAKEID`':
-						$stmt->bindValue($identifier, $this->carmakeid, PDO::PARAM_INT);
+					case '`CAR_MAKE_ID`':
+						$stmt->bindValue($identifier, $this->car_make_id, PDO::PARAM_INT);
 						break;
-					case '`CARMODELID`':
-						$stmt->bindValue($identifier, $this->carmodelid, PDO::PARAM_INT);
+					case '`CAR_MODEL_ID`':
+						$stmt->bindValue($identifier, $this->car_model_id, PDO::PARAM_INT);
 						break;
 					case '`TRANSMISSION`':
 						$stmt->bindValue($identifier, $this->transmission, PDO::PARAM_STR);
@@ -856,11 +1006,20 @@ abstract class BasePost extends BaseObject  implements Persistent
 					case '`TRADEIN`':
 						$stmt->bindValue($identifier, $this->tradein, PDO::PARAM_INT);
 						break;
+					case '`POSTTYPE`':
+						$stmt->bindValue($identifier, $this->posttype, PDO::PARAM_STR);
+						break;
 					case '`COMMENT`':
 						$stmt->bindValue($identifier, $this->comment, PDO::PARAM_STR);
 						break;
-					case '`SUBMITTED`':
-						$stmt->bindValue($identifier, $this->submitted, PDO::PARAM_INT);
+					case '`DATESUBMITTED`':
+						$stmt->bindValue($identifier, $this->datesubmitted, PDO::PARAM_INT);
+						break;
+					case '`ACTIVATION`':
+						$stmt->bindValue($identifier, $this->activation, PDO::PARAM_STR);
+						break;
+					case '`ACTIVE`':
+						$stmt->bindValue($identifier, (int) $this->active, PDO::PARAM_INT);
 						break;
 				}
 			}
@@ -954,6 +1113,30 @@ abstract class BasePost extends BaseObject  implements Persistent
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aUser !== null) {
+				if (!$this->aUser->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+				}
+			}
+
+			if ($this->aCarMake !== null) {
+				if (!$this->aCarMake->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarMake->getValidationFailures());
+				}
+			}
+
+			if ($this->aCarModel !== null) {
+				if (!$this->aCarModel->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarModel->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = PostPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -996,40 +1179,46 @@ abstract class BasePost extends BaseObject  implements Persistent
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getTitle();
+				return $this->getUserId();
 				break;
 			case 2:
-				return $this->getUserid();
-				break;
-			case 3:
 				return $this->getPricefrom();
 				break;
-			case 4:
+			case 3:
 				return $this->getPriceto();
 				break;
-			case 5:
+			case 4:
 				return $this->getYearfrom();
 				break;
-			case 6:
+			case 5:
 				return $this->getYearto();
 				break;
+			case 6:
+				return $this->getCarMakeId();
+				break;
 			case 7:
-				return $this->getCarmakeid();
+				return $this->getCarModelId();
 				break;
 			case 8:
-				return $this->getCarmodelid();
-				break;
-			case 9:
 				return $this->getTransmission();
 				break;
-			case 10:
+			case 9:
 				return $this->getTradein();
+				break;
+			case 10:
+				return $this->getPosttype();
 				break;
 			case 11:
 				return $this->getComment();
 				break;
 			case 12:
-				return $this->getSubmitted();
+				return $this->getDatesubmitted();
+				break;
+			case 13:
+				return $this->getActivation();
+				break;
+			case 14:
+				return $this->getActive();
 				break;
 			default:
 				return null;
@@ -1048,10 +1237,11 @@ abstract class BasePost extends BaseObject  implements Persistent
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Post'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -1060,19 +1250,32 @@ abstract class BasePost extends BaseObject  implements Persistent
 		$keys = PostPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getTitle(),
-			$keys[2] => $this->getUserid(),
-			$keys[3] => $this->getPricefrom(),
-			$keys[4] => $this->getPriceto(),
-			$keys[5] => $this->getYearfrom(),
-			$keys[6] => $this->getYearto(),
-			$keys[7] => $this->getCarmakeid(),
-			$keys[8] => $this->getCarmodelid(),
-			$keys[9] => $this->getTransmission(),
-			$keys[10] => $this->getTradein(),
+			$keys[1] => $this->getUserId(),
+			$keys[2] => $this->getPricefrom(),
+			$keys[3] => $this->getPriceto(),
+			$keys[4] => $this->getYearfrom(),
+			$keys[5] => $this->getYearto(),
+			$keys[6] => $this->getCarMakeId(),
+			$keys[7] => $this->getCarModelId(),
+			$keys[8] => $this->getTransmission(),
+			$keys[9] => $this->getTradein(),
+			$keys[10] => $this->getPosttype(),
 			$keys[11] => $this->getComment(),
-			$keys[12] => $this->getSubmitted(),
+			$keys[12] => $this->getDatesubmitted(),
+			$keys[13] => $this->getActivation(),
+			$keys[14] => $this->getActive(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aUser) {
+				$result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->aCarMake) {
+				$result['CarMake'] = $this->aCarMake->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->aCarModel) {
+				$result['CarModel'] = $this->aCarModel->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -1107,40 +1310,46 @@ abstract class BasePost extends BaseObject  implements Persistent
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setTitle($value);
+				$this->setUserId($value);
 				break;
 			case 2:
-				$this->setUserid($value);
-				break;
-			case 3:
 				$this->setPricefrom($value);
 				break;
-			case 4:
+			case 3:
 				$this->setPriceto($value);
 				break;
-			case 5:
+			case 4:
 				$this->setYearfrom($value);
 				break;
-			case 6:
+			case 5:
 				$this->setYearto($value);
 				break;
+			case 6:
+				$this->setCarMakeId($value);
+				break;
 			case 7:
-				$this->setCarmakeid($value);
+				$this->setCarModelId($value);
 				break;
 			case 8:
-				$this->setCarmodelid($value);
-				break;
-			case 9:
 				$this->setTransmission($value);
 				break;
-			case 10:
+			case 9:
 				$this->setTradein($value);
+				break;
+			case 10:
+				$this->setPosttype($value);
 				break;
 			case 11:
 				$this->setComment($value);
 				break;
 			case 12:
-				$this->setSubmitted($value);
+				$this->setDatesubmitted($value);
+				break;
+			case 13:
+				$this->setActivation($value);
+				break;
+			case 14:
+				$this->setActive($value);
 				break;
 		} // switch()
 	}
@@ -1167,18 +1376,20 @@ abstract class BasePost extends BaseObject  implements Persistent
 		$keys = PostPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setUserid($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setPricefrom($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setPriceto($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setYearfrom($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setYearto($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCarmakeid($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCarmodelid($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setTransmission($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setTradein($arr[$keys[10]]);
+		if (array_key_exists($keys[1], $arr)) $this->setUserId($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setPricefrom($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setPriceto($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setYearfrom($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setYearto($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCarMakeId($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCarModelId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTransmission($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTradein($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPosttype($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setComment($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setSubmitted($arr[$keys[12]]);
+		if (array_key_exists($keys[12], $arr)) $this->setDatesubmitted($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setActivation($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setActive($arr[$keys[14]]);
 	}
 
 	/**
@@ -1191,18 +1402,20 @@ abstract class BasePost extends BaseObject  implements Persistent
 		$criteria = new Criteria(PostPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(PostPeer::ID)) $criteria->add(PostPeer::ID, $this->id);
-		if ($this->isColumnModified(PostPeer::TITLE)) $criteria->add(PostPeer::TITLE, $this->title);
-		if ($this->isColumnModified(PostPeer::USERID)) $criteria->add(PostPeer::USERID, $this->userid);
+		if ($this->isColumnModified(PostPeer::USER_ID)) $criteria->add(PostPeer::USER_ID, $this->user_id);
 		if ($this->isColumnModified(PostPeer::PRICEFROM)) $criteria->add(PostPeer::PRICEFROM, $this->pricefrom);
 		if ($this->isColumnModified(PostPeer::PRICETO)) $criteria->add(PostPeer::PRICETO, $this->priceto);
 		if ($this->isColumnModified(PostPeer::YEARFROM)) $criteria->add(PostPeer::YEARFROM, $this->yearfrom);
 		if ($this->isColumnModified(PostPeer::YEARTO)) $criteria->add(PostPeer::YEARTO, $this->yearto);
-		if ($this->isColumnModified(PostPeer::CARMAKEID)) $criteria->add(PostPeer::CARMAKEID, $this->carmakeid);
-		if ($this->isColumnModified(PostPeer::CARMODELID)) $criteria->add(PostPeer::CARMODELID, $this->carmodelid);
+		if ($this->isColumnModified(PostPeer::CAR_MAKE_ID)) $criteria->add(PostPeer::CAR_MAKE_ID, $this->car_make_id);
+		if ($this->isColumnModified(PostPeer::CAR_MODEL_ID)) $criteria->add(PostPeer::CAR_MODEL_ID, $this->car_model_id);
 		if ($this->isColumnModified(PostPeer::TRANSMISSION)) $criteria->add(PostPeer::TRANSMISSION, $this->transmission);
 		if ($this->isColumnModified(PostPeer::TRADEIN)) $criteria->add(PostPeer::TRADEIN, $this->tradein);
+		if ($this->isColumnModified(PostPeer::POSTTYPE)) $criteria->add(PostPeer::POSTTYPE, $this->posttype);
 		if ($this->isColumnModified(PostPeer::COMMENT)) $criteria->add(PostPeer::COMMENT, $this->comment);
-		if ($this->isColumnModified(PostPeer::SUBMITTED)) $criteria->add(PostPeer::SUBMITTED, $this->submitted);
+		if ($this->isColumnModified(PostPeer::DATESUBMITTED)) $criteria->add(PostPeer::DATESUBMITTED, $this->datesubmitted);
+		if ($this->isColumnModified(PostPeer::ACTIVATION)) $criteria->add(PostPeer::ACTIVATION, $this->activation);
+		if ($this->isColumnModified(PostPeer::ACTIVE)) $criteria->add(PostPeer::ACTIVE, $this->active);
 
 		return $criteria;
 	}
@@ -1265,18 +1478,32 @@ abstract class BasePost extends BaseObject  implements Persistent
 	 */
 	public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
 	{
-		$copyObj->setTitle($this->getTitle());
-		$copyObj->setUserid($this->getUserid());
+		$copyObj->setUserId($this->getUserId());
 		$copyObj->setPricefrom($this->getPricefrom());
 		$copyObj->setPriceto($this->getPriceto());
 		$copyObj->setYearfrom($this->getYearfrom());
 		$copyObj->setYearto($this->getYearto());
-		$copyObj->setCarmakeid($this->getCarmakeid());
-		$copyObj->setCarmodelid($this->getCarmodelid());
+		$copyObj->setCarMakeId($this->getCarMakeId());
+		$copyObj->setCarModelId($this->getCarModelId());
 		$copyObj->setTransmission($this->getTransmission());
 		$copyObj->setTradein($this->getTradein());
+		$copyObj->setPosttype($this->getPosttype());
 		$copyObj->setComment($this->getComment());
-		$copyObj->setSubmitted($this->getSubmitted());
+		$copyObj->setDatesubmitted($this->getDatesubmitted());
+		$copyObj->setActivation($this->getActivation());
+		$copyObj->setActive($this->getActive());
+
+		if ($deepCopy && !$this->startCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+			// store object hash to prevent cycle
+			$this->startCopy = true;
+
+			//unflag object copy
+			$this->startCopy = false;
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -1322,23 +1549,172 @@ abstract class BasePost extends BaseObject  implements Persistent
 	}
 
 	/**
+	 * Declares an association between this object and a User object.
+	 *
+	 * @param      User $v
+	 * @return     Post The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setUser(User $v = null)
+	{
+		if ($v === null) {
+			$this->setUserId(NULL);
+		} else {
+			$this->setUserId($v->getId());
+		}
+
+		$this->aUser = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the User object, it will not be re-added.
+		if ($v !== null) {
+			$v->addPost($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated User object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     User The associated User object.
+	 * @throws     PropelException
+	 */
+	public function getUser(PropelPDO $con = null)
+	{
+		if ($this->aUser === null && ($this->user_id !== null)) {
+			$this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aUser->addPosts($this);
+			 */
+		}
+		return $this->aUser;
+	}
+
+	/**
+	 * Declares an association between this object and a CarMake object.
+	 *
+	 * @param      CarMake $v
+	 * @return     Post The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setCarMake(CarMake $v = null)
+	{
+		if ($v === null) {
+			$this->setCarMakeId(NULL);
+		} else {
+			$this->setCarMakeId($v->getId());
+		}
+
+		$this->aCarMake = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the CarMake object, it will not be re-added.
+		if ($v !== null) {
+			$v->addPost($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated CarMake object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     CarMake The associated CarMake object.
+	 * @throws     PropelException
+	 */
+	public function getCarMake(PropelPDO $con = null)
+	{
+		if ($this->aCarMake === null && ($this->car_make_id !== null)) {
+			$this->aCarMake = CarMakeQuery::create()->findPk($this->car_make_id, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aCarMake->addPosts($this);
+			 */
+		}
+		return $this->aCarMake;
+	}
+
+	/**
+	 * Declares an association between this object and a CarModel object.
+	 *
+	 * @param      CarModel $v
+	 * @return     Post The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setCarModel(CarModel $v = null)
+	{
+		if ($v === null) {
+			$this->setCarModelId(NULL);
+		} else {
+			$this->setCarModelId($v->getId());
+		}
+
+		$this->aCarModel = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the CarModel object, it will not be re-added.
+		if ($v !== null) {
+			$v->addPost($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated CarModel object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     CarModel The associated CarModel object.
+	 * @throws     PropelException
+	 */
+	public function getCarModel(PropelPDO $con = null)
+	{
+		if ($this->aCarModel === null && ($this->car_model_id !== null)) {
+			$this->aCarModel = CarModelQuery::create()->findPk($this->car_model_id, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aCarModel->addPosts($this);
+			 */
+		}
+		return $this->aCarModel;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
 	{
 		$this->id = null;
-		$this->title = null;
-		$this->userid = null;
+		$this->user_id = null;
 		$this->pricefrom = null;
 		$this->priceto = null;
 		$this->yearfrom = null;
 		$this->yearto = null;
-		$this->carmakeid = null;
-		$this->carmodelid = null;
+		$this->car_make_id = null;
+		$this->car_model_id = null;
 		$this->transmission = null;
 		$this->tradein = null;
+		$this->posttype = null;
 		$this->comment = null;
-		$this->submitted = null;
+		$this->datesubmitted = null;
+		$this->activation = null;
+		$this->active = null;
 		$this->alreadyInSave = false;
 		$this->alreadyInValidation = false;
 		$this->clearAllReferences();
@@ -1361,6 +1737,9 @@ abstract class BasePost extends BaseObject  implements Persistent
 		if ($deep) {
 		} // if ($deep)
 
+		$this->aUser = null;
+		$this->aCarMake = null;
+		$this->aCarModel = null;
 	}
 
 	/**

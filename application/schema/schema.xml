@@ -7,17 +7,64 @@
 	
 	<table name="Posts" phpName="Post">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
-		<column name="title" type="varchar" size="70" required="true" />
-		<column name="userId" type="integer" required="true" />
-		<column name="priceFrom" type="integer" size="6" required="true" />
-		<column name="priceTo" type="integer" size="6" required="true" />
+		<column name="user_id" type="integer" required="true" />
+		<column name="priceFrom" type="integer" required="true" />
+		<column name="priceTo" type="integer" required="true" />
 		<column name="yearFrom" type="integer" size="4" required="false" />
 		<column name="yearTo" type="integer" size="4" required="false" />
-		<column name="carMakeId" type="integer" required="true" />
-		<column name="carModelId" type="integer" required="true" />
+		<column name="car_make_id" type="integer" required="true" />
+		<column name="car_model_id" type="integer" required="true" />
 		<column name="transmission" type="varchar" required="true" />
-		<column name="tradein" type="integer" size="1" required="true" />
+		<column name="tradeIn" type="integer" size="1" required="true" />
+		<column name="postType" type="varchar" size="4" required="true" />
 		<column name="comment" type="varchar" size="1000" required="true" />
-		<column name="submitted" type="integer" size="11" required="true" />
+		<column name="dateSubmitted" type="integer" size="10" required="true" />
+		<column name="activation" type="varchar" size="40" required="false" />
+		<column name="active" type="boolean" required="true" />
+		<foreign-key foreignTable="Users">
+			<reference local="user_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="CarMakes">
+			<reference local="car_make_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="CarModels">
+			<reference local="car_model_id" foreign="id"/>
+		</foreign-key>
 	</table>
+	
+	<table name="Dealers" phpName="Dealer">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="shopName" type="varchar" size="100" required="true" />
+		<column name="email" type="varchar" size="300" required="true" />
+		<column name="password" type="varchar" size="40" required="true" />
+		<column name="clearance" type="integer" size="1" required="true" />
+		<column name="streetName" type="varchar" size="100" required="true" />
+		<column name="streetNumber" type="varchar" size="5" required="true" />
+		<column name="postal" type="varchar" size="7" required="true" />
+		<column name="city" type="varchar" size="80" required="true" />
+		<column name="phone" type="varchar" size="12" required="true" />
+		<column name="fax" type="varchar" size="12" required="true" />
+		<column name="website" type="varchar" size="500" required="true" />
+	</table>
+	
+	<table name="CarMakes" phpName="CarMake">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="make" type="varchar" size="100" required="true" />
+	</table>
+	
+	<table name="CarModels" phpName="CarModel">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="make_id" type="integer" required="true" />
+		<column name="model" type="varchar" size="100" required="true" />
+		<foreign-key foreignTable="CarMakes">
+			<reference local="make_id" foreign="id"/>
+		</foreign-key>
+	</table>
+	
+	<table name="Admins" phpName="Admin">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="username" type="varchar" size="100" required="true" />
+		<column name="password" type="varchar" size="40" required="true" />
+	</table>
+	
 </database>

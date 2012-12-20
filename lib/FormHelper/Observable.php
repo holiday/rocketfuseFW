@@ -65,9 +65,9 @@ class Observable {
     /**
      * Set this Observable as changed 
      */
-    public function setChanged(){
+    public function setChanged($arg=null){
         $this->changed = true;
-        $this->notifyObservers();
+        $this->notifyObservers($arg);
     }
     
     /**

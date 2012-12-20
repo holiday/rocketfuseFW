@@ -11,9 +11,13 @@ class MultipleValidator extends AbstractValidator {
 			$min = $this->options['min'];
 			$max = $this->options['max'];
 			
-			$items = count($this->value);
-			
-			return ($items <= $max && $items >= $min);
+			if(is_array($this->value)) {
+				$items = count($this->value);
+				return ($items <= $max && $items >= $min);
+			}elseif(strlen($this->value) > 0 || $this->value != null) {
+				return true;
+			}
+			return false;
 			
 		}catch(Exception $e) {
 			throw new Exception("MultipleValidator requires options 'min' and 'max' to be set.");

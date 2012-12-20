@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'Users' table.
+ * Base class that represents a row from the 'CarModels' table.
  *
  * 
  *
  * @package    propel.generator.models.om
  */
-abstract class BaseUser extends BaseObject  implements Persistent
+abstract class BaseCarModel extends BaseObject  implements Persistent
 {
 
 	/**
 	 * Peer class name
 	 */
-	const PEER = 'UserPeer';
+	const PEER = 'CarModelPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        UserPeer
+	 * @var        CarModelPeer
 	 */
 	protected static $peer;
 
@@ -37,10 +37,21 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	protected $id;
 
 	/**
-	 * The value for the email field.
+	 * The value for the make_id field.
+	 * @var        int
+	 */
+	protected $make_id;
+
+	/**
+	 * The value for the model field.
 	 * @var        string
 	 */
-	protected $email;
+	protected $model;
+
+	/**
+	 * @var        CarMake
+	 */
+	protected $aCarMake;
 
 	/**
 	 * @var        array Post[] Collection to store aggregation of Post objects.
@@ -78,20 +89,30 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	}
 
 	/**
-	 * Get the [email] column value.
+	 * Get the [make_id] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getMakeId()
+	{
+		return $this->make_id;
+	}
+
+	/**
+	 * Get the [model] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getEmail()
+	public function getModel()
 	{
-		return $this->email;
+		return $this->model;
 	}
 
 	/**
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     User The current object (for fluent API support)
+	 * @return     CarModel The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -101,31 +122,55 @@ abstract class BaseUser extends BaseObject  implements Persistent
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = UserPeer::ID;
+			$this->modifiedColumns[] = CarModelPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [email] column.
+	 * Set the value of [make_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     CarModel The current object (for fluent API support)
+	 */
+	public function setMakeId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->make_id !== $v) {
+			$this->make_id = $v;
+			$this->modifiedColumns[] = CarModelPeer::MAKE_ID;
+		}
+
+		if ($this->aCarMake !== null && $this->aCarMake->getId() !== $v) {
+			$this->aCarMake = null;
+		}
+
+		return $this;
+	} // setMakeId()
+
+	/**
+	 * Set the value of [model] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     User The current object (for fluent API support)
+	 * @return     CarModel The current object (for fluent API support)
 	 */
-	public function setEmail($v)
+	public function setModel($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->email !== $v) {
-			$this->email = $v;
-			$this->modifiedColumns[] = UserPeer::EMAIL;
+		if ($this->model !== $v) {
+			$this->model = $v;
+			$this->modifiedColumns[] = CarModelPeer::MODEL;
 		}
 
 		return $this;
-	} // setEmail()
+	} // setModel()
 
 	/**
 	 * Indicates whether the columns in this object are only set to default values.
@@ -160,7 +205,8 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->email = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->make_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+			$this->model = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -169,10 +215,10 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->ensureConsistency();
 			}
 
-			return $startcol + 2; // 2 = UserPeer::NUM_HYDRATE_COLUMNS.
+			return $startcol + 3; // 3 = CarModelPeer::NUM_HYDRATE_COLUMNS.
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating User object", $e);
+			throw new PropelException("Error populating CarModel object", $e);
 		}
 	}
 
@@ -192,6 +238,9 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	public function ensureConsistency()
 	{
 
+		if ($this->aCarMake !== null && $this->make_id !== $this->aCarMake->getId()) {
+			$this->aCarMake = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -215,13 +264,13 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(CarModelPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = UserPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = CarModelPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -231,6 +280,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aCarMake = null;
 			$this->collPosts = null;
 
 		} // if (deep)
@@ -252,12 +302,12 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(CarModelPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$con->beginTransaction();
 		try {
-			$deleteQuery = UserQuery::create()
+			$deleteQuery = CarModelQuery::create()
 				->filterByPrimaryKey($this->getPrimaryKey());
 			$ret = $this->preDelete($con);
 			if ($ret) {
@@ -294,7 +344,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(CarModelPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$con->beginTransaction();
@@ -314,7 +364,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 					$this->postUpdate($con);
 				}
 				$this->postSave($con);
-				UserPeer::addInstanceToPool($this);
+				CarModelPeer::addInstanceToPool($this);
 			} else {
 				$affectedRows = 0;
 			}
@@ -342,6 +392,18 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
+
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aCarMake !== null) {
+				if ($this->aCarMake->isModified() || $this->aCarMake->isNew()) {
+					$affectedRows += $this->aCarMake->save($con);
+				}
+				$this->setCarMake($this->aCarMake);
+			}
 
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
@@ -390,21 +452,24 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		$modifiedColumns = array();
 		$index = 0;
 
-		$this->modifiedColumns[] = UserPeer::ID;
+		$this->modifiedColumns[] = CarModelPeer::ID;
 		if (null !== $this->id) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key (' . UserPeer::ID . ')');
+			throw new PropelException('Cannot insert a value for auto-increment primary key (' . CarModelPeer::ID . ')');
 		}
 
 		 // check the columns in natural order for more readable SQL queries
-		if ($this->isColumnModified(UserPeer::ID)) {
+		if ($this->isColumnModified(CarModelPeer::ID)) {
 			$modifiedColumns[':p' . $index++]  = '`ID`';
 		}
-		if ($this->isColumnModified(UserPeer::EMAIL)) {
-			$modifiedColumns[':p' . $index++]  = '`EMAIL`';
+		if ($this->isColumnModified(CarModelPeer::MAKE_ID)) {
+			$modifiedColumns[':p' . $index++]  = '`MAKE_ID`';
+		}
+		if ($this->isColumnModified(CarModelPeer::MODEL)) {
+			$modifiedColumns[':p' . $index++]  = '`MODEL`';
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `Users` (%s) VALUES (%s)',
+			'INSERT INTO `CarModels` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);
@@ -416,8 +481,11 @@ abstract class BaseUser extends BaseObject  implements Persistent
 					case '`ID`':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
 						break;
-					case '`EMAIL`':
-						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
+					case '`MAKE_ID`':
+						$stmt->bindValue($identifier, $this->make_id, PDO::PARAM_INT);
+						break;
+					case '`MODEL`':
+						$stmt->bindValue($identifier, $this->model, PDO::PARAM_STR);
 						break;
 				}
 			}
@@ -511,7 +579,19 @@ abstract class BaseUser extends BaseObject  implements Persistent
 			$failureMap = array();
 
 
-			if (($retval = UserPeer::doValidate($this, $columns)) !== true) {
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aCarMake !== null) {
+				if (!$this->aCarMake->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarMake->getValidationFailures());
+				}
+			}
+
+
+			if (($retval = CarModelPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -542,7 +622,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CarModelPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -561,7 +641,10 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getEmail();
+				return $this->getMakeId();
+				break;
+			case 2:
+				return $this->getModel();
 				break;
 			default:
 				return null;
@@ -586,16 +669,20 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
-		if (isset($alreadyDumpedObjects['User'][$this->getPrimaryKey()])) {
+		if (isset($alreadyDumpedObjects['CarModel'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
 		}
-		$alreadyDumpedObjects['User'][$this->getPrimaryKey()] = true;
-		$keys = UserPeer::getFieldNames($keyType);
+		$alreadyDumpedObjects['CarModel'][$this->getPrimaryKey()] = true;
+		$keys = CarModelPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getEmail(),
+			$keys[1] => $this->getMakeId(),
+			$keys[2] => $this->getModel(),
 		);
 		if ($includeForeignObjects) {
+			if (null !== $this->aCarMake) {
+				$result['CarMake'] = $this->aCarMake->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
 			if (null !== $this->collPosts) {
 				$result['Posts'] = $this->collPosts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
 			}
@@ -615,7 +702,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CarModelPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -634,7 +721,10 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setEmail($value);
+				$this->setMakeId($value);
+				break;
+			case 2:
+				$this->setModel($value);
 				break;
 		} // switch()
 	}
@@ -658,10 +748,11 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = UserPeer::getFieldNames($keyType);
+		$keys = CarModelPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setEmail($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setMakeId($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setModel($arr[$keys[2]]);
 	}
 
 	/**
@@ -671,10 +762,11 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(UserPeer::DATABASE_NAME);
+		$criteria = new Criteria(CarModelPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(UserPeer::ID)) $criteria->add(UserPeer::ID, $this->id);
-		if ($this->isColumnModified(UserPeer::EMAIL)) $criteria->add(UserPeer::EMAIL, $this->email);
+		if ($this->isColumnModified(CarModelPeer::ID)) $criteria->add(CarModelPeer::ID, $this->id);
+		if ($this->isColumnModified(CarModelPeer::MAKE_ID)) $criteria->add(CarModelPeer::MAKE_ID, $this->make_id);
+		if ($this->isColumnModified(CarModelPeer::MODEL)) $criteria->add(CarModelPeer::MODEL, $this->model);
 
 		return $criteria;
 	}
@@ -689,8 +781,8 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(UserPeer::DATABASE_NAME);
-		$criteria->add(UserPeer::ID, $this->id);
+		$criteria = new Criteria(CarModelPeer::DATABASE_NAME);
+		$criteria->add(CarModelPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -730,14 +822,15 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of User (or compatible) type.
+	 * @param      object $copyObj An object of CarModel (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
 	{
-		$copyObj->setEmail($this->getEmail());
+		$copyObj->setMakeId($this->getMakeId());
+		$copyObj->setModel($this->getModel());
 
 		if ($deepCopy && !$this->startCopy) {
 			// important: temporarily setNew(false) because this affects the behavior of
@@ -771,7 +864,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     User Clone of current object.
+	 * @return     CarModel Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -790,14 +883,63 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     UserPeer
+	 * @return     CarModelPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new UserPeer();
+			self::$peer = new CarModelPeer();
 		}
 		return self::$peer;
+	}
+
+	/**
+	 * Declares an association between this object and a CarMake object.
+	 *
+	 * @param      CarMake $v
+	 * @return     CarModel The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setCarMake(CarMake $v = null)
+	{
+		if ($v === null) {
+			$this->setMakeId(NULL);
+		} else {
+			$this->setMakeId($v->getId());
+		}
+
+		$this->aCarMake = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the CarMake object, it will not be re-added.
+		if ($v !== null) {
+			$v->addCarModel($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated CarMake object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     CarMake The associated CarMake object.
+	 * @throws     PropelException
+	 */
+	public function getCarMake(PropelPDO $con = null)
+	{
+		if ($this->aCarMake === null && ($this->make_id !== null)) {
+			$this->aCarMake = CarMakeQuery::create()->findPk($this->make_id, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aCarMake->addCarModels($this);
+			 */
+		}
+		return $this->aCarMake;
 	}
 
 
@@ -857,7 +999,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * If the $criteria is not null, it is used to always fetch the results from the database.
 	 * Otherwise the results are fetched from the database the first time, then cached.
 	 * Next time the same method is called without $criteria, the cached collection is returned.
-	 * If this User is new, it will return
+	 * If this CarModel is new, it will return
 	 * an empty collection or the current collection; the criteria is ignored on a new object.
 	 *
 	 * @param      Criteria $criteria optional Criteria object to narrow the query
@@ -873,7 +1015,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->initPosts();
 			} else {
 				$collPosts = PostQuery::create(null, $criteria)
-					->filterByUser($this)
+					->filterByCarModel($this)
 					->find($con);
 				if (null !== $criteria) {
 					return $collPosts;
@@ -900,7 +1042,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		foreach ($posts as $post) {
 			// Fix issue with collection modified by reference
 			if ($post->isNew()) {
-				$post->setUser($this);
+				$post->setCarModel($this);
 			}
 			$this->addPost($post);
 		}
@@ -928,7 +1070,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 					$query->distinct();
 				}
 				return $query
-					->filterByUser($this)
+					->filterByCarModel($this)
 					->count($con);
 			}
 		} else {
@@ -941,7 +1083,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * through the Post foreign key attribute.
 	 *
 	 * @param      Post $l Post
-	 * @return     User The current object (for fluent API support)
+	 * @return     CarModel The current object (for fluent API support)
 	 */
 	public function addPost(Post $l)
 	{
@@ -961,20 +1103,45 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	protected function doAddPost($post)
 	{
 		$this->collPosts[]= $post;
-		$post->setUser($this);
+		$post->setCarModel($this);
 	}
 
 
 	/**
 	 * If this collection has already been initialized with
 	 * an identical criteria, it returns the collection.
-	 * Otherwise if this User is new, it will return
-	 * an empty collection; or if this User has previously
+	 * Otherwise if this CarModel is new, it will return
+	 * an empty collection; or if this CarModel has previously
 	 * been saved, it will retrieve related Posts from storage.
 	 *
 	 * This method is protected by default in order to keep the public
 	 * api reasonable.  You can provide public methods for those you
-	 * actually need in User.
+	 * actually need in CarModel.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+	 * @return     PropelCollection|array Post[] List of Post objects
+	 */
+	public function getPostsJoinUser($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$query = PostQuery::create(null, $criteria);
+		$query->joinWith('User', $join_behavior);
+
+		return $this->getPosts($query, $con);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this CarModel is new, it will return
+	 * an empty collection; or if this CarModel has previously
+	 * been saved, it will retrieve related Posts from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in CarModel.
 	 *
 	 * @param      Criteria $criteria optional Criteria object to narrow the query
 	 * @param      PropelPDO $con optional connection object
@@ -989,38 +1156,14 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		return $this->getPosts($query, $con);
 	}
 
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this User is new, it will return
-	 * an empty collection; or if this User has previously
-	 * been saved, it will retrieve related Posts from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in User.
-	 *
-	 * @param      Criteria $criteria optional Criteria object to narrow the query
-	 * @param      PropelPDO $con optional connection object
-	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-	 * @return     PropelCollection|array Post[] List of Post objects
-	 */
-	public function getPostsJoinCarModel($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		$query = PostQuery::create(null, $criteria);
-		$query->joinWith('CarModel', $join_behavior);
-
-		return $this->getPosts($query, $con);
-	}
-
 	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
 	{
 		$this->id = null;
-		$this->email = null;
+		$this->make_id = null;
+		$this->model = null;
 		$this->alreadyInSave = false;
 		$this->alreadyInValidation = false;
 		$this->clearAllReferences();
@@ -1052,6 +1195,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 			$this->collPosts->clearIterator();
 		}
 		$this->collPosts = null;
+		$this->aCarMake = null;
 	}
 
 	/**
@@ -1061,7 +1205,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function __toString()
 	{
-		return (string) $this->exportTo(UserPeer::DEFAULT_STRING_FORMAT);
+		return (string) $this->exportTo(CarModelPeer::DEFAULT_STRING_FORMAT);
 	}
 
-} // BaseUser
+} // BaseCarModel

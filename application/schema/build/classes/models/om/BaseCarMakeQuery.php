@@ -2,64 +2,68 @@
 
 
 /**
- * Base class that represents a query for the 'Users' table.
+ * Base class that represents a query for the 'CarMakes' table.
  *
  * 
  *
- * @method     UserQuery orderById($order = Criteria::ASC) Order by the id column
- * @method     UserQuery orderByEmail($order = Criteria::ASC) Order by the email column
+ * @method     CarMakeQuery orderById($order = Criteria::ASC) Order by the id column
+ * @method     CarMakeQuery orderByMake($order = Criteria::ASC) Order by the make column
  *
- * @method     UserQuery groupById() Group by the id column
- * @method     UserQuery groupByEmail() Group by the email column
+ * @method     CarMakeQuery groupById() Group by the id column
+ * @method     CarMakeQuery groupByMake() Group by the make column
  *
- * @method     UserQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
- * @method     UserQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
- * @method     UserQuery innerJoin($relation) Adds a INNER JOIN clause to the query
+ * @method     CarMakeQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
+ * @method     CarMakeQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
+ * @method     CarMakeQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     UserQuery leftJoinPost($relationAlias = null) Adds a LEFT JOIN clause to the query using the Post relation
- * @method     UserQuery rightJoinPost($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Post relation
- * @method     UserQuery innerJoinPost($relationAlias = null) Adds a INNER JOIN clause to the query using the Post relation
+ * @method     CarMakeQuery leftJoinPost($relationAlias = null) Adds a LEFT JOIN clause to the query using the Post relation
+ * @method     CarMakeQuery rightJoinPost($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Post relation
+ * @method     CarMakeQuery innerJoinPost($relationAlias = null) Adds a INNER JOIN clause to the query using the Post relation
  *
- * @method     User findOne(PropelPDO $con = null) Return the first User matching the query
- * @method     User findOneOrCreate(PropelPDO $con = null) Return the first User matching the query, or a new User object populated from the query conditions when no match is found
+ * @method     CarMakeQuery leftJoinCarModel($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarModel relation
+ * @method     CarMakeQuery rightJoinCarModel($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarModel relation
+ * @method     CarMakeQuery innerJoinCarModel($relationAlias = null) Adds a INNER JOIN clause to the query using the CarModel relation
  *
- * @method     User findOneById(int $id) Return the first User filtered by the id column
- * @method     User findOneByEmail(string $email) Return the first User filtered by the email column
+ * @method     CarMake findOne(PropelPDO $con = null) Return the first CarMake matching the query
+ * @method     CarMake findOneOrCreate(PropelPDO $con = null) Return the first CarMake matching the query, or a new CarMake object populated from the query conditions when no match is found
  *
- * @method     array findById(int $id) Return User objects filtered by the id column
- * @method     array findByEmail(string $email) Return User objects filtered by the email column
+ * @method     CarMake findOneById(int $id) Return the first CarMake filtered by the id column
+ * @method     CarMake findOneByMake(string $make) Return the first CarMake filtered by the make column
+ *
+ * @method     array findById(int $id) Return CarMake objects filtered by the id column
+ * @method     array findByMake(string $make) Return CarMake objects filtered by the make column
  *
  * @package    propel.generator.models.om
  */
-abstract class BaseUserQuery extends ModelCriteria
+abstract class BaseCarMakeQuery extends ModelCriteria
 {
 	
 	/**
-	 * Initializes internal state of BaseUserQuery object.
+	 * Initializes internal state of BaseCarMakeQuery object.
 	 *
 	 * @param     string $dbName The dabase name
 	 * @param     string $modelName The phpName of a model, e.g. 'Book'
 	 * @param     string $modelAlias The alias for the model in this query, e.g. 'b'
 	 */
-	public function __construct($dbName = 'ready4car', $modelName = 'User', $modelAlias = null)
+	public function __construct($dbName = 'ready4car', $modelName = 'CarMake', $modelAlias = null)
 	{
 		parent::__construct($dbName, $modelName, $modelAlias);
 	}
 
 	/**
-	 * Returns a new UserQuery object.
+	 * Returns a new CarMakeQuery object.
 	 *
 	 * @param     string $modelAlias The alias of a model in the query
 	 * @param     Criteria $criteria Optional Criteria to build the query from
 	 *
-	 * @return    UserQuery
+	 * @return    CarMakeQuery
 	 */
 	public static function create($modelAlias = null, $criteria = null)
 	{
-		if ($criteria instanceof UserQuery) {
+		if ($criteria instanceof CarMakeQuery) {
 			return $criteria;
 		}
-		$query = new UserQuery();
+		$query = new CarMakeQuery();
 		if (null !== $modelAlias) {
 			$query->setModelAlias($modelAlias);
 		}
@@ -81,19 +85,19 @@ abstract class BaseUserQuery extends ModelCriteria
 	 * @param     mixed $key Primary key to use for the query
 	 * @param     PropelPDO $con an optional connection object
 	 *
-	 * @return    User|array|mixed the result, formatted by the current formatter
+	 * @return    CarMake|array|mixed the result, formatted by the current formatter
 	 */
 	public function findPk($key, $con = null)
 	{
 		if ($key === null) {
 			return null;
 		}
-		if ((null !== ($obj = UserPeer::getInstanceFromPool((string) $key))) && !$this->formatter) {
+		if ((null !== ($obj = CarMakePeer::getInstanceFromPool((string) $key))) && !$this->formatter) {
 			// the object is alredy in the instance pool
 			return $obj;
 		}
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(CarMakePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 		$this->basePreSelect($con);
 		if ($this->formatter || $this->modelAlias || $this->with || $this->select
@@ -112,11 +116,11 @@ abstract class BaseUserQuery extends ModelCriteria
 	 * @param     mixed $key Primary key to use for the query
 	 * @param     PropelPDO $con A connection object
 	 *
-	 * @return    User A model object, or null if the key is not found
+	 * @return    CarMake A model object, or null if the key is not found
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID`, `EMAIL` FROM `Users` WHERE `ID` = :p0';
+		$sql = 'SELECT `ID`, `MAKE` FROM `CarMakes` WHERE `ID` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -127,9 +131,9 @@ abstract class BaseUserQuery extends ModelCriteria
 		}
 		$obj = null;
 		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$obj = new User();
+			$obj = new CarMake();
 			$obj->hydrate($row);
-			UserPeer::addInstanceToPool($obj, (string) $row[0]);
+			CarMakePeer::addInstanceToPool($obj, (string) $row[0]);
 		}
 		$stmt->closeCursor();
 
@@ -142,7 +146,7 @@ abstract class BaseUserQuery extends ModelCriteria
 	 * @param     mixed $key Primary key to use for the query
 	 * @param     PropelPDO $con A connection object
 	 *
-	 * @return    User|array|mixed the result, formatted by the current formatter
+	 * @return    CarMake|array|mixed the result, formatted by the current formatter
 	 */
 	protected function findPkComplex($key, $con)
 	{
@@ -182,11 +186,11 @@ abstract class BaseUserQuery extends ModelCriteria
 	 *
 	 * @param     mixed $key Primary key to use for the query
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
 	public function filterByPrimaryKey($key)
 	{
-		return $this->addUsingAlias(UserPeer::ID, $key, Criteria::EQUAL);
+		return $this->addUsingAlias(CarMakePeer::ID, $key, Criteria::EQUAL);
 	}
 
 	/**
@@ -194,11 +198,11 @@ abstract class BaseUserQuery extends ModelCriteria
 	 *
 	 * @param     array $keys The list of primary key to use for the query
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
 	public function filterByPrimaryKeys($keys)
 	{
-		return $this->addUsingAlias(UserPeer::ID, $keys, Criteria::IN);
+		return $this->addUsingAlias(CarMakePeer::ID, $keys, Criteria::IN);
 	}
 
 	/**
@@ -217,42 +221,42 @@ abstract class BaseUserQuery extends ModelCriteria
 	 *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
 	public function filterById($id = null, $comparison = null)
 	{
 		if (is_array($id) && null === $comparison) {
 			$comparison = Criteria::IN;
 		}
-		return $this->addUsingAlias(UserPeer::ID, $id, $comparison);
+		return $this->addUsingAlias(CarMakePeer::ID, $id, $comparison);
 	}
 
 	/**
-	 * Filter the query on the email column
+	 * Filter the query on the make column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterByEmail('fooValue');   // WHERE email = 'fooValue'
-	 * $query->filterByEmail('%fooValue%'); // WHERE email LIKE '%fooValue%'
+	 * $query->filterByMake('fooValue');   // WHERE make = 'fooValue'
+	 * $query->filterByMake('%fooValue%'); // WHERE make LIKE '%fooValue%'
 	 * </code>
 	 *
-	 * @param     string $email The value to use as filter.
+	 * @param     string $make The value to use as filter.
 	 *              Accepts wildcards (* and % trigger a LIKE)
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
-	public function filterByEmail($email = null, $comparison = null)
+	public function filterByMake($make = null, $comparison = null)
 	{
 		if (null === $comparison) {
-			if (is_array($email)) {
+			if (is_array($make)) {
 				$comparison = Criteria::IN;
-			} elseif (preg_match('/[\%\*]/', $email)) {
-				$email = str_replace('*', '%', $email);
+			} elseif (preg_match('/[\%\*]/', $make)) {
+				$make = str_replace('*', '%', $make);
 				$comparison = Criteria::LIKE;
 			}
 		}
-		return $this->addUsingAlias(UserPeer::EMAIL, $email, $comparison);
+		return $this->addUsingAlias(CarMakePeer::MAKE, $make, $comparison);
 	}
 
 	/**
@@ -261,13 +265,13 @@ abstract class BaseUserQuery extends ModelCriteria
 	 * @param     Post $post  the related object to use as filter
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
 	public function filterByPost($post, $comparison = null)
 	{
 		if ($post instanceof Post) {
 			return $this
-				->addUsingAlias(UserPeer::ID, $post->getUserId(), $comparison);
+				->addUsingAlias(CarMakePeer::ID, $post->getCarMakeId(), $comparison);
 		} elseif ($post instanceof PropelCollection) {
 			return $this
 				->usePostQuery()
@@ -284,7 +288,7 @@ abstract class BaseUserQuery extends ModelCriteria
 	 * @param     string $relationAlias optional alias for the relation
 	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
 	public function joinPost($relationAlias = null, $joinType = Criteria::INNER_JOIN)
 	{
@@ -329,19 +333,92 @@ abstract class BaseUserQuery extends ModelCriteria
 	}
 
 	/**
-	 * Exclude object from result
+	 * Filter the query by a related CarModel object
 	 *
-	 * @param     User $user Object to remove from the list of results
+	 * @param     CarModel $carModel  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
 	 *
-	 * @return    UserQuery The current query, for fluid interface
+	 * @return    CarMakeQuery The current query, for fluid interface
 	 */
-	public function prune($user = null)
+	public function filterByCarModel($carModel, $comparison = null)
 	{
-		if ($user) {
-			$this->addUsingAlias(UserPeer::ID, $user->getId(), Criteria::NOT_EQUAL);
+		if ($carModel instanceof CarModel) {
+			return $this
+				->addUsingAlias(CarMakePeer::ID, $carModel->getMakeId(), $comparison);
+		} elseif ($carModel instanceof PropelCollection) {
+			return $this
+				->useCarModelQuery()
+				->filterByPrimaryKeys($carModel->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByCarModel() only accepts arguments of type CarModel or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the CarModel relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    CarMakeQuery The current query, for fluid interface
+	 */
+	public function joinCarModel($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('CarModel');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'CarModel');
 		}
 
 		return $this;
 	}
 
-} // BaseUserQuery
+	/**
+	 * Use the CarModel relation CarModel object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    CarModelQuery A secondary query class using the current class as primary query
+	 */
+	public function useCarModelQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinCarModel($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'CarModel', 'CarModelQuery');
+	}
+
+	/**
+	 * Exclude object from result
+	 *
+	 * @param     CarMake $carMake Object to remove from the list of results
+	 *
+	 * @return    CarMakeQuery The current query, for fluid interface
+	 */
+	public function prune($carMake = null)
+	{
+		if ($carMake) {
+			$this->addUsingAlias(CarMakePeer::ID, $carMake->getId(), Criteria::NOT_EQUAL);
+		}
+
+		return $this;
+	}
+
+} // BaseCarMakeQuery

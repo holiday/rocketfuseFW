@@ -40,11 +40,11 @@ class MultiSelect extends Select {
      *   Return the HTML representation of this field
     */
     public function getHtml() {
-        $base = "<select name=\"$this->name\" " . $this->toHtml($this->attributes) . ">";
+        $base = PHP_EOL . $this->getIndentStr() . "<select name=\"$this->name\" multiple=\"multiple\" " . $this->toHtml($this->attributes) . ">" . PHP_EOL;
         foreach($this->options as $option) {
-            $base .= "\n" . $option->getHtml();
+            $base .= str_repeat("\t", $this->getIndent() + 1) . $option->getHtml() . PHP_EOL;
         }
-        $base .= "\n</select>";
+        $base .= $this->getIndentStr() . "</select>" . PHP_EOL;
         return $base;
     }
     

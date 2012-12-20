@@ -36,6 +36,7 @@ class Option extends AbstractFormField {
     public function setSelected() {
         if(!$this->selected) {
             $this->attributes['selected'] = 'selected';
+            $this->selected = true;
             return true;
         }
         return false;
@@ -70,12 +71,14 @@ class Option extends AbstractFormField {
         return "<option " . $this->toHtml($this->attributes) . ">" . $this->name . "</option>";
     }
     
+    
+    
     /**
      *  Return False
      * @return boolean 
      */
     public function isEmpty(){
-        return false;
+        return isset($this->value);
     }
 
 }

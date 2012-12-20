@@ -2,25 +2,25 @@
 
 
 /**
- * Base class that represents a row from the 'Users' table.
+ * Base class that represents a row from the 'Dealers' table.
  *
  * 
  *
  * @package    propel.generator.models.om
  */
-abstract class BaseUser extends BaseObject  implements Persistent
+abstract class BaseDealer extends BaseObject  implements Persistent
 {
 
 	/**
 	 * Peer class name
 	 */
-	const PEER = 'UserPeer';
+	const PEER = 'DealerPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        UserPeer
+	 * @var        DealerPeer
 	 */
 	protected static $peer;
 
@@ -37,15 +37,70 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	protected $id;
 
 	/**
+	 * The value for the shopname field.
+	 * @var        string
+	 */
+	protected $shopname;
+
+	/**
 	 * The value for the email field.
 	 * @var        string
 	 */
 	protected $email;
 
 	/**
-	 * @var        array Post[] Collection to store aggregation of Post objects.
+	 * The value for the password field.
+	 * @var        string
 	 */
-	protected $collPosts;
+	protected $password;
+
+	/**
+	 * The value for the clearance field.
+	 * @var        int
+	 */
+	protected $clearance;
+
+	/**
+	 * The value for the streetname field.
+	 * @var        string
+	 */
+	protected $streetname;
+
+	/**
+	 * The value for the streetnumber field.
+	 * @var        string
+	 */
+	protected $streetnumber;
+
+	/**
+	 * The value for the postal field.
+	 * @var        string
+	 */
+	protected $postal;
+
+	/**
+	 * The value for the city field.
+	 * @var        string
+	 */
+	protected $city;
+
+	/**
+	 * The value for the phone field.
+	 * @var        string
+	 */
+	protected $phone;
+
+	/**
+	 * The value for the fax field.
+	 * @var        string
+	 */
+	protected $fax;
+
+	/**
+	 * The value for the website field.
+	 * @var        string
+	 */
+	protected $website;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -62,12 +117,6 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	protected $alreadyInValidation = false;
 
 	/**
-	 * An array of objects scheduled for deletion.
-	 * @var		array
-	 */
-	protected $postsScheduledForDeletion = null;
-
-	/**
 	 * Get the [id] column value.
 	 * 
 	 * @return     int
@@ -75,6 +124,16 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * Get the [shopname] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getShopname()
+	{
+		return $this->shopname;
 	}
 
 	/**
@@ -88,10 +147,100 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	}
 
 	/**
+	 * Get the [password] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	 * Get the [clearance] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getClearance()
+	{
+		return $this->clearance;
+	}
+
+	/**
+	 * Get the [streetname] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getStreetname()
+	{
+		return $this->streetname;
+	}
+
+	/**
+	 * Get the [streetnumber] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getStreetnumber()
+	{
+		return $this->streetnumber;
+	}
+
+	/**
+	 * Get the [postal] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getPostal()
+	{
+		return $this->postal;
+	}
+
+	/**
+	 * Get the [city] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getCity()
+	{
+		return $this->city;
+	}
+
+	/**
+	 * Get the [phone] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getPhone()
+	{
+		return $this->phone;
+	}
+
+	/**
+	 * Get the [fax] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getFax()
+	{
+		return $this->fax;
+	}
+
+	/**
+	 * Get the [website] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getWebsite()
+	{
+		return $this->website;
+	}
+
+	/**
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     User The current object (for fluent API support)
+	 * @return     Dealer The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -101,17 +250,37 @@ abstract class BaseUser extends BaseObject  implements Persistent
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = UserPeer::ID;
+			$this->modifiedColumns[] = DealerPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
+	 * Set the value of [shopname] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setShopname($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->shopname !== $v) {
+			$this->shopname = $v;
+			$this->modifiedColumns[] = DealerPeer::SHOPNAME;
+		}
+
+		return $this;
+	} // setShopname()
+
+	/**
 	 * Set the value of [email] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     User The current object (for fluent API support)
+	 * @return     Dealer The current object (for fluent API support)
 	 */
 	public function setEmail($v)
 	{
@@ -121,11 +290,191 @@ abstract class BaseUser extends BaseObject  implements Persistent
 
 		if ($this->email !== $v) {
 			$this->email = $v;
-			$this->modifiedColumns[] = UserPeer::EMAIL;
+			$this->modifiedColumns[] = DealerPeer::EMAIL;
 		}
 
 		return $this;
 	} // setEmail()
+
+	/**
+	 * Set the value of [password] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setPassword($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->password !== $v) {
+			$this->password = $v;
+			$this->modifiedColumns[] = DealerPeer::PASSWORD;
+		}
+
+		return $this;
+	} // setPassword()
+
+	/**
+	 * Set the value of [clearance] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setClearance($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->clearance !== $v) {
+			$this->clearance = $v;
+			$this->modifiedColumns[] = DealerPeer::CLEARANCE;
+		}
+
+		return $this;
+	} // setClearance()
+
+	/**
+	 * Set the value of [streetname] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setStreetname($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->streetname !== $v) {
+			$this->streetname = $v;
+			$this->modifiedColumns[] = DealerPeer::STREETNAME;
+		}
+
+		return $this;
+	} // setStreetname()
+
+	/**
+	 * Set the value of [streetnumber] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setStreetnumber($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->streetnumber !== $v) {
+			$this->streetnumber = $v;
+			$this->modifiedColumns[] = DealerPeer::STREETNUMBER;
+		}
+
+		return $this;
+	} // setStreetnumber()
+
+	/**
+	 * Set the value of [postal] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setPostal($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->postal !== $v) {
+			$this->postal = $v;
+			$this->modifiedColumns[] = DealerPeer::POSTAL;
+		}
+
+		return $this;
+	} // setPostal()
+
+	/**
+	 * Set the value of [city] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setCity($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->city !== $v) {
+			$this->city = $v;
+			$this->modifiedColumns[] = DealerPeer::CITY;
+		}
+
+		return $this;
+	} // setCity()
+
+	/**
+	 * Set the value of [phone] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setPhone($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->phone !== $v) {
+			$this->phone = $v;
+			$this->modifiedColumns[] = DealerPeer::PHONE;
+		}
+
+		return $this;
+	} // setPhone()
+
+	/**
+	 * Set the value of [fax] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setFax($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->fax !== $v) {
+			$this->fax = $v;
+			$this->modifiedColumns[] = DealerPeer::FAX;
+		}
+
+		return $this;
+	} // setFax()
+
+	/**
+	 * Set the value of [website] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Dealer The current object (for fluent API support)
+	 */
+	public function setWebsite($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->website !== $v) {
+			$this->website = $v;
+			$this->modifiedColumns[] = DealerPeer::WEBSITE;
+		}
+
+		return $this;
+	} // setWebsite()
 
 	/**
 	 * Indicates whether the columns in this object are only set to default values.
@@ -160,7 +509,17 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->email = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->shopname = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->email = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+			$this->password = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+			$this->clearance = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+			$this->streetname = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+			$this->streetnumber = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+			$this->postal = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+			$this->city = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+			$this->phone = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+			$this->fax = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+			$this->website = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -169,10 +528,10 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->ensureConsistency();
 			}
 
-			return $startcol + 2; // 2 = UserPeer::NUM_HYDRATE_COLUMNS.
+			return $startcol + 12; // 12 = DealerPeer::NUM_HYDRATE_COLUMNS.
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating User object", $e);
+			throw new PropelException("Error populating Dealer object", $e);
 		}
 	}
 
@@ -215,13 +574,13 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DealerPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = UserPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = DealerPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -230,8 +589,6 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		$this->hydrate($row, 0, true); // rehydrate
 
 		if ($deep) {  // also de-associate any related objects?
-
-			$this->collPosts = null;
 
 		} // if (deep)
 	}
@@ -252,12 +609,12 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DealerPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$con->beginTransaction();
 		try {
-			$deleteQuery = UserQuery::create()
+			$deleteQuery = DealerQuery::create()
 				->filterByPrimaryKey($this->getPrimaryKey());
 			$ret = $this->preDelete($con);
 			if ($ret) {
@@ -294,7 +651,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DealerPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$con->beginTransaction();
@@ -314,7 +671,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 					$this->postUpdate($con);
 				}
 				$this->postSave($con);
-				UserPeer::addInstanceToPool($this);
+				DealerPeer::addInstanceToPool($this);
 			} else {
 				$affectedRows = 0;
 			}
@@ -354,23 +711,6 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->resetModified();
 			}
 
-			if ($this->postsScheduledForDeletion !== null) {
-				if (!$this->postsScheduledForDeletion->isEmpty()) {
-					PostQuery::create()
-						->filterByPrimaryKeys($this->postsScheduledForDeletion->getPrimaryKeys(false))
-						->delete($con);
-					$this->postsScheduledForDeletion = null;
-				}
-			}
-
-			if ($this->collPosts !== null) {
-				foreach ($this->collPosts as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 
 		}
@@ -390,21 +730,51 @@ abstract class BaseUser extends BaseObject  implements Persistent
 		$modifiedColumns = array();
 		$index = 0;
 
-		$this->modifiedColumns[] = UserPeer::ID;
+		$this->modifiedColumns[] = DealerPeer::ID;
 		if (null !== $this->id) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key (' . UserPeer::ID . ')');
+			throw new PropelException('Cannot insert a value for auto-increment primary key (' . DealerPeer::ID . ')');
 		}
 
 		 // check the columns in natural order for more readable SQL queries
-		if ($this->isColumnModified(UserPeer::ID)) {
+		if ($this->isColumnModified(DealerPeer::ID)) {
 			$modifiedColumns[':p' . $index++]  = '`ID`';
 		}
-		if ($this->isColumnModified(UserPeer::EMAIL)) {
+		if ($this->isColumnModified(DealerPeer::SHOPNAME)) {
+			$modifiedColumns[':p' . $index++]  = '`SHOPNAME`';
+		}
+		if ($this->isColumnModified(DealerPeer::EMAIL)) {
 			$modifiedColumns[':p' . $index++]  = '`EMAIL`';
+		}
+		if ($this->isColumnModified(DealerPeer::PASSWORD)) {
+			$modifiedColumns[':p' . $index++]  = '`PASSWORD`';
+		}
+		if ($this->isColumnModified(DealerPeer::CLEARANCE)) {
+			$modifiedColumns[':p' . $index++]  = '`CLEARANCE`';
+		}
+		if ($this->isColumnModified(DealerPeer::STREETNAME)) {
+			$modifiedColumns[':p' . $index++]  = '`STREETNAME`';
+		}
+		if ($this->isColumnModified(DealerPeer::STREETNUMBER)) {
+			$modifiedColumns[':p' . $index++]  = '`STREETNUMBER`';
+		}
+		if ($this->isColumnModified(DealerPeer::POSTAL)) {
+			$modifiedColumns[':p' . $index++]  = '`POSTAL`';
+		}
+		if ($this->isColumnModified(DealerPeer::CITY)) {
+			$modifiedColumns[':p' . $index++]  = '`CITY`';
+		}
+		if ($this->isColumnModified(DealerPeer::PHONE)) {
+			$modifiedColumns[':p' . $index++]  = '`PHONE`';
+		}
+		if ($this->isColumnModified(DealerPeer::FAX)) {
+			$modifiedColumns[':p' . $index++]  = '`FAX`';
+		}
+		if ($this->isColumnModified(DealerPeer::WEBSITE)) {
+			$modifiedColumns[':p' . $index++]  = '`WEBSITE`';
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `Users` (%s) VALUES (%s)',
+			'INSERT INTO `Dealers` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);
@@ -416,8 +786,38 @@ abstract class BaseUser extends BaseObject  implements Persistent
 					case '`ID`':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
 						break;
+					case '`SHOPNAME`':
+						$stmt->bindValue($identifier, $this->shopname, PDO::PARAM_STR);
+						break;
 					case '`EMAIL`':
 						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
+						break;
+					case '`PASSWORD`':
+						$stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
+						break;
+					case '`CLEARANCE`':
+						$stmt->bindValue($identifier, $this->clearance, PDO::PARAM_INT);
+						break;
+					case '`STREETNAME`':
+						$stmt->bindValue($identifier, $this->streetname, PDO::PARAM_STR);
+						break;
+					case '`STREETNUMBER`':
+						$stmt->bindValue($identifier, $this->streetnumber, PDO::PARAM_STR);
+						break;
+					case '`POSTAL`':
+						$stmt->bindValue($identifier, $this->postal, PDO::PARAM_STR);
+						break;
+					case '`CITY`':
+						$stmt->bindValue($identifier, $this->city, PDO::PARAM_STR);
+						break;
+					case '`PHONE`':
+						$stmt->bindValue($identifier, $this->phone, PDO::PARAM_STR);
+						break;
+					case '`FAX`':
+						$stmt->bindValue($identifier, $this->fax, PDO::PARAM_STR);
+						break;
+					case '`WEBSITE`':
+						$stmt->bindValue($identifier, $this->website, PDO::PARAM_STR);
 						break;
 				}
 			}
@@ -511,18 +911,10 @@ abstract class BaseUser extends BaseObject  implements Persistent
 			$failureMap = array();
 
 
-			if (($retval = UserPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = DealerPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
-
-				if ($this->collPosts !== null) {
-					foreach ($this->collPosts as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 
 			$this->alreadyInValidation = false;
@@ -542,7 +934,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DealerPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -561,7 +953,37 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				return $this->getId();
 				break;
 			case 1:
+				return $this->getShopname();
+				break;
+			case 2:
 				return $this->getEmail();
+				break;
+			case 3:
+				return $this->getPassword();
+				break;
+			case 4:
+				return $this->getClearance();
+				break;
+			case 5:
+				return $this->getStreetname();
+				break;
+			case 6:
+				return $this->getStreetnumber();
+				break;
+			case 7:
+				return $this->getPostal();
+				break;
+			case 8:
+				return $this->getCity();
+				break;
+			case 9:
+				return $this->getPhone();
+				break;
+			case 10:
+				return $this->getFax();
+				break;
+			case 11:
+				return $this->getWebsite();
 				break;
 			default:
 				return null;
@@ -580,26 +1002,30 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
-	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
 	{
-		if (isset($alreadyDumpedObjects['User'][$this->getPrimaryKey()])) {
+		if (isset($alreadyDumpedObjects['Dealer'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
 		}
-		$alreadyDumpedObjects['User'][$this->getPrimaryKey()] = true;
-		$keys = UserPeer::getFieldNames($keyType);
+		$alreadyDumpedObjects['Dealer'][$this->getPrimaryKey()] = true;
+		$keys = DealerPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getEmail(),
+			$keys[1] => $this->getShopname(),
+			$keys[2] => $this->getEmail(),
+			$keys[3] => $this->getPassword(),
+			$keys[4] => $this->getClearance(),
+			$keys[5] => $this->getStreetname(),
+			$keys[6] => $this->getStreetnumber(),
+			$keys[7] => $this->getPostal(),
+			$keys[8] => $this->getCity(),
+			$keys[9] => $this->getPhone(),
+			$keys[10] => $this->getFax(),
+			$keys[11] => $this->getWebsite(),
 		);
-		if ($includeForeignObjects) {
-			if (null !== $this->collPosts) {
-				$result['Posts'] = $this->collPosts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
-			}
-		}
 		return $result;
 	}
 
@@ -615,7 +1041,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DealerPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -634,7 +1060,37 @@ abstract class BaseUser extends BaseObject  implements Persistent
 				$this->setId($value);
 				break;
 			case 1:
+				$this->setShopname($value);
+				break;
+			case 2:
 				$this->setEmail($value);
+				break;
+			case 3:
+				$this->setPassword($value);
+				break;
+			case 4:
+				$this->setClearance($value);
+				break;
+			case 5:
+				$this->setStreetname($value);
+				break;
+			case 6:
+				$this->setStreetnumber($value);
+				break;
+			case 7:
+				$this->setPostal($value);
+				break;
+			case 8:
+				$this->setCity($value);
+				break;
+			case 9:
+				$this->setPhone($value);
+				break;
+			case 10:
+				$this->setFax($value);
+				break;
+			case 11:
+				$this->setWebsite($value);
 				break;
 		} // switch()
 	}
@@ -658,10 +1114,20 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = UserPeer::getFieldNames($keyType);
+		$keys = DealerPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setEmail($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setShopname($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setEmail($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setPassword($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setClearance($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setStreetname($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setStreetnumber($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPostal($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCity($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setPhone($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setFax($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setWebsite($arr[$keys[11]]);
 	}
 
 	/**
@@ -671,10 +1137,20 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(UserPeer::DATABASE_NAME);
+		$criteria = new Criteria(DealerPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(UserPeer::ID)) $criteria->add(UserPeer::ID, $this->id);
-		if ($this->isColumnModified(UserPeer::EMAIL)) $criteria->add(UserPeer::EMAIL, $this->email);
+		if ($this->isColumnModified(DealerPeer::ID)) $criteria->add(DealerPeer::ID, $this->id);
+		if ($this->isColumnModified(DealerPeer::SHOPNAME)) $criteria->add(DealerPeer::SHOPNAME, $this->shopname);
+		if ($this->isColumnModified(DealerPeer::EMAIL)) $criteria->add(DealerPeer::EMAIL, $this->email);
+		if ($this->isColumnModified(DealerPeer::PASSWORD)) $criteria->add(DealerPeer::PASSWORD, $this->password);
+		if ($this->isColumnModified(DealerPeer::CLEARANCE)) $criteria->add(DealerPeer::CLEARANCE, $this->clearance);
+		if ($this->isColumnModified(DealerPeer::STREETNAME)) $criteria->add(DealerPeer::STREETNAME, $this->streetname);
+		if ($this->isColumnModified(DealerPeer::STREETNUMBER)) $criteria->add(DealerPeer::STREETNUMBER, $this->streetnumber);
+		if ($this->isColumnModified(DealerPeer::POSTAL)) $criteria->add(DealerPeer::POSTAL, $this->postal);
+		if ($this->isColumnModified(DealerPeer::CITY)) $criteria->add(DealerPeer::CITY, $this->city);
+		if ($this->isColumnModified(DealerPeer::PHONE)) $criteria->add(DealerPeer::PHONE, $this->phone);
+		if ($this->isColumnModified(DealerPeer::FAX)) $criteria->add(DealerPeer::FAX, $this->fax);
+		if ($this->isColumnModified(DealerPeer::WEBSITE)) $criteria->add(DealerPeer::WEBSITE, $this->website);
 
 		return $criteria;
 	}
@@ -689,8 +1165,8 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(UserPeer::DATABASE_NAME);
-		$criteria->add(UserPeer::ID, $this->id);
+		$criteria = new Criteria(DealerPeer::DATABASE_NAME);
+		$criteria->add(DealerPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -730,32 +1206,24 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of User (or compatible) type.
+	 * @param      object $copyObj An object of Dealer (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
 	{
+		$copyObj->setShopname($this->getShopname());
 		$copyObj->setEmail($this->getEmail());
-
-		if ($deepCopy && !$this->startCopy) {
-			// important: temporarily setNew(false) because this affects the behavior of
-			// the getter/setter methods for fkey referrer objects.
-			$copyObj->setNew(false);
-			// store object hash to prevent cycle
-			$this->startCopy = true;
-
-			foreach ($this->getPosts() as $relObj) {
-				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-					$copyObj->addPost($relObj->copy($deepCopy));
-				}
-			}
-
-			//unflag object copy
-			$this->startCopy = false;
-		} // if ($deepCopy)
-
+		$copyObj->setPassword($this->getPassword());
+		$copyObj->setClearance($this->getClearance());
+		$copyObj->setStreetname($this->getStreetname());
+		$copyObj->setStreetnumber($this->getStreetnumber());
+		$copyObj->setPostal($this->getPostal());
+		$copyObj->setCity($this->getCity());
+		$copyObj->setPhone($this->getPhone());
+		$copyObj->setFax($this->getFax());
+		$copyObj->setWebsite($this->getWebsite());
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -771,7 +1239,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     User Clone of current object.
+	 * @return     Dealer Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -790,228 +1258,14 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     UserPeer
+	 * @return     DealerPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new UserPeer();
+			self::$peer = new DealerPeer();
 		}
 		return self::$peer;
-	}
-
-
-	/**
-	 * Initializes a collection based on the name of a relation.
-	 * Avoids crafting an 'init[$relationName]s' method name
-	 * that wouldn't work when StandardEnglishPluralizer is used.
-	 *
-	 * @param      string $relationName The name of the relation to initialize
-	 * @return     void
-	 */
-	public function initRelation($relationName)
-	{
-		if ('Post' == $relationName) {
-			return $this->initPosts();
-		}
-	}
-
-	/**
-	 * Clears out the collPosts collection
-	 *
-	 * This does not modify the database; however, it will remove any associated objects, causing
-	 * them to be refetched by subsequent calls to accessor method.
-	 *
-	 * @return     void
-	 * @see        addPosts()
-	 */
-	public function clearPosts()
-	{
-		$this->collPosts = null; // important to set this to NULL since that means it is uninitialized
-	}
-
-	/**
-	 * Initializes the collPosts collection.
-	 *
-	 * By default this just sets the collPosts collection to an empty array (like clearcollPosts());
-	 * however, you may wish to override this method in your stub class to provide setting appropriate
-	 * to your application -- for example, setting the initial array to the values stored in database.
-	 *
-	 * @param      boolean $overrideExisting If set to true, the method call initializes
-	 *                                        the collection even if it is not empty
-	 *
-	 * @return     void
-	 */
-	public function initPosts($overrideExisting = true)
-	{
-		if (null !== $this->collPosts && !$overrideExisting) {
-			return;
-		}
-		$this->collPosts = new PropelObjectCollection();
-		$this->collPosts->setModel('Post');
-	}
-
-	/**
-	 * Gets an array of Post objects which contain a foreign key that references this object.
-	 *
-	 * If the $criteria is not null, it is used to always fetch the results from the database.
-	 * Otherwise the results are fetched from the database the first time, then cached.
-	 * Next time the same method is called without $criteria, the cached collection is returned.
-	 * If this User is new, it will return
-	 * an empty collection or the current collection; the criteria is ignored on a new object.
-	 *
-	 * @param      Criteria $criteria optional Criteria object to narrow the query
-	 * @param      PropelPDO $con optional connection object
-	 * @return     PropelCollection|array Post[] List of Post objects
-	 * @throws     PropelException
-	 */
-	public function getPosts($criteria = null, PropelPDO $con = null)
-	{
-		if(null === $this->collPosts || null !== $criteria) {
-			if ($this->isNew() && null === $this->collPosts) {
-				// return empty collection
-				$this->initPosts();
-			} else {
-				$collPosts = PostQuery::create(null, $criteria)
-					->filterByUser($this)
-					->find($con);
-				if (null !== $criteria) {
-					return $collPosts;
-				}
-				$this->collPosts = $collPosts;
-			}
-		}
-		return $this->collPosts;
-	}
-
-	/**
-	 * Sets a collection of Post objects related by a one-to-many relationship
-	 * to the current object.
-	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-	 * and new objects from the given Propel collection.
-	 *
-	 * @param      PropelCollection $posts A Propel collection.
-	 * @param      PropelPDO $con Optional connection object
-	 */
-	public function setPosts(PropelCollection $posts, PropelPDO $con = null)
-	{
-		$this->postsScheduledForDeletion = $this->getPosts(new Criteria(), $con)->diff($posts);
-
-		foreach ($posts as $post) {
-			// Fix issue with collection modified by reference
-			if ($post->isNew()) {
-				$post->setUser($this);
-			}
-			$this->addPost($post);
-		}
-
-		$this->collPosts = $posts;
-	}
-
-	/**
-	 * Returns the number of related Post objects.
-	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      PropelPDO $con
-	 * @return     int Count of related Post objects.
-	 * @throws     PropelException
-	 */
-	public function countPosts(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-	{
-		if(null === $this->collPosts || null !== $criteria) {
-			if ($this->isNew() && null === $this->collPosts) {
-				return 0;
-			} else {
-				$query = PostQuery::create(null, $criteria);
-				if($distinct) {
-					$query->distinct();
-				}
-				return $query
-					->filterByUser($this)
-					->count($con);
-			}
-		} else {
-			return count($this->collPosts);
-		}
-	}
-
-	/**
-	 * Method called to associate a Post object to this object
-	 * through the Post foreign key attribute.
-	 *
-	 * @param      Post $l Post
-	 * @return     User The current object (for fluent API support)
-	 */
-	public function addPost(Post $l)
-	{
-		if ($this->collPosts === null) {
-			$this->initPosts();
-		}
-		if (!$this->collPosts->contains($l)) { // only add it if the **same** object is not already associated
-			$this->doAddPost($l);
-		}
-
-		return $this;
-	}
-
-	/**
-	 * @param	Post $post The post object to add.
-	 */
-	protected function doAddPost($post)
-	{
-		$this->collPosts[]= $post;
-		$post->setUser($this);
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this User is new, it will return
-	 * an empty collection; or if this User has previously
-	 * been saved, it will retrieve related Posts from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in User.
-	 *
-	 * @param      Criteria $criteria optional Criteria object to narrow the query
-	 * @param      PropelPDO $con optional connection object
-	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-	 * @return     PropelCollection|array Post[] List of Post objects
-	 */
-	public function getPostsJoinCarMake($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		$query = PostQuery::create(null, $criteria);
-		$query->joinWith('CarMake', $join_behavior);
-
-		return $this->getPosts($query, $con);
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this User is new, it will return
-	 * an empty collection; or if this User has previously
-	 * been saved, it will retrieve related Posts from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in User.
-	 *
-	 * @param      Criteria $criteria optional Criteria object to narrow the query
-	 * @param      PropelPDO $con optional connection object
-	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-	 * @return     PropelCollection|array Post[] List of Post objects
-	 */
-	public function getPostsJoinCarModel($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		$query = PostQuery::create(null, $criteria);
-		$query->joinWith('CarModel', $join_behavior);
-
-		return $this->getPosts($query, $con);
 	}
 
 	/**
@@ -1020,7 +1274,17 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	public function clear()
 	{
 		$this->id = null;
+		$this->shopname = null;
 		$this->email = null;
+		$this->password = null;
+		$this->clearance = null;
+		$this->streetname = null;
+		$this->streetnumber = null;
+		$this->postal = null;
+		$this->city = null;
+		$this->phone = null;
+		$this->fax = null;
+		$this->website = null;
 		$this->alreadyInSave = false;
 		$this->alreadyInValidation = false;
 		$this->clearAllReferences();
@@ -1041,17 +1305,8 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
-			if ($this->collPosts) {
-				foreach ($this->collPosts as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
 		} // if ($deep)
 
-		if ($this->collPosts instanceof PropelCollection) {
-			$this->collPosts->clearIterator();
-		}
-		$this->collPosts = null;
 	}
 
 	/**
@@ -1061,7 +1316,7 @@ abstract class BaseUser extends BaseObject  implements Persistent
 	 */
 	public function __toString()
 	{
-		return (string) $this->exportTo(UserPeer::DEFAULT_STRING_FORMAT);
+		return (string) $this->exportTo(DealerPeer::DEFAULT_STRING_FORMAT);
 	}
 
-} // BaseUser
+} // BaseDealer

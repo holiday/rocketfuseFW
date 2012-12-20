@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'Users' table.
+ * This class defines the structure of the 'CarMakes' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.models.map
  */
-class UserTableMap extends TableMap
+class CarMakeTableMap extends TableMap
 {
 
 	/**
 	 * The (dot-path) name of this class
 	 */
-	const CLASS_NAME = 'models.map.UserTableMap';
+	const CLASS_NAME = 'models.map.CarMakeTableMap';
 
 	/**
 	 * Initialize the table attributes, columns and validators
@@ -32,14 +32,14 @@ class UserTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('Users');
-		$this->setPhpName('User');
-		$this->setClassname('User');
+		$this->setName('CarMakes');
+		$this->setPhpName('CarMake');
+		$this->setClassname('CarMake');
 		$this->setPackage('models');
 		$this->setUseIdGenerator(true);
 		// columns
 		$this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-		$this->addColumn('EMAIL', 'Email', 'VARCHAR', true, 255, null);
+		$this->addColumn('MAKE', 'Make', 'VARCHAR', true, 100, null);
 		// validators
 	} // initialize()
 
@@ -48,7 +48,8 @@ class UserTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
-		$this->addRelation('Post', 'Post', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'Posts');
+		$this->addRelation('Post', 'Post', RelationMap::ONE_TO_MANY, array('id' => 'car_make_id', ), null, null, 'Posts');
+		$this->addRelation('CarModel', 'CarModel', RelationMap::ONE_TO_MANY, array('id' => 'make_id', ), null, null, 'CarModels');
 	} // buildRelations()
 
-} // UserTableMap
+} // CarMakeTableMap

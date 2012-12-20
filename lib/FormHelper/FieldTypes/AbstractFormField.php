@@ -9,7 +9,7 @@ use FormHelper\Observer as Observer;
 
 abstract class AbstractFormField extends Observable implements Observer {
     
-    protected $value = '';
+    protected $value;
     
     protected $attributes = array();
     
@@ -68,6 +68,13 @@ abstract class AbstractFormField extends Observable implements Observer {
         return $this->attributes;
     }
     
+    public function getAttribute($attribute) {
+        if(isset($this->attributes[$attribute])) {
+            return $this->attributes[$attribute];
+        }
+        return false;
+    }
+    
     public function addRule($rule) {
         return array_push($this->rules, $rule);
     }
@@ -89,8 +96,12 @@ abstract class AbstractFormField extends Observable implements Observer {
     public function update(Observable $observable, $args=null) {
         //update the indentation
         $this->setIndent($observable->getIndent());
+        
+        //check if this field is set
+        if(isset($args[$this->name])) {
+            $this->setValue($args[$this->name]);
+        }
     }
-    
     
     abstract public function getHtml();
     

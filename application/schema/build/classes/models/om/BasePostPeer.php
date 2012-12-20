@@ -26,22 +26,19 @@ abstract class BasePostPeer {
 	const TM_CLASS = 'PostTableMap';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 15;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-	const NUM_HYDRATE_COLUMNS = 13;
+	const NUM_HYDRATE_COLUMNS = 15;
 
 	/** the column name for the ID field */
 	const ID = 'Posts.ID';
 
-	/** the column name for the TITLE field */
-	const TITLE = 'Posts.TITLE';
-
-	/** the column name for the USERID field */
-	const USERID = 'Posts.USERID';
+	/** the column name for the USER_ID field */
+	const USER_ID = 'Posts.USER_ID';
 
 	/** the column name for the PRICEFROM field */
 	const PRICEFROM = 'Posts.PRICEFROM';
@@ -55,11 +52,11 @@ abstract class BasePostPeer {
 	/** the column name for the YEARTO field */
 	const YEARTO = 'Posts.YEARTO';
 
-	/** the column name for the CARMAKEID field */
-	const CARMAKEID = 'Posts.CARMAKEID';
+	/** the column name for the CAR_MAKE_ID field */
+	const CAR_MAKE_ID = 'Posts.CAR_MAKE_ID';
 
-	/** the column name for the CARMODELID field */
-	const CARMODELID = 'Posts.CARMODELID';
+	/** the column name for the CAR_MODEL_ID field */
+	const CAR_MODEL_ID = 'Posts.CAR_MODEL_ID';
 
 	/** the column name for the TRANSMISSION field */
 	const TRANSMISSION = 'Posts.TRANSMISSION';
@@ -67,11 +64,20 @@ abstract class BasePostPeer {
 	/** the column name for the TRADEIN field */
 	const TRADEIN = 'Posts.TRADEIN';
 
+	/** the column name for the POSTTYPE field */
+	const POSTTYPE = 'Posts.POSTTYPE';
+
 	/** the column name for the COMMENT field */
 	const COMMENT = 'Posts.COMMENT';
 
-	/** the column name for the SUBMITTED field */
-	const SUBMITTED = 'Posts.SUBMITTED';
+	/** the column name for the DATESUBMITTED field */
+	const DATESUBMITTED = 'Posts.DATESUBMITTED';
+
+	/** the column name for the ACTIVATION field */
+	const ACTIVATION = 'Posts.ACTIVATION';
+
+	/** the column name for the ACTIVE field */
+	const ACTIVE = 'Posts.ACTIVE';
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -92,12 +98,12 @@ abstract class BasePostPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	protected static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Userid', 'Pricefrom', 'Priceto', 'Yearfrom', 'Yearto', 'Carmakeid', 'Carmodelid', 'Transmission', 'Tradein', 'Comment', 'Submitted', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'title', 'userid', 'pricefrom', 'priceto', 'yearfrom', 'yearto', 'carmakeid', 'carmodelid', 'transmission', 'tradein', 'comment', 'submitted', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::TITLE, self::USERID, self::PRICEFROM, self::PRICETO, self::YEARFROM, self::YEARTO, self::CARMAKEID, self::CARMODELID, self::TRANSMISSION, self::TRADEIN, self::COMMENT, self::SUBMITTED, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('ID', 'TITLE', 'USERID', 'PRICEFROM', 'PRICETO', 'YEARFROM', 'YEARTO', 'CARMAKEID', 'CARMODELID', 'TRANSMISSION', 'TRADEIN', 'COMMENT', 'SUBMITTED', ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'userId', 'priceFrom', 'priceTo', 'yearFrom', 'yearTo', 'carMakeId', 'carModelId', 'transmission', 'tradein', 'comment', 'submitted', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Pricefrom', 'Priceto', 'Yearfrom', 'Yearto', 'CarMakeId', 'CarModelId', 'Transmission', 'Tradein', 'Posttype', 'Comment', 'Datesubmitted', 'Activation', 'Active', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'pricefrom', 'priceto', 'yearfrom', 'yearto', 'carMakeId', 'carModelId', 'transmission', 'tradein', 'posttype', 'comment', 'datesubmitted', 'activation', 'active', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::USER_ID, self::PRICEFROM, self::PRICETO, self::YEARFROM, self::YEARTO, self::CAR_MAKE_ID, self::CAR_MODEL_ID, self::TRANSMISSION, self::TRADEIN, self::POSTTYPE, self::COMMENT, self::DATESUBMITTED, self::ACTIVATION, self::ACTIVE, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'PRICEFROM', 'PRICETO', 'YEARFROM', 'YEARTO', 'CAR_MAKE_ID', 'CAR_MODEL_ID', 'TRANSMISSION', 'TRADEIN', 'POSTTYPE', 'COMMENT', 'DATESUBMITTED', 'ACTIVATION', 'ACTIVE', ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'priceFrom', 'priceTo', 'yearFrom', 'yearTo', 'car_make_id', 'car_model_id', 'transmission', 'tradeIn', 'postType', 'comment', 'dateSubmitted', 'activation', 'active', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	/**
@@ -107,12 +113,12 @@ abstract class BasePostPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	protected static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Userid' => 2, 'Pricefrom' => 3, 'Priceto' => 4, 'Yearfrom' => 5, 'Yearto' => 6, 'Carmakeid' => 7, 'Carmodelid' => 8, 'Transmission' => 9, 'Tradein' => 10, 'Comment' => 11, 'Submitted' => 12, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'title' => 1, 'userid' => 2, 'pricefrom' => 3, 'priceto' => 4, 'yearfrom' => 5, 'yearto' => 6, 'carmakeid' => 7, 'carmodelid' => 8, 'transmission' => 9, 'tradein' => 10, 'comment' => 11, 'submitted' => 12, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::TITLE => 1, self::USERID => 2, self::PRICEFROM => 3, self::PRICETO => 4, self::YEARFROM => 5, self::YEARTO => 6, self::CARMAKEID => 7, self::CARMODELID => 8, self::TRANSMISSION => 9, self::TRADEIN => 10, self::COMMENT => 11, self::SUBMITTED => 12, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'TITLE' => 1, 'USERID' => 2, 'PRICEFROM' => 3, 'PRICETO' => 4, 'YEARFROM' => 5, 'YEARTO' => 6, 'CARMAKEID' => 7, 'CARMODELID' => 8, 'TRANSMISSION' => 9, 'TRADEIN' => 10, 'COMMENT' => 11, 'SUBMITTED' => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'userId' => 2, 'priceFrom' => 3, 'priceTo' => 4, 'yearFrom' => 5, 'yearTo' => 6, 'carMakeId' => 7, 'carModelId' => 8, 'transmission' => 9, 'tradein' => 10, 'comment' => 11, 'submitted' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Pricefrom' => 2, 'Priceto' => 3, 'Yearfrom' => 4, 'Yearto' => 5, 'CarMakeId' => 6, 'CarModelId' => 7, 'Transmission' => 8, 'Tradein' => 9, 'Posttype' => 10, 'Comment' => 11, 'Datesubmitted' => 12, 'Activation' => 13, 'Active' => 14, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'pricefrom' => 2, 'priceto' => 3, 'yearfrom' => 4, 'yearto' => 5, 'carMakeId' => 6, 'carModelId' => 7, 'transmission' => 8, 'tradein' => 9, 'posttype' => 10, 'comment' => 11, 'datesubmitted' => 12, 'activation' => 13, 'active' => 14, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::USER_ID => 1, self::PRICEFROM => 2, self::PRICETO => 3, self::YEARFROM => 4, self::YEARTO => 5, self::CAR_MAKE_ID => 6, self::CAR_MODEL_ID => 7, self::TRANSMISSION => 8, self::TRADEIN => 9, self::POSTTYPE => 10, self::COMMENT => 11, self::DATESUBMITTED => 12, self::ACTIVATION => 13, self::ACTIVE => 14, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'PRICEFROM' => 2, 'PRICETO' => 3, 'YEARFROM' => 4, 'YEARTO' => 5, 'CAR_MAKE_ID' => 6, 'CAR_MODEL_ID' => 7, 'TRANSMISSION' => 8, 'TRADEIN' => 9, 'POSTTYPE' => 10, 'COMMENT' => 11, 'DATESUBMITTED' => 12, 'ACTIVATION' => 13, 'ACTIVE' => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'priceFrom' => 2, 'priceTo' => 3, 'yearFrom' => 4, 'yearTo' => 5, 'car_make_id' => 6, 'car_model_id' => 7, 'transmission' => 8, 'tradeIn' => 9, 'postType' => 10, 'comment' => 11, 'dateSubmitted' => 12, 'activation' => 13, 'active' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	/**
@@ -185,32 +191,36 @@ abstract class BasePostPeer {
 	{
 		if (null === $alias) {
 			$criteria->addSelectColumn(PostPeer::ID);
-			$criteria->addSelectColumn(PostPeer::TITLE);
-			$criteria->addSelectColumn(PostPeer::USERID);
+			$criteria->addSelectColumn(PostPeer::USER_ID);
 			$criteria->addSelectColumn(PostPeer::PRICEFROM);
 			$criteria->addSelectColumn(PostPeer::PRICETO);
 			$criteria->addSelectColumn(PostPeer::YEARFROM);
 			$criteria->addSelectColumn(PostPeer::YEARTO);
-			$criteria->addSelectColumn(PostPeer::CARMAKEID);
-			$criteria->addSelectColumn(PostPeer::CARMODELID);
+			$criteria->addSelectColumn(PostPeer::CAR_MAKE_ID);
+			$criteria->addSelectColumn(PostPeer::CAR_MODEL_ID);
 			$criteria->addSelectColumn(PostPeer::TRANSMISSION);
 			$criteria->addSelectColumn(PostPeer::TRADEIN);
+			$criteria->addSelectColumn(PostPeer::POSTTYPE);
 			$criteria->addSelectColumn(PostPeer::COMMENT);
-			$criteria->addSelectColumn(PostPeer::SUBMITTED);
+			$criteria->addSelectColumn(PostPeer::DATESUBMITTED);
+			$criteria->addSelectColumn(PostPeer::ACTIVATION);
+			$criteria->addSelectColumn(PostPeer::ACTIVE);
 		} else {
 			$criteria->addSelectColumn($alias . '.ID');
-			$criteria->addSelectColumn($alias . '.TITLE');
-			$criteria->addSelectColumn($alias . '.USERID');
+			$criteria->addSelectColumn($alias . '.USER_ID');
 			$criteria->addSelectColumn($alias . '.PRICEFROM');
 			$criteria->addSelectColumn($alias . '.PRICETO');
 			$criteria->addSelectColumn($alias . '.YEARFROM');
 			$criteria->addSelectColumn($alias . '.YEARTO');
-			$criteria->addSelectColumn($alias . '.CARMAKEID');
-			$criteria->addSelectColumn($alias . '.CARMODELID');
+			$criteria->addSelectColumn($alias . '.CAR_MAKE_ID');
+			$criteria->addSelectColumn($alias . '.CAR_MODEL_ID');
 			$criteria->addSelectColumn($alias . '.TRANSMISSION');
 			$criteria->addSelectColumn($alias . '.TRADEIN');
+			$criteria->addSelectColumn($alias . '.POSTTYPE');
 			$criteria->addSelectColumn($alias . '.COMMENT');
-			$criteria->addSelectColumn($alias . '.SUBMITTED');
+			$criteria->addSelectColumn($alias . '.DATESUBMITTED');
+			$criteria->addSelectColumn($alias . '.ACTIVATION');
+			$criteria->addSelectColumn($alias . '.ACTIVE');
 		}
 	}
 
@@ -494,6 +504,969 @@ abstract class BasePostPeer {
 			PostPeer::addInstanceToPool($obj, $key);
 		}
 		return array($obj, $col);
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related User table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related CarMake table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinCarMake(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related CarModel table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinCarModel(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with their User objects.
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol = PostPeer::NUM_HYDRATE_COLUMNS;
+		UserPeer::addSelectColumns($criteria);
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = UserPeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = UserPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					UserPeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (Post) to $obj2 (User)
+				$obj2->addPost($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with their CarMake objects.
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinCarMake(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol = PostPeer::NUM_HYDRATE_COLUMNS;
+		CarMakePeer::addSelectColumns($criteria);
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = CarMakePeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = CarMakePeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = CarMakePeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					CarMakePeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (Post) to $obj2 (CarMake)
+				$obj2->addPost($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with their CarModel objects.
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinCarModel(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol = PostPeer::NUM_HYDRATE_COLUMNS;
+		CarModelPeer::addSelectColumns($criteria);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = CarModelPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = CarModelPeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = CarModelPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					CarModelPeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (Post) to $obj2 (CarModel)
+				$obj2->addPost($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining all related tables
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+	/**
+	 * Selects a collection of Post objects pre-filled with all related objects.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol2 = PostPeer::NUM_HYDRATE_COLUMNS;
+
+		UserPeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+		CarMakePeer::addSelectColumns($criteria);
+		$startcol4 = $startcol3 + CarMakePeer::NUM_HYDRATE_COLUMNS;
+
+		CarModelPeer::addSelectColumns($criteria);
+		$startcol5 = $startcol4 + CarModelPeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+			// Add objects for joined User rows
+
+			$key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+			if ($key2 !== null) {
+				$obj2 = UserPeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = UserPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					UserPeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 loaded
+
+				// Add the $obj1 (Post) to the collection in $obj2 (User)
+				$obj2->addPost($obj1);
+			} // if joined row not null
+
+			// Add objects for joined CarMake rows
+
+			$key3 = CarMakePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+			if ($key3 !== null) {
+				$obj3 = CarMakePeer::getInstanceFromPool($key3);
+				if (!$obj3) {
+
+					$cls = CarMakePeer::getOMClass(false);
+
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					CarMakePeer::addInstanceToPool($obj3, $key3);
+				} // if obj3 loaded
+
+				// Add the $obj1 (Post) to the collection in $obj3 (CarMake)
+				$obj3->addPost($obj1);
+			} // if joined row not null
+
+			// Add objects for joined CarModel rows
+
+			$key4 = CarModelPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+			if ($key4 !== null) {
+				$obj4 = CarModelPeer::getInstanceFromPool($key4);
+				if (!$obj4) {
+
+					$cls = CarModelPeer::getOMClass(false);
+
+					$obj4 = new $cls();
+					$obj4->hydrate($row, $startcol4);
+					CarModelPeer::addInstanceToPool($obj4, $key4);
+				} // if obj4 loaded
+
+				// Add the $obj1 (Post) to the collection in $obj4 (CarModel)
+				$obj4->addPost($obj1);
+			} // if joined row not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related User table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related CarMake table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptCarMake(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related CarModel table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptCarModel(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(PostPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			PostPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(PostPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with all related objects except User.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		// $criteria->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol2 = PostPeer::NUM_HYDRATE_COLUMNS;
+
+		CarMakePeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + CarMakePeer::NUM_HYDRATE_COLUMNS;
+
+		CarModelPeer::addSelectColumns($criteria);
+		$startcol4 = $startcol3 + CarModelPeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined CarMake rows
+
+				$key2 = CarMakePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = CarMakePeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$cls = CarMakePeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					CarMakePeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj2 (CarMake)
+				$obj2->addPost($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined CarModel rows
+
+				$key3 = CarModelPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				if ($key3 !== null) {
+					$obj3 = CarModelPeer::getInstanceFromPool($key3);
+					if (!$obj3) {
+	
+						$cls = CarModelPeer::getOMClass(false);
+
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					CarModelPeer::addInstanceToPool($obj3, $key3);
+				} // if $obj3 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj3 (CarModel)
+				$obj3->addPost($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with all related objects except CarMake.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptCarMake(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		// $criteria->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol2 = PostPeer::NUM_HYDRATE_COLUMNS;
+
+		UserPeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+		CarModelPeer::addSelectColumns($criteria);
+		$startcol4 = $startcol3 + CarModelPeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MODEL_ID, CarModelPeer::ID, $join_behavior);
+
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined User rows
+
+				$key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = UserPeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$cls = UserPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					UserPeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj2 (User)
+				$obj2->addPost($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined CarModel rows
+
+				$key3 = CarModelPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				if ($key3 !== null) {
+					$obj3 = CarModelPeer::getInstanceFromPool($key3);
+					if (!$obj3) {
+	
+						$cls = CarModelPeer::getOMClass(false);
+
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					CarModelPeer::addInstanceToPool($obj3, $key3);
+				} // if $obj3 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj3 (CarModel)
+				$obj3->addPost($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Post objects pre-filled with all related objects except CarModel.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Post objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptCarModel(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		// $criteria->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		PostPeer::addSelectColumns($criteria);
+		$startcol2 = PostPeer::NUM_HYDRATE_COLUMNS;
+
+		UserPeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+		CarMakePeer::addSelectColumns($criteria);
+		$startcol4 = $startcol3 + CarMakePeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(PostPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+		$criteria->addJoin(PostPeer::CAR_MAKE_ID, CarMakePeer::ID, $join_behavior);
+
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = PostPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = PostPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = PostPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				PostPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined User rows
+
+				$key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = UserPeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$cls = UserPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					UserPeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj2 (User)
+				$obj2->addPost($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined CarMake rows
+
+				$key3 = CarMakePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				if ($key3 !== null) {
+					$obj3 = CarMakePeer::getInstanceFromPool($key3);
+					if (!$obj3) {
+	
+						$cls = CarMakePeer::getOMClass(false);
+
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					CarMakePeer::addInstanceToPool($obj3, $key3);
+				} // if $obj3 already loaded
+
+				// Add the $obj1 (Post) to the collection in $obj3 (CarMake)
+				$obj3->addPost($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
 	}
 
 	/**

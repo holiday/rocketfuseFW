@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'Users' table.
+ * This class defines the structure of the 'Admins' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.models.map
  */
-class UserTableMap extends TableMap
+class AdminTableMap extends TableMap
 {
 
 	/**
 	 * The (dot-path) name of this class
 	 */
-	const CLASS_NAME = 'models.map.UserTableMap';
+	const CLASS_NAME = 'models.map.AdminTableMap';
 
 	/**
 	 * Initialize the table attributes, columns and validators
@@ -32,14 +32,15 @@ class UserTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('Users');
-		$this->setPhpName('User');
-		$this->setClassname('User');
+		$this->setName('Admins');
+		$this->setPhpName('Admin');
+		$this->setClassname('Admin');
 		$this->setPackage('models');
 		$this->setUseIdGenerator(true);
 		// columns
 		$this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-		$this->addColumn('EMAIL', 'Email', 'VARCHAR', true, 255, null);
+		$this->addColumn('USERNAME', 'Username', 'VARCHAR', true, 100, null);
+		$this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 40, null);
 		// validators
 	} // initialize()
 
@@ -48,7 +49,6 @@ class UserTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
-		$this->addRelation('Post', 'Post', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'Posts');
 	} // buildRelations()
 
-} // UserTableMap
+} // AdminTableMap

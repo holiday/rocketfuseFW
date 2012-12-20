@@ -1,0 +1,38 @@
+//////////////
+Documentation + Examples
+/////////////
+
+Starting a new Session with a name (required):
+------------------------
+
+SessionManager::init('mySessionName');
+
+
+Resuming a Session that has already been started:
+-------------------------------------------------
+
+SessionManager::init('mySessionName');
+
+
+Deleting a session by its name:
+------------------------------
+
+SessionManager::init('mySessionName'); //this will only remove the contents of 'mySessionName', not any other session
+SessionManager::clear()
+
+Dealing with Multiple Sessions:
+---------------------------------- 
+function startSession1() {
+	SessionManager:init('mySessionName1');
+	SessionManager::store('fruits', array('mango', 'oranges', 'grapes'));
+}
+
+function startSession2() {
+	SessionManager::init('mySessionName2');
+	SessionManager::store('pi', 3.14);
+}
+
+WARNING:
+--------------------
+SessionManager::init(); should only be called when setting the headers ONCE, attempting to set multiple sessions in the same header will fail
+

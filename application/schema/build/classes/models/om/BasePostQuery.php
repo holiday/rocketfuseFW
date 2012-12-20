@@ -7,67 +7,87 @@
  * 
  *
  * @method     PostQuery orderById($order = Criteria::ASC) Order by the id column
- * @method     PostQuery orderByTitle($order = Criteria::ASC) Order by the title column
- * @method     PostQuery orderByUserid($order = Criteria::ASC) Order by the userId column
+ * @method     PostQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
  * @method     PostQuery orderByPricefrom($order = Criteria::ASC) Order by the priceFrom column
  * @method     PostQuery orderByPriceto($order = Criteria::ASC) Order by the priceTo column
  * @method     PostQuery orderByYearfrom($order = Criteria::ASC) Order by the yearFrom column
  * @method     PostQuery orderByYearto($order = Criteria::ASC) Order by the yearTo column
- * @method     PostQuery orderByCarmakeid($order = Criteria::ASC) Order by the carMakeId column
- * @method     PostQuery orderByCarmodelid($order = Criteria::ASC) Order by the carModelId column
+ * @method     PostQuery orderByCarMakeId($order = Criteria::ASC) Order by the car_make_id column
+ * @method     PostQuery orderByCarModelId($order = Criteria::ASC) Order by the car_model_id column
  * @method     PostQuery orderByTransmission($order = Criteria::ASC) Order by the transmission column
- * @method     PostQuery orderByTradein($order = Criteria::ASC) Order by the tradein column
+ * @method     PostQuery orderByTradein($order = Criteria::ASC) Order by the tradeIn column
+ * @method     PostQuery orderByPosttype($order = Criteria::ASC) Order by the postType column
  * @method     PostQuery orderByComment($order = Criteria::ASC) Order by the comment column
- * @method     PostQuery orderBySubmitted($order = Criteria::ASC) Order by the submitted column
+ * @method     PostQuery orderByDatesubmitted($order = Criteria::ASC) Order by the dateSubmitted column
+ * @method     PostQuery orderByActivation($order = Criteria::ASC) Order by the activation column
+ * @method     PostQuery orderByActive($order = Criteria::ASC) Order by the active column
  *
  * @method     PostQuery groupById() Group by the id column
- * @method     PostQuery groupByTitle() Group by the title column
- * @method     PostQuery groupByUserid() Group by the userId column
+ * @method     PostQuery groupByUserId() Group by the user_id column
  * @method     PostQuery groupByPricefrom() Group by the priceFrom column
  * @method     PostQuery groupByPriceto() Group by the priceTo column
  * @method     PostQuery groupByYearfrom() Group by the yearFrom column
  * @method     PostQuery groupByYearto() Group by the yearTo column
- * @method     PostQuery groupByCarmakeid() Group by the carMakeId column
- * @method     PostQuery groupByCarmodelid() Group by the carModelId column
+ * @method     PostQuery groupByCarMakeId() Group by the car_make_id column
+ * @method     PostQuery groupByCarModelId() Group by the car_model_id column
  * @method     PostQuery groupByTransmission() Group by the transmission column
- * @method     PostQuery groupByTradein() Group by the tradein column
+ * @method     PostQuery groupByTradein() Group by the tradeIn column
+ * @method     PostQuery groupByPosttype() Group by the postType column
  * @method     PostQuery groupByComment() Group by the comment column
- * @method     PostQuery groupBySubmitted() Group by the submitted column
+ * @method     PostQuery groupByDatesubmitted() Group by the dateSubmitted column
+ * @method     PostQuery groupByActivation() Group by the activation column
+ * @method     PostQuery groupByActive() Group by the active column
  *
  * @method     PostQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     PostQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     PostQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     PostQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method     PostQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method     PostQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
+ *
+ * @method     PostQuery leftJoinCarMake($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarMake relation
+ * @method     PostQuery rightJoinCarMake($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarMake relation
+ * @method     PostQuery innerJoinCarMake($relationAlias = null) Adds a INNER JOIN clause to the query using the CarMake relation
+ *
+ * @method     PostQuery leftJoinCarModel($relationAlias = null) Adds a LEFT JOIN clause to the query using the CarModel relation
+ * @method     PostQuery rightJoinCarModel($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CarModel relation
+ * @method     PostQuery innerJoinCarModel($relationAlias = null) Adds a INNER JOIN clause to the query using the CarModel relation
+ *
  * @method     Post findOne(PropelPDO $con = null) Return the first Post matching the query
  * @method     Post findOneOrCreate(PropelPDO $con = null) Return the first Post matching the query, or a new Post object populated from the query conditions when no match is found
  *
  * @method     Post findOneById(int $id) Return the first Post filtered by the id column
- * @method     Post findOneByTitle(string $title) Return the first Post filtered by the title column
- * @method     Post findOneByUserid(int $userId) Return the first Post filtered by the userId column
+ * @method     Post findOneByUserId(int $user_id) Return the first Post filtered by the user_id column
  * @method     Post findOneByPricefrom(int $priceFrom) Return the first Post filtered by the priceFrom column
  * @method     Post findOneByPriceto(int $priceTo) Return the first Post filtered by the priceTo column
  * @method     Post findOneByYearfrom(int $yearFrom) Return the first Post filtered by the yearFrom column
  * @method     Post findOneByYearto(int $yearTo) Return the first Post filtered by the yearTo column
- * @method     Post findOneByCarmakeid(int $carMakeId) Return the first Post filtered by the carMakeId column
- * @method     Post findOneByCarmodelid(int $carModelId) Return the first Post filtered by the carModelId column
+ * @method     Post findOneByCarMakeId(int $car_make_id) Return the first Post filtered by the car_make_id column
+ * @method     Post findOneByCarModelId(int $car_model_id) Return the first Post filtered by the car_model_id column
  * @method     Post findOneByTransmission(string $transmission) Return the first Post filtered by the transmission column
- * @method     Post findOneByTradein(int $tradein) Return the first Post filtered by the tradein column
+ * @method     Post findOneByTradein(int $tradeIn) Return the first Post filtered by the tradeIn column
+ * @method     Post findOneByPosttype(string $postType) Return the first Post filtered by the postType column
  * @method     Post findOneByComment(string $comment) Return the first Post filtered by the comment column
- * @method     Post findOneBySubmitted(int $submitted) Return the first Post filtered by the submitted column
+ * @method     Post findOneByDatesubmitted(int $dateSubmitted) Return the first Post filtered by the dateSubmitted column
+ * @method     Post findOneByActivation(string $activation) Return the first Post filtered by the activation column
+ * @method     Post findOneByActive(boolean $active) Return the first Post filtered by the active column
  *
  * @method     array findById(int $id) Return Post objects filtered by the id column
- * @method     array findByTitle(string $title) Return Post objects filtered by the title column
- * @method     array findByUserid(int $userId) Return Post objects filtered by the userId column
+ * @method     array findByUserId(int $user_id) Return Post objects filtered by the user_id column
  * @method     array findByPricefrom(int $priceFrom) Return Post objects filtered by the priceFrom column
  * @method     array findByPriceto(int $priceTo) Return Post objects filtered by the priceTo column
  * @method     array findByYearfrom(int $yearFrom) Return Post objects filtered by the yearFrom column
  * @method     array findByYearto(int $yearTo) Return Post objects filtered by the yearTo column
- * @method     array findByCarmakeid(int $carMakeId) Return Post objects filtered by the carMakeId column
- * @method     array findByCarmodelid(int $carModelId) Return Post objects filtered by the carModelId column
+ * @method     array findByCarMakeId(int $car_make_id) Return Post objects filtered by the car_make_id column
+ * @method     array findByCarModelId(int $car_model_id) Return Post objects filtered by the car_model_id column
  * @method     array findByTransmission(string $transmission) Return Post objects filtered by the transmission column
- * @method     array findByTradein(int $tradein) Return Post objects filtered by the tradein column
+ * @method     array findByTradein(int $tradeIn) Return Post objects filtered by the tradeIn column
+ * @method     array findByPosttype(string $postType) Return Post objects filtered by the postType column
  * @method     array findByComment(string $comment) Return Post objects filtered by the comment column
- * @method     array findBySubmitted(int $submitted) Return Post objects filtered by the submitted column
+ * @method     array findByDatesubmitted(int $dateSubmitted) Return Post objects filtered by the dateSubmitted column
+ * @method     array findByActivation(string $activation) Return Post objects filtered by the activation column
+ * @method     array findByActive(boolean $active) Return Post objects filtered by the active column
  *
  * @package    propel.generator.models.om
  */
@@ -156,7 +176,7 @@ abstract class BasePostQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID`, `TITLE`, `USERID`, `PRICEFROM`, `PRICETO`, `YEARFROM`, `YEARTO`, `CARMAKEID`, `CARMODELID`, `TRANSMISSION`, `TRADEIN`, `COMMENT`, `SUBMITTED` FROM `Posts` WHERE `ID` = :p0';
+		$sql = 'SELECT `ID`, `USER_ID`, `PRICEFROM`, `PRICETO`, `YEARFROM`, `YEARTO`, `CAR_MAKE_ID`, `CAR_MODEL_ID`, `TRANSMISSION`, `TRADEIN`, `POSTTYPE`, `COMMENT`, `DATESUBMITTED`, `ACTIVATION`, `ACTIVE` FROM `Posts` WHERE `ID` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -268,44 +288,18 @@ abstract class BasePostQuery extends ModelCriteria
 	}
 
 	/**
-	 * Filter the query on the title column
+	 * Filter the query on the user_id column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterByTitle('fooValue');   // WHERE title = 'fooValue'
-	 * $query->filterByTitle('%fooValue%'); // WHERE title LIKE '%fooValue%'
+	 * $query->filterByUserId(1234); // WHERE user_id = 1234
+	 * $query->filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
+	 * $query->filterByUserId(array('min' => 12)); // WHERE user_id > 12
 	 * </code>
 	 *
-	 * @param     string $title The value to use as filter.
-	 *              Accepts wildcards (* and % trigger a LIKE)
-	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 * @see       filterByUser()
 	 *
-	 * @return    PostQuery The current query, for fluid interface
-	 */
-	public function filterByTitle($title = null, $comparison = null)
-	{
-		if (null === $comparison) {
-			if (is_array($title)) {
-				$comparison = Criteria::IN;
-			} elseif (preg_match('/[\%\*]/', $title)) {
-				$title = str_replace('*', '%', $title);
-				$comparison = Criteria::LIKE;
-			}
-		}
-		return $this->addUsingAlias(PostPeer::TITLE, $title, $comparison);
-	}
-
-	/**
-	 * Filter the query on the userId column
-	 *
-	 * Example usage:
-	 * <code>
-	 * $query->filterByUserid(1234); // WHERE userId = 1234
-	 * $query->filterByUserid(array(12, 34)); // WHERE userId IN (12, 34)
-	 * $query->filterByUserid(array('min' => 12)); // WHERE userId > 12
-	 * </code>
-	 *
-	 * @param     mixed $userid The value to use as filter.
+	 * @param     mixed $userId The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
 	 *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -313,16 +307,16 @@ abstract class BasePostQuery extends ModelCriteria
 	 *
 	 * @return    PostQuery The current query, for fluid interface
 	 */
-	public function filterByUserid($userid = null, $comparison = null)
+	public function filterByUserId($userId = null, $comparison = null)
 	{
-		if (is_array($userid)) {
+		if (is_array($userId)) {
 			$useMinMax = false;
-			if (isset($userid['min'])) {
-				$this->addUsingAlias(PostPeer::USERID, $userid['min'], Criteria::GREATER_EQUAL);
+			if (isset($userId['min'])) {
+				$this->addUsingAlias(PostPeer::USER_ID, $userId['min'], Criteria::GREATER_EQUAL);
 				$useMinMax = true;
 			}
-			if (isset($userid['max'])) {
-				$this->addUsingAlias(PostPeer::USERID, $userid['max'], Criteria::LESS_EQUAL);
+			if (isset($userId['max'])) {
+				$this->addUsingAlias(PostPeer::USER_ID, $userId['max'], Criteria::LESS_EQUAL);
 				$useMinMax = true;
 			}
 			if ($useMinMax) {
@@ -332,7 +326,7 @@ abstract class BasePostQuery extends ModelCriteria
 				$comparison = Criteria::IN;
 			}
 		}
-		return $this->addUsingAlias(PostPeer::USERID, $userid, $comparison);
+		return $this->addUsingAlias(PostPeer::USER_ID, $userId, $comparison);
 	}
 
 	/**
@@ -496,16 +490,18 @@ abstract class BasePostQuery extends ModelCriteria
 	}
 
 	/**
-	 * Filter the query on the carMakeId column
+	 * Filter the query on the car_make_id column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterByCarmakeid(1234); // WHERE carMakeId = 1234
-	 * $query->filterByCarmakeid(array(12, 34)); // WHERE carMakeId IN (12, 34)
-	 * $query->filterByCarmakeid(array('min' => 12)); // WHERE carMakeId > 12
+	 * $query->filterByCarMakeId(1234); // WHERE car_make_id = 1234
+	 * $query->filterByCarMakeId(array(12, 34)); // WHERE car_make_id IN (12, 34)
+	 * $query->filterByCarMakeId(array('min' => 12)); // WHERE car_make_id > 12
 	 * </code>
 	 *
-	 * @param     mixed $carmakeid The value to use as filter.
+	 * @see       filterByCarMake()
+	 *
+	 * @param     mixed $carMakeId The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
 	 *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -513,16 +509,16 @@ abstract class BasePostQuery extends ModelCriteria
 	 *
 	 * @return    PostQuery The current query, for fluid interface
 	 */
-	public function filterByCarmakeid($carmakeid = null, $comparison = null)
+	public function filterByCarMakeId($carMakeId = null, $comparison = null)
 	{
-		if (is_array($carmakeid)) {
+		if (is_array($carMakeId)) {
 			$useMinMax = false;
-			if (isset($carmakeid['min'])) {
-				$this->addUsingAlias(PostPeer::CARMAKEID, $carmakeid['min'], Criteria::GREATER_EQUAL);
+			if (isset($carMakeId['min'])) {
+				$this->addUsingAlias(PostPeer::CAR_MAKE_ID, $carMakeId['min'], Criteria::GREATER_EQUAL);
 				$useMinMax = true;
 			}
-			if (isset($carmakeid['max'])) {
-				$this->addUsingAlias(PostPeer::CARMAKEID, $carmakeid['max'], Criteria::LESS_EQUAL);
+			if (isset($carMakeId['max'])) {
+				$this->addUsingAlias(PostPeer::CAR_MAKE_ID, $carMakeId['max'], Criteria::LESS_EQUAL);
 				$useMinMax = true;
 			}
 			if ($useMinMax) {
@@ -532,20 +528,22 @@ abstract class BasePostQuery extends ModelCriteria
 				$comparison = Criteria::IN;
 			}
 		}
-		return $this->addUsingAlias(PostPeer::CARMAKEID, $carmakeid, $comparison);
+		return $this->addUsingAlias(PostPeer::CAR_MAKE_ID, $carMakeId, $comparison);
 	}
 
 	/**
-	 * Filter the query on the carModelId column
+	 * Filter the query on the car_model_id column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterByCarmodelid(1234); // WHERE carModelId = 1234
-	 * $query->filterByCarmodelid(array(12, 34)); // WHERE carModelId IN (12, 34)
-	 * $query->filterByCarmodelid(array('min' => 12)); // WHERE carModelId > 12
+	 * $query->filterByCarModelId(1234); // WHERE car_model_id = 1234
+	 * $query->filterByCarModelId(array(12, 34)); // WHERE car_model_id IN (12, 34)
+	 * $query->filterByCarModelId(array('min' => 12)); // WHERE car_model_id > 12
 	 * </code>
 	 *
-	 * @param     mixed $carmodelid The value to use as filter.
+	 * @see       filterByCarModel()
+	 *
+	 * @param     mixed $carModelId The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
 	 *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -553,16 +551,16 @@ abstract class BasePostQuery extends ModelCriteria
 	 *
 	 * @return    PostQuery The current query, for fluid interface
 	 */
-	public function filterByCarmodelid($carmodelid = null, $comparison = null)
+	public function filterByCarModelId($carModelId = null, $comparison = null)
 	{
-		if (is_array($carmodelid)) {
+		if (is_array($carModelId)) {
 			$useMinMax = false;
-			if (isset($carmodelid['min'])) {
-				$this->addUsingAlias(PostPeer::CARMODELID, $carmodelid['min'], Criteria::GREATER_EQUAL);
+			if (isset($carModelId['min'])) {
+				$this->addUsingAlias(PostPeer::CAR_MODEL_ID, $carModelId['min'], Criteria::GREATER_EQUAL);
 				$useMinMax = true;
 			}
-			if (isset($carmodelid['max'])) {
-				$this->addUsingAlias(PostPeer::CARMODELID, $carmodelid['max'], Criteria::LESS_EQUAL);
+			if (isset($carModelId['max'])) {
+				$this->addUsingAlias(PostPeer::CAR_MODEL_ID, $carModelId['max'], Criteria::LESS_EQUAL);
 				$useMinMax = true;
 			}
 			if ($useMinMax) {
@@ -572,7 +570,7 @@ abstract class BasePostQuery extends ModelCriteria
 				$comparison = Criteria::IN;
 			}
 		}
-		return $this->addUsingAlias(PostPeer::CARMODELID, $carmodelid, $comparison);
+		return $this->addUsingAlias(PostPeer::CAR_MODEL_ID, $carModelId, $comparison);
 	}
 
 	/**
@@ -604,13 +602,13 @@ abstract class BasePostQuery extends ModelCriteria
 	}
 
 	/**
-	 * Filter the query on the tradein column
+	 * Filter the query on the tradeIn column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterByTradein(1234); // WHERE tradein = 1234
-	 * $query->filterByTradein(array(12, 34)); // WHERE tradein IN (12, 34)
-	 * $query->filterByTradein(array('min' => 12)); // WHERE tradein > 12
+	 * $query->filterByTradein(1234); // WHERE tradeIn = 1234
+	 * $query->filterByTradein(array(12, 34)); // WHERE tradeIn IN (12, 34)
+	 * $query->filterByTradein(array('min' => 12)); // WHERE tradeIn > 12
 	 * </code>
 	 *
 	 * @param     mixed $tradein The value to use as filter.
@@ -644,6 +642,34 @@ abstract class BasePostQuery extends ModelCriteria
 	}
 
 	/**
+	 * Filter the query on the postType column
+	 *
+	 * Example usage:
+	 * <code>
+	 * $query->filterByPosttype('fooValue');   // WHERE postType = 'fooValue'
+	 * $query->filterByPosttype('%fooValue%'); // WHERE postType LIKE '%fooValue%'
+	 * </code>
+	 *
+	 * @param     string $posttype The value to use as filter.
+	 *              Accepts wildcards (* and % trigger a LIKE)
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByPosttype($posttype = null, $comparison = null)
+	{
+		if (null === $comparison) {
+			if (is_array($posttype)) {
+				$comparison = Criteria::IN;
+			} elseif (preg_match('/[\%\*]/', $posttype)) {
+				$posttype = str_replace('*', '%', $posttype);
+				$comparison = Criteria::LIKE;
+			}
+		}
+		return $this->addUsingAlias(PostPeer::POSTTYPE, $posttype, $comparison);
+	}
+
+	/**
 	 * Filter the query on the comment column
 	 *
 	 * Example usage:
@@ -672,16 +698,16 @@ abstract class BasePostQuery extends ModelCriteria
 	}
 
 	/**
-	 * Filter the query on the submitted column
+	 * Filter the query on the dateSubmitted column
 	 *
 	 * Example usage:
 	 * <code>
-	 * $query->filterBySubmitted(1234); // WHERE submitted = 1234
-	 * $query->filterBySubmitted(array(12, 34)); // WHERE submitted IN (12, 34)
-	 * $query->filterBySubmitted(array('min' => 12)); // WHERE submitted > 12
+	 * $query->filterByDatesubmitted(1234); // WHERE dateSubmitted = 1234
+	 * $query->filterByDatesubmitted(array(12, 34)); // WHERE dateSubmitted IN (12, 34)
+	 * $query->filterByDatesubmitted(array('min' => 12)); // WHERE dateSubmitted > 12
 	 * </code>
 	 *
-	 * @param     mixed $submitted The value to use as filter.
+	 * @param     mixed $datesubmitted The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
 	 *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -689,16 +715,16 @@ abstract class BasePostQuery extends ModelCriteria
 	 *
 	 * @return    PostQuery The current query, for fluid interface
 	 */
-	public function filterBySubmitted($submitted = null, $comparison = null)
+	public function filterByDatesubmitted($datesubmitted = null, $comparison = null)
 	{
-		if (is_array($submitted)) {
+		if (is_array($datesubmitted)) {
 			$useMinMax = false;
-			if (isset($submitted['min'])) {
-				$this->addUsingAlias(PostPeer::SUBMITTED, $submitted['min'], Criteria::GREATER_EQUAL);
+			if (isset($datesubmitted['min'])) {
+				$this->addUsingAlias(PostPeer::DATESUBMITTED, $datesubmitted['min'], Criteria::GREATER_EQUAL);
 				$useMinMax = true;
 			}
-			if (isset($submitted['max'])) {
-				$this->addUsingAlias(PostPeer::SUBMITTED, $submitted['max'], Criteria::LESS_EQUAL);
+			if (isset($datesubmitted['max'])) {
+				$this->addUsingAlias(PostPeer::DATESUBMITTED, $datesubmitted['max'], Criteria::LESS_EQUAL);
 				$useMinMax = true;
 			}
 			if ($useMinMax) {
@@ -708,7 +734,283 @@ abstract class BasePostQuery extends ModelCriteria
 				$comparison = Criteria::IN;
 			}
 		}
-		return $this->addUsingAlias(PostPeer::SUBMITTED, $submitted, $comparison);
+		return $this->addUsingAlias(PostPeer::DATESUBMITTED, $datesubmitted, $comparison);
+	}
+
+	/**
+	 * Filter the query on the activation column
+	 *
+	 * Example usage:
+	 * <code>
+	 * $query->filterByActivation('fooValue');   // WHERE activation = 'fooValue'
+	 * $query->filterByActivation('%fooValue%'); // WHERE activation LIKE '%fooValue%'
+	 * </code>
+	 *
+	 * @param     string $activation The value to use as filter.
+	 *              Accepts wildcards (* and % trigger a LIKE)
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByActivation($activation = null, $comparison = null)
+	{
+		if (null === $comparison) {
+			if (is_array($activation)) {
+				$comparison = Criteria::IN;
+			} elseif (preg_match('/[\%\*]/', $activation)) {
+				$activation = str_replace('*', '%', $activation);
+				$comparison = Criteria::LIKE;
+			}
+		}
+		return $this->addUsingAlias(PostPeer::ACTIVATION, $activation, $comparison);
+	}
+
+	/**
+	 * Filter the query on the active column
+	 *
+	 * Example usage:
+	 * <code>
+	 * $query->filterByActive(true); // WHERE active = true
+	 * $query->filterByActive('yes'); // WHERE active = true
+	 * </code>
+	 *
+	 * @param     boolean|string $active The value to use as filter.
+	 *              Non-boolean arguments are converted using the following rules:
+	 *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+	 *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+	 *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByActive($active = null, $comparison = null)
+	{
+		if (is_string($active)) {
+			$active = in_array(strtolower($active), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+		}
+		return $this->addUsingAlias(PostPeer::ACTIVE, $active, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related User object
+	 *
+	 * @param     User|PropelCollection $user The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByUser($user, $comparison = null)
+	{
+		if ($user instanceof User) {
+			return $this
+				->addUsingAlias(PostPeer::USER_ID, $user->getId(), $comparison);
+		} elseif ($user instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(PostPeer::USER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
+		} else {
+			throw new PropelException('filterByUser() only accepts arguments of type User or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the User relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function joinUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('User');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'User');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the User relation User object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    UserQuery A secondary query class using the current class as primary query
+	 */
+	public function useUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinUser($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'User', 'UserQuery');
+	}
+
+	/**
+	 * Filter the query by a related CarMake object
+	 *
+	 * @param     CarMake|PropelCollection $carMake The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByCarMake($carMake, $comparison = null)
+	{
+		if ($carMake instanceof CarMake) {
+			return $this
+				->addUsingAlias(PostPeer::CAR_MAKE_ID, $carMake->getId(), $comparison);
+		} elseif ($carMake instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(PostPeer::CAR_MAKE_ID, $carMake->toKeyValue('PrimaryKey', 'Id'), $comparison);
+		} else {
+			throw new PropelException('filterByCarMake() only accepts arguments of type CarMake or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the CarMake relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function joinCarMake($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('CarMake');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'CarMake');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the CarMake relation CarMake object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    CarMakeQuery A secondary query class using the current class as primary query
+	 */
+	public function useCarMakeQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinCarMake($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'CarMake', 'CarMakeQuery');
+	}
+
+	/**
+	 * Filter the query by a related CarModel object
+	 *
+	 * @param     CarModel|PropelCollection $carModel The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function filterByCarModel($carModel, $comparison = null)
+	{
+		if ($carModel instanceof CarModel) {
+			return $this
+				->addUsingAlias(PostPeer::CAR_MODEL_ID, $carModel->getId(), $comparison);
+		} elseif ($carModel instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(PostPeer::CAR_MODEL_ID, $carModel->toKeyValue('PrimaryKey', 'Id'), $comparison);
+		} else {
+			throw new PropelException('filterByCarModel() only accepts arguments of type CarModel or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the CarModel relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    PostQuery The current query, for fluid interface
+	 */
+	public function joinCarModel($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('CarModel');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'CarModel');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the CarModel relation CarModel object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    CarModelQuery A secondary query class using the current class as primary query
+	 */
+	public function useCarModelQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinCarModel($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'CarModel', 'CarModelQuery');
 	}
 
 	/**

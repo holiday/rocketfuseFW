@@ -10,6 +10,7 @@ require_once 'AbstractFormField.php';
 require_once 'Option.php';
 
 use \FieldTypes\Option as Option;
+use \FormHelper\Observable as Observable;
 
 class Select extends AbstractFormField {
 
@@ -37,12 +38,11 @@ class Select extends AbstractFormField {
     public function option($description, $attributes, $selected = false) {
         $opt = new Option(trim($description), $attributes, $selected);
         $this->options[] = $opt;
-
-        //Change the currentSelected Option IFF this is not a Multi-Select
-        if ($selected && !isset($this->attributes['multiple'])) {
-            $this->currentSelected->unSelect();
-            $this->currentSelected = $opt;
+        
+        if($selected) {
+            $this->toggleSelected($opt);
         }
+        
         return $this;
     }
 
@@ -55,6 +55,7 @@ class Select extends AbstractFormField {
             $base .= str_repeat("\t", $this->getIndent() + 1) . $option->getHtml() . PHP_EOL;
         }
         $base .= $this->getIndentStr() . "</select>" . PHP_EOL;
+        
         return $base;
     }
 
@@ -65,15 +66,38 @@ class Select extends AbstractFormField {
     public function getOptions() {
         return $this->options;
     }
-
+    
+    public function update(Observable $observable, $args=null){
+        parent::update($observable, $args);
+        $this->updateChildren();
+    }
+    
+    private function updateChildren(){
+        foreach($this->options as $k => $option) {
+            if(!$this->isEmpty() && trim($option->getAttribute('value')) == trim($this->value)) {
+                $option->setSelected();
+                $this->toggleSelected($option);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public function toggleSelected($selected) {
+        //Change the currentSelected Option IFF this is not a Multi-Select
+        if(isset($this->currentSelected)) {
+            $this->currentSelected->unSelect();
+            $this->currentSelected = $selected;
+        }
+    }
+    
     /**
      *  Return false i.e. this is a secondary field, it is always empty and only used within a Select FormField
      * @return boolean 
      */
     public function isEmpty() {
-        return false;
+        return !isset($this->value);
     }
-
 }
 
 ?>
