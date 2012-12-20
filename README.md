@@ -6,7 +6,7 @@ support. Any components we decide to add later will be modular and you will be a
 
 <h2>Installation Instructions</h2>
 
-<p>Clone the repository into your webserver (MAMP, XAMPP), normally the 'htdocs' folder by running:</p>
+<p>Clone the repository into your webserver (MAMP, XAMPP, etc), normally the 'htdocs' folder by running:</p>
 <pre>
 git clone https://github.com/holiday/rocketfuseFW.git
 </pre>
