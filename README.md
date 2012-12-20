@@ -15,11 +15,11 @@ git clone https://github.com/holiday/rocketfuseFW.git
 
 <pre>
 	<code>
-		NameVirtualHost *:80
+		"NameVirtualHost *:80
 		<VirtualHost *:80>
 		DocumentRoot "C:/xampp/htdocs/rocketfuseFW" #this should be the path to the framework
 		ServerName www.myLocalSite.com #whatever sitename you want to simulate locally
-		</VirtualHost>
+		</VirtualHost>"
 	</code>
 </pre>
 
