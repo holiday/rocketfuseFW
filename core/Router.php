@@ -58,7 +58,7 @@ class Router extends Core {
 			
 			//query string
 			$this->queryString = htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
-			
+
 			//if there is a stored route for this, use it
 			if($this->_checkRoute($this->requestURI)){
 				return true;

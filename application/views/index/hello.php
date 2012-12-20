@@ -1,10 +1,3 @@
-<html>
-<head>
-	<title>Hello</title>
-</head>
-<body>
 
-	This is my template file!
+<h2>Page Contents</h1>
 
-</body>
-</html>
