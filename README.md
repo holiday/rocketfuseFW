@@ -14,13 +14,11 @@ git clone https://github.com/holiday/rocketfuseFW.git
 <p>Make sure you add a virtual host for your domain. Do NOT use the default webserver domain (http://localhost/rocketfuseFW). Instead setup a virtual host that points to the framework's directory. In XAMPP, simply open PATH_TO_XAMPP/conf/extra/httpd-vhosts.conf and append the following code.</p>
 
 <pre>
-	<code>
 		"NameVirtualHost *:80
 		<VirtualHost *:80>
-		DocumentRoot "C:/xampp/htdocs/rocketfuseFW" #this should be the path to the framework
+		DocumentRoot 'C:/xampp/htdocs/rocketfuseFW' #this should be the path to the framework
 		ServerName www.myLocalSite.com #whatever sitename you want to simulate locally
 		</VirtualHost>"
-	</code>
 </pre>
 
 
