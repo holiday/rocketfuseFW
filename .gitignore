@@ -1,0 +1,6 @@
+application/controllers/*
+application/public/css/*
+application/public/js/*
+application/public/images/*
+lib/*
+vendors/*
