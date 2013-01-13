@@ -5,7 +5,7 @@
 		public function getConnection($host, $dbName, $username, $password) {
 			try {
 				//Attempt to connect to the database
-				return new PDO("pgsql:dbname={$dbname};host={$host}", $username, $password);
+				return new PDO("mysql:dbname={$dbname};host={$host}", $username, $password);
 			}catch(PDOException $e) {
 				throw new Exception($e);
 			}

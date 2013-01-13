@@ -6,7 +6,7 @@
 	*/
 
 	interface Connection {
-		public function getConnection();
+		public function getConnection($host, $dbName, $username, $password);
 	}
 
 ?>
