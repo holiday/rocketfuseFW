@@ -31,8 +31,12 @@ class Controller{
 	/**
 	*	Method that is called before any other method
 	*/
-	public function runBefore(){
-	}
+	public function runBefore(){}
+
+	/**
+	*	Method that is called after any other method
+	*/
+	public function runAfter() {}
 	
 	/**
 	*	Magic method that is used to call methods defined in this Class by its String $fnName with optional 

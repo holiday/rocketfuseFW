@@ -109,21 +109,57 @@ class Router extends Core {
 		//Instantiate Controller and Persist it in an array
 		$controller = new $className($this->Registry);
 		
+		//method is not defined or the method is the constructor then 404 out
+		if(!$this->hasMethod($className, $this->method) || $this->method == '__construct') {
+			$this->e404();
+			return false;
+		}
 		
+		//With ACL uncomment this
 		//if(!$controller->enabled) {
 			//Pass the request through the Access Control
-			$this->Registry->ACL->handle($controller, $this->method, $this->parameters);
-			return true;
+			//$this->Registry->ACL->handle($controller, $this->method, $this->parameters);
+			//return true;
 		//}
 		
 		//Without ACL uncomment this
-		/*
-		$controller->runBefore();
-		call_user_func_array(array($controller,  $this->method), $this->parameters);
+		if($controller->runBefore()) {
+			call_user_func_array(array($controller,  $this->method), $this->parameters);
+			$controller->runAfter();
+		}else {
+			$this->e404();
+		}
+		
 		return true;
-		*/
+	}
+
+	/**
+	*	Return true if the controller has the public method, false otherwise
+	*	@param $controllerName - String
+	*	@param $methodName - String
+	*/
+	private function hasMethod($controllerName, $methodName) {
+
+		//Check if the method exists before attempting to call it
+		try {
+        	$ref = new ReflectionClass($controllerName);
+	    } catch (LogicException $e) {
+	        return false;
+	    }
+		
+		$methods = $ref->getMethods(ReflectionMethod::IS_PUBLIC);
+
+		foreach($methods as $method) {
+			if(strtolower($methodName) == strtolower($method->name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
+	/**
+	*	Renders a 404 error page
+	*/
 	public function e404() {
 		$this->Registry->Template->errorpage('404');
 	}
