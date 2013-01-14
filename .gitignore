@@ -1,4 +1,5 @@
 application/controllers/*
+application/views/*
 application/public/css/*
 application/public/js/*
 application/public/images/*
