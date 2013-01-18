@@ -61,10 +61,10 @@ class Router extends Core {
 
 			//if there is a stored route for this, use it
 			if($this->_checkRoute($this->requestURI)){
-				return true;
+				$route = $this->_checkRoute($this->requestURI);
+			}else {
+				$route = Route::generateRoute($this->requestURI);
 			}
-			
-			$route = Route::generateRoute($this->requestURI);
 			
 			if($route instanceof Route) {
 				$this->controller = $route->getController();
@@ -74,7 +74,6 @@ class Router extends Core {
 				return true;
 			}
 		}
-		
 		$this->e404();
 	}	
 	
@@ -82,8 +81,10 @@ class Router extends Core {
 		
 		foreach(self::$routes as $route) {
 			if ($route->getRoute() == $request){
-				$this->redirect($route->getRedirect());
-				return true;
+				return $route;
+				//do not perform a redirect, load the controller and call the method
+				//$this->redirect($route->getRedirect());
+				//return true;
 			}
 		}
 		return false;
