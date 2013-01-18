@@ -29,13 +29,4 @@ set_include_path('application' . DS . 'public' . PATH_SEPARATOR . get_include_pa
 $loader = new Loader(__ROOT . DS . 'core');
 $loader->register();
 
-$loader = new Loader('application/schema/build/classes/models/map');
-$loader->register();
-
-$loader = new Loader('application/schema/build/classes/models/om');
-$loader->register();
-
-$loader = new Loader('application/schema/build/classes/models');
-$loader->register();
-
 ?>
