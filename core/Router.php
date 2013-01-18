@@ -70,6 +70,7 @@ class Router extends Core {
 				$this->controller = $route->getController();
 				$this->method = $route->getMethod();
 				$this->parameters = $route->getParameters();
+				//print_r($route);
 				$this->load($route);
 				return true;
 			}
@@ -82,9 +83,6 @@ class Router extends Core {
 		foreach(self::$routes as $route) {
 			if ($route->getRoute() == $request){
 				return $route;
-				//do not perform a redirect, load the controller and call the method
-				//$this->redirect($route->getRedirect());
-				//return true;
 			}
 		}
 		return false;

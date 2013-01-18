@@ -7,47 +7,55 @@
 
 class Template extends Core {
 	
+	private $templateLocations = array();
+
 	public $vars = array();
-	
+
 	/*
 	*	Magic Setter for dynamic variables
 	*/
 	public function __set($k, $v) {
 		$this->vars[$k] = $v;	
 	}
+
+	public function addPath($path) {
+		if(is_readable($path)) {
+			array_push($this->templateLocations, $path);
+		}else {
+			throw new Exception('Template->addPath() could not recognise the given path');
+		}
+	}
 	
 	/*
-	*	Includes the requested HTML view pertaining to the current controller
+	*	Includes the requested view pertaining to the current controller
 	*	@param view String name of the html file
 	*/
 	public function render($view) {
-		
-		//if a controller was not specified then it is assumed the controller is the current one
-		if(!isset($controller)) {
-			$controller = $this->Registry->Router->controller;
-		}
-		
-		//Look in the application/views/controller for the view
-		$path = __VIEWS . $this->Registry->Router->controller . DS . $view . '.php';
-		
-		$path2 = __VIEWS . $view . '.php';
+
+		//get the current controller
+		$controller = strtolower($this->Registry->Router->controller);
+
+		//these are the paths the template should look in when attempting to render() files
+		$this->addPath(__VIEWS . $controller . DS);
+		$this->addPath(__VIEWS . DS);
 
 		//keys will become variables
 		extract($this->vars);
-		
-		//check both the view directory and also check within the admin directory for the admin file
-		if(is_readable($path)) {
-			//include the view file
-			include $path;
-			return true;
-		}elseif(is_readable($path2)){
-			include $path2;
-			return true;
-		}else {
-			throw new Exception ('Could not find view ' . $view, E_USER_ERROR);
-			return false;
-			
+
+		//search for the view
+		foreach($this->templateLocations as $dir) {
+			if(file_exists($dir . $view . '.php')) {
+				include $dir . $view . '.php';
+				return true;
+			}else if(file_exists($dir . $view)) {
+				include $dir . $view;
+				return true;
+			}
 		}
+
+		//if the view was not found throw an error
+		throw new Exception ('Could not find view (' . $view . $ext . ') ' . 'for controller (' . $controller . ')' , E_USER_ERROR);
+		return false;
 			
 	}
 	
