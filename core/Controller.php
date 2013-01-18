@@ -29,9 +29,13 @@ class Controller{
 	}
 	
 	/**
-	*	Method that is called before any other method
+	*	Method that is called before any other method. If this returns true, the 
+	*	requested method will be called, otherwise the request is blocked and a 404 is 
+	*	displayed.
 	*/
-	public function runBefore(){}
+	public function runBefore(){
+		return true; 
+	}
 
 	/**
 	*	Method that is called after any other method
