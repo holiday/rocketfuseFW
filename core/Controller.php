@@ -20,8 +20,8 @@ class Controller{
 	//whether to make this controller accessible 
 	public $visible = true;
 
-	public function __construct($registry) {
-		$this->App = $registry;
+	public function __construct($app) {
+		$this->App = $app;
 	}
 	
 	public function index() {

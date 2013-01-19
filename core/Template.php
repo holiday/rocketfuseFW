@@ -22,7 +22,7 @@ class Template extends Core {
 		if(is_readable($path)) {
 			array_push($this->templateLocations, $path);
 		}else {
-			throw new Exception('Template->addPath() could not recognise the given path');
+			throw new InvalidPathException('Template->addPath() could not recognise the given path');
 		}
 	}
 	
@@ -33,7 +33,7 @@ class Template extends Core {
 	public function render($view) {
 
 		//get the current controller
-		$controller = strtolower($this->Registry->Router->controller);
+		$controller = strtolower($this->App->Router->controller);
 
 		//these are the paths the template should look in when attempting to render() files
 		$this->addPath(__VIEWS . $controller . DS);
@@ -54,7 +54,7 @@ class Template extends Core {
 		}
 
 		//if the view was not found throw an error
-		throw new Exception ('Could not find view (' . $view . $ext . ') ' . 'for controller (' . $controller . ')' , E_USER_ERROR);
+		throw new MissingViewException ('Could not find view (' . $view . ') ' . 'for controller (' . $controller . ')' , E_USER_ERROR);
 		return false;
 			
 	}

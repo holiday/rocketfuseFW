@@ -70,6 +70,12 @@ class Router extends Core {
 				$this->parameters = $parsedRoute->getParameters();
 				$this->load();
 				return true;
+			}else {
+				$this->controller = $parsedRoute->getController();
+				$this->method = $parsedRoute->getMethod();
+				$this->parameters = $parsedRoute->getParameters();
+				$this->load();
+				return true;
 			}
 		}
 		$this->e404();
@@ -91,20 +97,24 @@ class Router extends Core {
 	*	Load the Controller and method that was requested
 	*/
 	private function load() {
+
+		
 		//echo $this->method;
 		$path = __CONTROLLERS . ucfirst($this->controller) . 'Controller.php';
 		if (file_exists($path)){
 			require_once($path);
 		}else{
 			$this->e404();
+			throw new MissingControllerException("Missing controller ($path)");
 			return false;
 		}
+		
 		
 		//instantiate the controller
 		$className = ucfirst($this->controller) . 'Controller';
 		
 		//Instantiate Controller and Persist it in an array
-		$controller = new $className($this->Registry);
+		$controller = new $className($this->App);
 		
 		//method is not defined or the method is the constructor then 404 out
 		if(!$this->hasMethod($className, $this->method) || $this->method == '__construct') {
@@ -115,7 +125,7 @@ class Router extends Core {
 		//With ACL uncomment this
 		//if(!$controller->enabled) {
 			//Pass the request through the Access Control
-			//$this->Registry->ACL->handle($controller, $this->method, $this->parameters);
+			//$this->App->ACL->handle($controller, $this->method, $this->parameters);
 			//return true;
 		//}
 		
@@ -159,7 +169,7 @@ class Router extends Core {
 	*	Renders a 404 error page
 	*/
 	public function e404() {
-		$this->Registry->Template->errorpage('404');
+		$this->App->Template->errorpage('404');
 	}
 	
 	/**

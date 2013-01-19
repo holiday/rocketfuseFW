@@ -40,7 +40,7 @@ class ACL extends Core {
 	}
 	
 	public function e404(){
-		$this->Registry->Template->errorpage('404');
+		$this->App->Template->errorpage('404');
 	}
 	
 }

@@ -49,19 +49,19 @@ require __ROOT . DS . 'core' . DS . 'init.php';
 require __ROOT . DS . 'core' . DS . 'routes.php';
 
 //core bootstrapper
-$registry = new Registry();
+$app = new App();
 
 //load in the router to the registry
-$registry->Router = new Router($registry);
+$app->Router = new Router($app);
 
 //template class
-$registry->Template = new Template($registry);
+$app->Template = new Template($app);
 
 //Access Control
-$registry->ACL = new ACL($registry);
+$app->ACL = new ACL($app);
 
 //load the controller
-$registry->Router->loadController();
+$app->Router->loadController();
 
 
 ?>
