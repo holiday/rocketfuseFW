@@ -59,29 +59,27 @@ class Router extends Core {
 			//query string
 			$this->queryString = htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
 
-			//if there is a stored route for this, use it
-			if($this->_checkRoute($this->requestURI)){
-				$route = $this->_checkRoute($this->requestURI);
-			}else {
-				$route = Route::generateRoute($this->requestURI);
-			}
+			$parsedRoute = Route::generateRoute($this->requestURI);
+
+			//if there is a stored route then attempt to find it
+			$route = $this->_checkRoute($parsedRoute->getPath());
 			
-			if($route instanceof Route) {
+			if($route instanceof Route && $route->equals($parsedRoute) ) {
 				$this->controller = $route->getController();
 				$this->method = $route->getMethod();
-				$this->parameters = $route->getParameters();
-				//print_r($route);
-				$this->load($route);
+				$this->parameters = $parsedRoute->getParameters();
+				$this->load();
 				return true;
 			}
 		}
 		$this->e404();
-	}	
+	}
 	
 	private function _checkRoute($request) {
 		
 		foreach(self::$routes as $route) {
-			if ($route->getRoute() == $request){
+			//echo $route->getPath() . ' -- ' . $request;
+			if ($route->getPath() == $request){
 				return $route;
 			}
 		}
@@ -93,7 +91,7 @@ class Router extends Core {
 	*	Load the Controller and method that was requested
 	*/
 	private function load() {
-		
+		//echo $this->method;
 		$path = __CONTROLLERS . ucfirst($this->controller) . 'Controller.php';
 		if (file_exists($path)){
 			require_once($path);
@@ -123,6 +121,7 @@ class Router extends Core {
 		
 		//Without ACL uncomment this
 		if($controller->runBefore()) {
+			//print_r($this->parameters);
 			call_user_func_array(array($controller,  $this->method), $this->parameters);
 			$controller->runAfter();
 		}else {

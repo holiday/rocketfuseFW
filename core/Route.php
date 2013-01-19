@@ -21,7 +21,7 @@ class Route {
 		
 	}
 	
-	public function create() {
+	public static function create() {
 		return new self();//instantiate a new static Route
 	}
 	
@@ -67,6 +67,13 @@ class Route {
 		$this->path = $path;
 		return $this;
 	}
+
+	/**
+	*	Getter for the path
+	*/
+	public function getPath() {
+		return $this->path;
+	}
 	
 	/**
 	*	Setter for the Controller name. Throws 
@@ -94,7 +101,7 @@ class Route {
 		return $this;
 	}
 	
-	public function generateRoute($requestURI) {
+	public static function generateRoute($requestURI) {
 		$parts = explode('/', $requestURI);
 		
 		//remove the blank created
@@ -113,13 +120,23 @@ class Route {
 			//set the parameters if there are any
 			$params = array_slice($parts, 2);
 			$params = array_merge($params, array_values($_GET));
+
+			//print_r($params);
 			
-			return Route::create()->setController($controller)->setMethod($method)->setParameters($params);
+			return Route::create()->setController($controller)->setMethod($method)->setParameters($params)->setPath('/' . $controller . '/' . $method);
 		}
 		//bad request
 		return false;
 	}
 	
+	public function equals(Route $route) {
+		if($route instanceof Route) {
+			return $route->getPath() == $this->getPath();
+		}else {
+			throw new Exception('equals() failed, parameter is not of type Route');
+		}
+	}
+
 	public function toString() {
 		return "Routing request: '" . $this->path . "' to controller => " . $this->controller . " and method => " . $this->method;
 	}

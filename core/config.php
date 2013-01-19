@@ -16,6 +16,9 @@ define('__APPLICATION', __ROOT . DS . 'application' . DS);
 //define the core directory
 define('__CORE', __ROOT . DS . 'core' . DS);
 
+//Modules dir
+define('__MODELS', __ROOT . DS . 'application' . DS . 'models' . DS);
+
 //controllers
 define('__CONTROLLERS', __ROOT . DS . 'application' . DS . 'controllers' . DS);
 
