@@ -3,8 +3,6 @@
 /*
 	All HTTP requests are routed to this class. It loads specific Controllers and methods passing 
 	in parameters as necesary. It also handles default behavior for malicious requests.
-	
-	WARNING: Core file, altering this file may render the application unusable
 */
 
 class Router extends Core {
@@ -59,11 +57,16 @@ class Router extends Core {
 			//query string
 			$this->queryString = htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
 
+			//this is a Route generated based on the URL Request
 			$parsedRoute = Route::generateRoute($this->requestURI);
 
-			//if there is a stored route then attempt to find it
+			//this will check if there is a stored Route mapping
 			$route = $this->_checkRoute($parsedRoute->getPath());
+
+			//echo $route->getPath();
 			
+			//now if the parsed route matches a mapping, then that mapping should be used
+			//otherwise only the parsedRoute is used for routing
 			if($route instanceof Route && $route->equals($parsedRoute) ) {
 				$this->controller = $route->getController();
 				$this->method = $route->getMethod();
@@ -78,11 +81,11 @@ class Router extends Core {
 				return true;
 			}
 		}
+		//bad request
 		$this->e404();
 	}
 	
 	private function _checkRoute($request) {
-		
 		foreach(self::$routes as $route) {
 			//echo $route->getPath() . ' -- ' . $request;
 			if ($route->getPath() == $request){
@@ -90,7 +93,6 @@ class Router extends Core {
 			}
 		}
 		return false;
-		
 	}
 	
 	/*

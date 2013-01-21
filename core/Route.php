@@ -3,7 +3,7 @@
 class Route {
 	
 	//controller name
-	private $controller = null;
+	private $controller = 'index';
 	
 	//controller method name
 	private $method = 'index';
@@ -12,7 +12,7 @@ class Route {
 	private $parameters = array();
 	
 	//path requested
-	private $path = '';
+	private $path = '/';
 	
 	/**
 	*	Initialize a new Route
@@ -107,26 +107,31 @@ class Route {
 		//remove the blank created
 		array_shift($parts);
 		
+		$controller = 'index';
+		$method = 'index';
+		$params = array();
+
 		//if the controller exists in the request
 		if(isset($parts[0]) && $parts[0] != null && $parts[0] != '') {
 			
-			$controller = $parts[0];
+			$controller = trim($parts[0]);
 			
 			if(isset($parts[1]) && $parts[1] != '' && $parts[1] != null){
 				$method = $parts[1];
 			}else{
 				$method = 'index';
 			}
+
 			//set the parameters if there are any
 			$params = array_slice($parts, 2);
 			$params = array_merge($params, array_values($_GET));
-
-			//print_r($params);
-			
-			return Route::create()->setController($controller)->setMethod($method)->setParameters($params)->setPath('/' . $controller . '/' . $method);
 		}
-		//bad request
-		return false;
+
+		return Route::create()
+		->setController($controller)
+		->setMethod($method)
+		->setParameters($params)
+		->setPath('/' . $controller . '/' . $method);
 	}
 	
 	public function equals(Route $route) {
